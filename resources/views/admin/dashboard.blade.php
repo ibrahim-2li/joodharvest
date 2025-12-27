@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ session('locale', 'en') }}" dir="{{ session('locale', 'en') === 'ar' ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jood Harvest - Admin Dashboard</title>
+    <title>{{ session('locale', 'en') === 'ar' ? 'جود هارفيست - لوحة التحكم' : 'Jood Harvest - Admin Dashboard' }}</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         * {
-            font-family: 'Inter', sans-serif;
+            font-family: {!! session('locale', 'en') === 'ar' ? "'Cairo', sans-serif" : "'Inter', sans-serif" !!};
         }
 
         .gradient-bg {
@@ -120,6 +120,19 @@
                     @endif
                 </button>
             </nav>
+
+            <!-- Language Switcher -->
+            <div class="px-4 py-4 border-t border-gray-200" x-data="{ locale: '{{ session('locale', 'en') }}' }">
+                <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Language</label>
+                <div class="flex items-center space-x-2 bg-gray-100 rounded-full p-1">
+                    <button @click="window.location.href = '{{ route('locale.change', 'en') }}'"
+                        :class="locale === 'en' ? 'bg-red-600 text-white' : 'text-gray-600'"
+                        class="flex-1 px-3 py-2 rounded-full text-sm font-semibold transition">EN</button>
+                    <button @click="window.location.href = '{{ route('locale.change', 'ar') }}'"
+                        :class="locale === 'ar' ? 'bg-red-600 text-white' : 'text-gray-600'"
+                        class="flex-1 px-3 py-2 rounded-full text-sm font-semibold transition">AR</button>
+                </div>
+            </div>
 
             <!-- Actions -->
             <div class="absolute bottom-0 w-64 border-t border-gray-200 bg-white">
