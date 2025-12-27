@@ -35,24 +35,36 @@
     </style>
 </head>
 
-<body class="bg-gray-50" x-data="{ activeSection: '{{ session('active_section', 'hero') }}', mobileSidebarOpen: false }">
+<body class="bg-gray-50" x-data="{ activeSection: '{{ session('active_section', 'hero') }}', mobileSidebarOpen: false, sidebarCollapsed: false }">
 
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
         @php
             $isRTL = session('locale', 'en') === 'ar';
         @endphp
-        <div x-bind:class="mobileSidebarOpen ? 'translate-x-0' : ''"
-            class="fixed md:relative z-30 w-64 bg-white shadow-xl h-full transition-transform duration-300 {{ $isRTL ? 'right-0 md:right-auto translate-x-full md:translate-x-0' : 'left-0 md:left-auto -translate-x-full md:translate-x-0' }}">
+        <div x-show="!sidebarCollapsed || mobileSidebarOpen" x-bind:class="mobileSidebarOpen ? 'translate-x-0' : ''"
+            :class="sidebarCollapsed ? 'md:w-0 md:overflow-hidden' : 'md:w-64'"
+            class="fixed md:relative z-30 w-64 bg-white shadow-xl h-full transition-all duration-300 {{ $isRTL ? 'right-0 md:right-auto translate-x-full md:translate-x-0' : 'left-0 md:left-auto -translate-x-full md:translate-x-0' }}"
+            x-transition>
 
 
 
             <!-- Logo Section -->
-            <div class="gradient-bg px-6 py-6">
-                <div class="text-2xl font-black text-white">
-                    <span>Jood</span><span class="text-gray-200">Harvest</span>
+            <div class="gradient-bg px-6 py-6 relative">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="text-2xl font-black text-white">
+                            <span>Jood</span><span class="text-gray-200">Harvest</span>
+                        </div>
+                        <p class="text-gray-100 text-sm mt-1">{{ session('locale', 'en') === 'ar' ? 'لوحة التحكم' : 'Admin Dashboard' }}</p>
+                    </div>
+                    <!-- Close Sidebar Button -->
+                    <button @click="sidebarCollapsed = true" class="text-white hover:text-gray-200 focus:outline-none" :title="'{{ session('locale', 'en') === 'ar' ? 'إخفاء القائمة الجانبية' : 'Hide Sidebar' }}'">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
                 </div>
-                <p class="text-gray-100 text-sm mt-1">{{ session('locale', 'en') === 'ar' ? 'لوحة التحكم' : 'Admin Dashboard' }}</p>
             </div>
 
             <!-- User Info -->
@@ -174,12 +186,14 @@
             <header class="bg-white shadow-sm z-10">
                 <div class="flex items-center justify-between px-6 py-4">
                     <div class="flex items-center space-x-4">
-                        <button @click="mobileSidebarOpen = !mobileSidebarOpen" class="md:hidden text-gray-600">
+                        <!-- Sidebar Toggle Button (All Screen Sizes) -->
+                        <button @click="sidebarCollapsed = !sidebarCollapsed" class="text-gray-600 hover:text-gray-800 focus:outline-none" :title="sidebarCollapsed ? '{{ session('locale', 'en') === 'ar' ? 'إظهار القائمة الجانبية' : 'Show Sidebar' }}' : '{{ session('locale', 'en') === 'ar' ? 'إخفاء القائمة الجانبية' : 'Hide Sidebar' }}'">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                                <path x-show="!sidebarCollapsed" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path>
+                                <path x-show="sidebarCollapsed" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
                             </svg>
                         </button>
+                        
                         <div>
                             <h1 class="text-2xl font-bold text-gray-800">
                                 <span x-show="activeSection === 'hero'">{{ session('locale', 'en') === 'ar' ? 'قسم الHero ' : 'Hero Section' }}</span>
