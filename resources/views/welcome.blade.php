@@ -166,7 +166,7 @@
             <!-- Mobile Menu -->
             <div x-show="open" class="md:hidden pb-4 space-y-3">
                 <a href="#home" class="block text-gray-700 hover:text-red-600 font-medium">
-                    <span x-show="locale === 'en'">Dashboard</span>
+                    <span x-show="locale === 'en'">Home</span>
                     <span x-show="locale === 'ar'">الرئيسية</span>
                 </a>
                 <a href="#about" class="block text-gray-700 hover:text-red-600 font-medium">
