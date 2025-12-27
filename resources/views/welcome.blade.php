@@ -154,7 +154,7 @@
             <!-- Mobile Menu -->
             <div x-show="open" class="md:hidden pb-4 space-y-3">
                 <a href="#home" class="block text-gray-700 hover:text-red-600 font-medium">
-                    <span x-show="locale === 'en'">Home</span>
+                    <span x-show="locale === 'en'">Dashboard</span>
                     <span x-show="locale === 'ar'">الرئيسية</span>
                 </a>
                 <a href="#about" class="block text-gray-700 hover:text-red-600 font-medium">
@@ -183,21 +183,21 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero-pattern gradient-bg pt-32 pb-20 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <!-- Hero Content -->
                 <div data-aos="fade-right" class="text-white">
                     <div x-show="locale === 'en'">
                         <h1 class="text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-6">
-                            Your Trusted Partner in <span class="text-gray-500">Cold Chain</span> Excellence
+                            {{ $content['hero']->firstWhere('key', 'title')->value_en ?? 'Your Trusted Partner in Cold Chain Excellence' }}
                         </h1>
                         <p class="text-xl md:text-2xl mb-8 text-red-400">
-                            Importing, cold storage, and distribution of premium chilled and frozen food products with
-                            full compliance to international standards.
+                            {{ $content['hero']->firstWhere('key', 'description')->value_en ?? 'Importing, cold storage, and distribution of premium chilled and frozen food products.' }}
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4">
                             <a href="#contact"
-                                class="bg-red-600 hover:bg-gray-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
+                                class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
                                 Request a Quote
                             </a>
                             <a href="#services"
@@ -209,15 +209,14 @@
 
                     <div x-show="locale === 'ar'">
                         <h1 class="text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-6">
-                            شريكك الموثوق في التميز <span class="text-gray-500">بسلسلة التبريد</span>
+                            {{ $content['hero']->firstWhere('key', 'title')->value_ar ?? 'شريكك الموثوق في التميز بسلسلة التبريد' }}
                         </h1>
                         <p class="text-xl md:text-2xl mb-8 text-red-400">
-                            استيراد وتخزين وتوزيع منتجات غذائية مبردة ومجمدة عالية الجودة مع الالتزام الكامل بالمعايير
-                            العالمية.
+                            {{ $content['hero']->firstWhere('key', 'description')->value_ar ?? 'استيراد وتخزين وتوزيع منتجات غذائية مبردة ومجمدة عالية الجودة.' }}
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4">
                             <a href="#contact"
-                                class="bg-red-600 hover:bg-gray-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
+                                class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
                                 اطلب عرض سعر
                             </a>
                             <a href="#services"
@@ -231,8 +230,15 @@
                 <!-- Hero Image -->
                 <div data-aos="fade-left" class="relative">
                     <div class="relative z-10 floating-slow">
-                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800"
-                            alt="Cold Storage" class="rounded-3xl shadow-2xl">
+                        @if (isset($content['hero']) &&
+                                $content['hero']->firstWhere('key', 'image') &&
+                                $content['hero']->firstWhere('key', 'image')->value_en)
+                            <img src="{{ asset($content['hero']->firstWhere('key', 'image')->value_en) }}"
+                                alt="Hero Image" class="rounded-3xl shadow-2xl">
+                        @else
+                            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800"
+                                alt="Cold Storage" class="rounded-3xl shadow-2xl">
+                        @endif
                     </div>
                     <div class="absolute -top-10 -right-10 w-72 h-72 bg-green-400 rounded-full opacity-20 blur-3xl">
                     </div>
@@ -249,24 +255,19 @@
             <div data-aos="fade-up" class="text-center mb-16">
                 <div x-show="locale === 'en'">
                     <h2 class="text-4xl md:text-5xl font-black mb-4">
-                        About <span class="gradient-text">Jood Harvest</span>
+                        {{ $content['about']->firstWhere('key', 'title')->value_en ?? 'About Jood Harvest' }}
                     </h2>
                     <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                        Jood Harvest specializes in importing and distributing high-quality chilled and frozen food
-                        products, adhering to the highest international cold chain standards, and providing integrated
-                        logistics solutions including cold storage and refrigerated transportation through its own
-                        fleet.
+                        {{ $content['about']->firstWhere('key', 'description')->value_en ?? 'Jood Harvest specializes in importing and distributing high-quality chilled and frozen food products.' }}
                     </p>
                 </div>
 
                 <div x-show="locale === 'ar'">
                     <h2 class="text-4xl md:text-5xl font-black mb-4">
-                        عن <span class="gradient-text">جود هارفيست</span>
+                        {{ $content['about']->firstWhere('key', 'title')->value_ar ?? 'عن جود هارفيست' }}
                     </h2>
                     <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                        تعمل جود هارفيست في استيراد وتوزيع الأغذية المبردة والمجمدة عالية الجودة، مع الالتزام بأعلى
-                        معايير سلسلة التبريد العالمية، وتقديم حلول لوجستية متكاملة تشمل التخزين والنقل عبر أسطول مبرد
-                        خاص بالشركة.
+                        {{ $content['about']->firstWhere('key', 'description')->value_ar ?? 'تعمل جود هارفيست في استيراد وتوزيع الأغذية المبردة والمجمدة عالية الجودة.' }}
                     </p>
                 </div>
             </div>
@@ -287,14 +288,13 @@
                     <div x-show="locale === 'en'">
                         <h3 class="text-2xl font-bold text-red-900 mb-4">Our Vision</h3>
                         <p class="text-gray-700 text-lg">
-                            To be a leading and trusted destination for chilled and frozen food import and distribution
-                            in the region.
+                            {{ $content['about']->firstWhere('key', 'vision')->value_en ?? 'To be a leading and trusted destination for chilled and frozen food import and distribution in the region.' }}
                         </p>
                     </div>
                     <div x-show="locale === 'ar'">
                         <h3 class="text-2xl font-bold text-red-900 mb-4">رؤيتنا</h3>
                         <p class="text-gray-700 text-lg">
-                            أن نكون وجهة رائدة وموثوقة في استيراد وتوزيع الأغذية المبردة والمجمدة في المنطقة.
+                            {{ $content['about']->firstWhere('key', 'vision')->value_ar ?? 'أن نكون وجهة رائدة وموثوقة في استيراد وتوزيع الأغذية المبردة والمجمدة في المنطقة.' }}
                         </p>
                     </div>
                 </div>
@@ -310,14 +310,13 @@
                     <div x-show="locale === 'en'">
                         <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
                         <p class="text-gray-700 text-lg">
-                            To deliver safe, high-quality food products supported by efficient and reliable logistics
-                            services.
+                            {{ $content['about']->firstWhere('key', 'mission')->value_en ?? 'To deliver safe, high-quality food products supported by efficient and reliable logistics services.' }}
                         </p>
                     </div>
                     <div x-show="locale === 'ar'">
                         <h3 class="text-2xl font-bold text-gray-900 mb-4">رسالتنا</h3>
                         <p class="text-gray-700 text-lg">
-                            تقديم منتجات غذائية آمنة وعالية الجودة مع خدمات لوجستية فعّالة وموثوقة.
+                            {{ $content['about']->firstWhere('key', 'mission')->value_ar ?? 'تقديم منتجات غذائية آمنة وعالية الجودة مع خدمات لوجستية فعّالة وموثوقة.' }}
                         </p>
                     </div>
                 </div>
@@ -664,116 +663,201 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div data-aos="fade-up" class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-black mb-4">
-                    <span x-show="locale === 'en'">Get In <span class="gradient-text">Touch</span></span>
-                    <span x-show="locale === 'ar'"><span class="gradient-text">تواصل</span> معنا</span>
+                    <span x-show="locale === 'en'">Get in <span class="gradient-text">Touch</span></span>
+                    <span x-show="locale === 'ar'">تواصل <span class="gradient-text">معنا</span></span>
                 </h2>
-                <p class="text-xl text-gray-600">
-                    <span x-show="locale === 'en'">📦 Import – Storage – Distribution</span>
-                    <span x-show="locale === 'ar'">📦 استيراد – تخزين – توزيع</span>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    <span x-show="locale === 'en'">Have a question or want to work together? Send us a message!</span>
+                    <span x-show="locale === 'ar'">لديك سؤال أو ترغب في العمل معنا؟ أرسل لنا رسالة!</span>
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-12">
-                <!-- Contact Info -->
-                <div data-aos="fade-right" class="space-y-8">
-                    <div class="flex items-start space-x-4 {{ session('locale') === 'ar' ? 'space-x-reverse' : '' }}">
-                        <div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg mb-2">
-                                <span x-show="locale === 'en'">Phone</span>
-                                <span x-show="locale === 'ar'">الهاتف</span>
-                            </h3>
-                            <p class="text-gray-600">+966 XX XXX XXXX</p>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Contact Information -->
+                <div class="space-y-6" data-aos="fade-right">
+                    <!-- Contact Info Card -->
+                    <div class="bg-gradient-to-br from-red-600 to-red-700 rounded-2xl p-8 text-white shadow-2xl">
+                        <h4 class="text-2xl font-bold mb-6">
+                            <span x-show="locale === 'en'">Contact Information</span>
+                            <span x-show="locale === 'ar'">معلومات التواصل</span>
+                        </h4>
+                        <div class="space-y-6">
+                            <!-- Location -->
+                            @if (isset($content['contact']) &&
+                                    $content['contact']->firstWhere('key', 'location') &&
+                                    $content['contact']->firstWhere('key', 'location')->value_en)
+                                <div class="flex items-start gap-4">
+                                    <div
+                                        class="flex-shrink-0 w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-bold mb-1">
+                                            <span x-show="locale === 'en'">Address</span>
+                                            <span x-show="locale === 'ar'">العنوان</span>
+                                        </h5>
+                                        <p class="text-red-100">
+                                            <span
+                                                x-show="locale === 'en'">{{ $content['contact']->firstWhere('key', 'location')->value_en }}</span>
+                                            <span
+                                                x-show="locale === 'ar'">{{ $content['contact']->firstWhere('key', 'location')->value_ar ?: $content['contact']->firstWhere('key', 'location')->value_en }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            @endif
+
+                            <!-- Email -->
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="flex-shrink-0 w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
+                                        </path>
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-1">
+                                        <span x-show="locale === 'en'">Email</span>
+                                        <span x-show="locale === 'ar'">البريد الإلكتروني</span>
+                                    </h5>
+                                    <a href="mailto:{{ $content['contact']->firstWhere('key', 'email')->value_en ?? 'info@joodharvest.com' }}"
+                                        class="text-red-100 hover:text-white transition-colors">
+                                        {{ $content['contact']->firstWhere('key', 'email')->value_en ?? 'info@joodharvest.com' }}
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="flex-shrink-0 w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-1">
+                                        <span x-show="locale === 'en'">Phone</span>
+                                        <span x-show="locale === 'ar'">رقم الهاتف</span>
+                                    </h5>
+                                    <a href="tel:{{ str_replace(' ', '', $content['contact']->firstWhere('key', 'phone')->value_en ?? '+966XXXXXXXXX') }}"
+                                        class="text-red-100 hover:text-white transition-colors">
+                                        {{ $content['contact']->firstWhere('key', 'phone')->value_en ?? '+966 XX XXX XXXX' }}
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-4 {{ session('locale') === 'ar' ? 'space-x-reverse' : '' }}">
-                        <div class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg mb-2">
-                                <span x-show="locale === 'en'">Email</span>
-                                <span x-show="locale === 'ar'">البريد الإلكتروني</span>
-                            </h3>
-                            <p class="text-gray-600">info@joodharvest.com</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start space-x-4 {{ session('locale') === 'ar' ? 'space-x-reverse' : '' }}">
-                        <div
-                            class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
-                                </path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg mb-2">
-                                <span x-show="locale === 'en'">Website</span>
-                                <span x-show="locale === 'ar'">الموقع الإلكتروني</span>
-                            </h3>
-                            <p class="text-gray-600">www.joodharvest.com</p>
+                    <!-- Working Hours Card -->
+                    <div class="bg-white rounded-2xl shadow-lg p-8 border-l-4 border-red-600">
+                        <h4 class="text-xl font-bold text-gray-900 mb-4">
+                            <span x-show="locale === 'en'">Working Hours</span>
+                            <span x-show="locale === 'ar'">ساعات العمل</span>
+                        </h4>
+                        <div class="space-y-3 text-gray-600">
+                            <div class="flex justify-between items-center pb-3 border-b border-gray-200">
+                                <span class="font-medium">
+                                    <span x-show="locale === 'en'">Sunday - Thursday</span>
+                                    <span x-show="locale === 'ar'">الأحد - الخميس</span>
+                                </span>
+                                <span class="font-bold text-gray-900">
+                                    <span x-show="locale === 'en'">8:30 AM - 4:30 PM</span>
+                                    <span x-show="locale === 'ar'">8:30 ص - 4:30 م</span>
+                                </span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">
+                                    <span x-show="locale === 'en'">Friday - Saturday</span>
+                                    <span x-show="locale === 'ar'">الجمعة - السبت</span>
+                                </span>
+                                <span class="font-bold text-red-600">
+                                    <span x-show="locale === 'en'">Closed</span>
+                                    <span x-show="locale === 'ar'">مغلق</span>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Contact Form -->
                 <div data-aos="fade-left">
-                    <form class="space-y-6">
-                        <div>
-                            <label class="block font-semibold mb-2">
-                                <span x-show="locale === 'en'">Name</span>
-                                <span x-show="locale === 'ar'">الاسم</span>
-                            </label>
-                            <input type="text"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                                :placeholder="locale === 'en' ? 'Your Name' : 'اسمك'">
+                    @if (session('success'))
+                        <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg mb-6">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded-lg mb-6">
+                            <ul class="list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('contact.store') }}"
+                        class="bg-gray-50 p-8 rounded-3xl shadow-xl">
+                        @csrf
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">
+                                    <span x-show="locale === 'en'">Your Name</span>
+                                    <span x-show="locale === 'ar'">اسمك</span>
+                                </label>
+                                <input type="text" name="name" value="{{ old('name') }}" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                    :placeholder="locale === 'en' ? 'John Doe' : 'أحمد محمد'">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">
+                                    <span x-show="locale === 'en'">Email Address</span>
+                                    <span x-show="locale === 'ar'">البريد الإلكتروني</span>
+                                </label>
+                                <input type="email" name="email" value="{{ old('email') }}" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                    placeholder="email@example.com">
+                            </div>
                         </div>
 
-                        <div>
-                            <label class="block font-semibold mb-2">
-                                <span x-show="locale === 'en'">Email</span>
-                                <span x-show="locale === 'ar'">البريد الإلكتروني</span>
+                        <div class="mb-6">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">
+                                <span x-show="locale === 'en'">Phone Number (Optional)</span>
+                                <span x-show="locale === 'ar'">رقم الهاتف (اختياري)</span>
                             </label>
-                            <input type="email"
+                            <input type="tel" name="phone" value="{{ old('phone') }}"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                                :placeholder="locale === 'en' ? 'your@email.com' : 'بريدك@الإلكتروني.com'">
+                                placeholder="+966 XX XXX XXXX">
                         </div>
 
-                        <div>
-                            <label class="block font-semibold mb-2">
+                        <div class="mb-6">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">
                                 <span x-show="locale === 'en'">Message</span>
                                 <span x-show="locale === 'ar'">الرسالة</span>
                             </label>
-                            <textarea rows="4"
+                            <textarea name="message" rows="6" required
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                                :placeholder="locale === 'en' ? 'Your message...' : 'رسالتك...'"></textarea>
+                                :placeholder="locale === 'en' ? 'Tell us about your project...' : 'أخبرنا عن مشروعك...'">{{ old('message') }}</textarea>
                         </div>
 
                         <button type="submit"
-                            class="w-full gradient-bg text-white font-bold px-8 py-4 rounded-full hover-scale shadow-lg">
+                            class="w-full bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale">
                             <span x-show="locale === 'en'">Send Message</span>
                             <span x-show="locale === 'ar'">إرسال الرسالة</span>
                         </button>
                     </form>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- Footer -->
