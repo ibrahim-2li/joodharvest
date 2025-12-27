@@ -39,8 +39,13 @@
 
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
-        <div :class="mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-            class="fixed md:relative md:translate-x-0 z-30 w-64 bg-white shadow-xl h-full transition-transform duration-300">
+        @php
+            $isRTL = session('locale', 'en') === 'ar';
+        @endphp
+        <div x-bind:class="mobileSidebarOpen ? 'translate-x-0' : ''"
+            class="fixed md:relative z-30 w-64 bg-white shadow-xl h-full transition-transform duration-300 {{ $isRTL ? 'right-0 md:right-auto translate-x-full md:translate-x-0' : 'left-0 md:left-auto -translate-x-full md:translate-x-0' }}">
+
+
 
             <!-- Logo Section -->
             <div class="gradient-bg px-6 py-6">
@@ -65,7 +70,7 @@
 
             <!-- Navigation -->
             <nav class="px-4 py-6 space-y-2">
-                <button @click="activeSection = 'hero'" :class="activeSection === 'hero' ? 'active' : ''"
+                <button @click="activeSection = 'hero'; mobileSidebarOpen = false" :class="activeSection === 'hero' ? 'active' : ''"
                     class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-gray-700 flex items-center space-x-3">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -75,7 +80,7 @@
                     <span>{{ session('locale', 'en') === 'ar' ? 'قسم الHero ' : 'Hero Section' }}</span>
                 </button>
 
-                <button @click="activeSection = 'about'" :class="activeSection === 'about' ? 'active' : ''"
+                <button @click="activeSection = 'about'; mobileSidebarOpen = false" :class="activeSection === 'about' ? 'active' : ''"
                     class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-gray-700 flex items-center space-x-3">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -84,7 +89,7 @@
                     <span>{{ session('locale', 'en') === 'ar' ? 'قسم من نحن' : 'About Section' }}</span>
                 </button>
 
-                <button @click="activeSection = 'services'" :class="activeSection === 'services' ? 'active' : ''"
+                <button @click="activeSection = 'services'; mobileSidebarOpen = false" :class="activeSection === 'services' ? 'active' : ''"
                     class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-gray-700 flex items-center space-x-3">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -94,7 +99,7 @@
                     <span>{{ session('locale', 'en') === 'ar' ? 'قسم الخدمات' : 'Services Section' }}</span>
                 </button>
 
-                <button @click="activeSection = 'contact'" :class="activeSection === 'contact' ? 'active' : ''"
+                <button @click="activeSection = 'contact'; mobileSidebarOpen = false" :class="activeSection === 'contact' ? 'active' : ''"
                     class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-gray-700 flex items-center space-x-3">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -104,7 +109,7 @@
                     <span>{{ session('locale', 'en') === 'ar' ? 'معلومات التواصل' : 'Contact Info' }}</span>
                 </button>
 
-                <button @click="activeSection = 'messages'" :class="activeSection === 'messages' ? 'active' : ''"
+                <button @click="activeSection = 'messages'; mobileSidebarOpen = false" :class="activeSection === 'messages' ? 'active' : ''"
                     class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-gray-700 flex items-center justify-between">
                     <div class="flex items-center space-x-3">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -161,7 +166,7 @@
 
         <!-- Mobile Overlay -->
         <div x-show="mobileSidebarOpen" @click="mobileSidebarOpen = false"
-            class="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"></div>
+            class="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden" x-cloak></div>
 
         <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
