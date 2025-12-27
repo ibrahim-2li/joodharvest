@@ -21,8 +21,20 @@
 
     <style>
         * {
-            font-family: {{ session('locale', 'en') === 'ar' ? "'Cairo', sans-serif" : "'Inter', sans-serif" }};
+            font-family: {!! session('locale', 'en') === 'ar' ? "'Cairo', sans-serif" : "'Inter', sans-serif" !!};
         }
+
+        /* Ensure all headings use the same font in Arabic */
+        @if (session('locale', 'en') === 'ar')
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-family: 'Cairo', sans-serif !important;
+            }
+        @endif
 
         :root {
             --primary-red: #C73534;
