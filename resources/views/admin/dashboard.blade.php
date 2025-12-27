@@ -35,7 +35,7 @@
     </style>
 </head>
 
-<body class="bg-gray-50" x-data="{ activeSection: 'hero', mobileSidebarOpen: false }">
+<body class="bg-gray-50" x-data="{ activeSection: '{{ session('active_section', 'hero') }}', mobileSidebarOpen: false }">
 
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
@@ -47,7 +47,7 @@
                 <div class="text-2xl font-black text-white">
                     <span>Jood</span><span class="text-gray-200">Harvest</span>
                 </div>
-                <p class="text-gray-100 text-sm mt-1">Admin Dashboard</p>
+                <p class="text-gray-100 text-sm mt-1">{{ session('locale', 'en') === 'ar' ? 'لوحة التحكم' : 'Admin Dashboard' }}</p>
             </div>
 
             <!-- User Info -->
@@ -58,7 +58,7 @@
                     </div>
                     <div>
                         <p class="text-sm font-semibold text-gray-800">{{ auth()->user()->name }}</p>
-                        <p class="text-xs text-gray-500">Administrator</p>
+                        <p class="text-xs text-gray-500">{{ session('locale', 'en') === 'ar' ? 'مدير النظام' : 'Administrator' }}</p>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
                         </path>
                     </svg>
-                    <span>Hero Section</span>
+                    <span>{{ session('locale', 'en') === 'ar' ? 'قسم الHero ' : 'Hero Section' }}</span>
                 </button>
 
                 <button @click="activeSection = 'about'" :class="activeSection === 'about' ? 'active' : ''"
@@ -81,7 +81,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    <span>About Section</span>
+                    <span>{{ session('locale', 'en') === 'ar' ? 'قسم من نحن' : 'About Section' }}</span>
                 </button>
 
                 <button @click="activeSection = 'services'" :class="activeSection === 'services' ? 'active' : ''"
@@ -91,7 +91,7 @@
                             d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
                         </path>
                     </svg>
-                    <span>Services Section</span>
+                    <span>{{ session('locale', 'en') === 'ar' ? 'قسم الخدمات' : 'Services Section' }}</span>
                 </button>
 
                 <button @click="activeSection = 'contact'" :class="activeSection === 'contact' ? 'active' : ''"
@@ -101,7 +101,7 @@
                             d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
                         </path>
                     </svg>
-                    <span>Contact Info</span>
+                    <span>{{ session('locale', 'en') === 'ar' ? 'معلومات التواصل' : 'Contact Info' }}</span>
                 </button>
 
                 <button @click="activeSection = 'messages'" :class="activeSection === 'messages' ? 'active' : ''"
@@ -112,7 +112,7 @@
                                 d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
                             </path>
                         </svg>
-                        <span>Messages</span>
+                        <span>{{ session('locale', 'en') === 'ar' ? 'الرسائل' : 'Messages' }}</span>
                     </div>
                     @if ($unreadCount > 0)
                         <span
@@ -123,7 +123,7 @@
 
             <!-- Language Switcher -->
             <div class="px-4 py-4 border-t border-gray-200" x-data="{ locale: '{{ session('locale', 'en') }}' }">
-                <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Language</label>
+                <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">{{ session('locale', 'en') === 'ar' ? 'اللغة' : 'Language' }}</label>
                 <div class="flex items-center space-x-2 bg-gray-100 rounded-full p-1">
                     <button @click="window.location.href = '{{ route('locale.change', 'en') }}'"
                         :class="locale === 'en' ? 'bg-red-600 text-white' : 'text-gray-600'"
@@ -142,7 +142,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                     </svg>
-                    <span class="text-sm font-medium">Preview Site</span>
+                    <span class="text-sm font-medium">{{ session('locale', 'en') === 'ar' ? 'معاينة الموقع' : 'Preview Site' }}</span>
                 </a>
                 <form method="POST" action="{{ route('logout') }}" class="border-t border-gray-200">
                     @csrf
@@ -153,7 +153,7 @@
                                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
                             </path>
                         </svg>
-                        <span class="text-sm font-medium">Logout</span>
+                        <span class="text-sm font-medium">{{ session('locale', 'en') === 'ar' ? 'تسجيل الخروج' : 'Logout' }}</span>
                     </button>
                 </form>
             </div>
@@ -177,16 +177,15 @@
                         </button>
                         <div>
                             <h1 class="text-2xl font-bold text-gray-800">
-                                <span x-show="activeSection === 'hero'">Hero Section</span>
-                                <span x-show="activeSection === 'about'">About Section</span>
-                                <span x-show="activeSection === 'services'">Services Section</span>
-                                <span x-show="activeSection === 'contact'">Contact Information</span>
-                                <span x-show="activeSection === 'messages'">Contact Messages</span>
+                                <span x-show="activeSection === 'hero'">{{ session('locale', 'en') === 'ar' ? 'قسم الHero ' : 'Hero Section' }}</span>
+                                <span x-show="activeSection === 'about'">{{ session('locale', 'en') === 'ar' ? 'قسم من نحن' : 'About Section' }}</span>
+                                <span x-show="activeSection === 'services'">{{ session('locale', 'en') === 'ar' ? 'قسم الخدمات' : 'Services Section' }}</span>
+                                <span x-show="activeSection === 'contact'">{{ session('locale', 'en') === 'ar' ? 'معلومات التواصل' : 'Contact Information' }}</span>
+                                <span x-show="activeSection === 'messages'">{{ session('locale', 'en') === 'ar' ? 'رسائل التواصل' : 'Contact Messages' }}</span>
                             </h1>
                             <p class="text-sm text-gray-500">
-                                <span x-show="activeSection !== 'messages'">Manage landing page content</span>
-                                <span x-show="activeSection === 'messages'">View and manage contact form
-                                    submissions</span>
+                                <span x-show="activeSection !== 'messages'">{{ session('locale', 'en') === 'ar' ? 'إدارة محتوى الصفحة الرئيسية' : 'Manage landing page content' }}</span>
+                                <span x-show="activeSection === 'messages'">{{ session('locale', 'en') === 'ar' ? 'عرض وإدارة رسائل نموذج الاتصال' : 'View and manage contact form submissions' }}</span>
                             </p>
                         </div>
                     </div>
@@ -200,12 +199,12 @@
             </header>
 
             <!-- Content Area -->
-            <main class="flex-1 overflow-y-auto bg-gray-50 p-6">
-                <form method="POST" action="{{ route('admin.update') }}" enctype="multipart/form-data">
-                    @csrf
-
-                    <!-- Hero Section -->
-                    <div x-show="activeSection === 'hero'" class="max-w-5xl">
+            <main class="flex-1 overflow-y-auto bg-gray-50 p-6 pb-24">
+                <!-- Hero Section -->
+                <div x-show="activeSection === 'hero'" class="max-w-5xl">
+                    <form method="POST" action="{{ route('admin.update') }}" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="active_section" value="hero">
                         <div class="bg-white rounded-xl shadow-sm p-8 space-y-6">
                             <div class="flex items-center space-x-3 mb-6">
                                 <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
@@ -217,8 +216,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h2 class="text-xl font-bold text-gray-800">Hero Section Content</h2>
-                                    <p class="text-sm text-gray-500">Main banner text displayed on homepage</p>
+                                    <h2 class="text-xl font-bold text-gray-800">{{ session('locale', 'en') === 'ar' ? 'محتوى قسم الHero ' : 'Hero Section Content' }}</h2>
+                                    <p class="text-sm text-gray-500">{{ session('locale', 'en') === 'ar' ? 'نص اللافتة الرئيسية المعروض على الصفحة' : 'Main banner text displayed on homepage' }}</p>
                                 </div>
                             </div>
 
@@ -287,11 +286,27 @@
                                         Formats: JPG, PNG, GIF, WebP</p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <!-- About Section -->
-                    <div x-show="activeSection === 'about'" class="max-w-5xl">
+                            <!-- Submit Button for Hero Section -->
+                            <div class="flex items-center justify-end pt-6 border-t border-gray-200">
+                                <button type="submit"
+                                    class="gradient-bg text-white px-8 py-3 rounded-lg font-bold shadow-lg hover:shadow-xl transition transform hover:scale-105 flex items-center space-x-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>{{ session('locale', 'en') === 'ar' ? 'حفظ قسم الHero ' : 'Save Hero Section' }}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- About Section -->
+                <div x-show="activeSection === 'about'" class="max-w-5xl">
+                    <form method="POST" action="{{ route('admin.update') }}" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="active_section" value="about">
                         <div class="bg-white rounded-xl shadow-sm p-8 space-y-8">
                             <div class="flex items-center space-x-3 mb-6">
                                 <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
@@ -400,8 +415,21 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Submit Button for About Section -->
+                            <div class="flex items-center justify-end pt-6 border-t border-gray-200">
+                                <button type="submit"
+                                    class="gradient-bg text-white px-8 py-3 rounded-lg font-bold shadow-lg hover:shadow-xl transition transform hover:scale-105 flex items-center space-x-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>{{ session('locale', 'en') === 'ar' ? 'حفظ قسم من نحن' : 'Save About Section' }}</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
+                </div>
 
                     <!-- Services Section -->
                     <div x-show="activeSection === 'services'" class="max-w-5xl">
@@ -432,8 +460,11 @@
                         </div>
                     </div>
 
-                    <!-- Contact Section -->
-                    <div x-show="activeSection === 'contact'" class="max-w-5xl">
+                <!-- Contact Section -->
+                <div x-show="activeSection === 'contact'" class="max-w-5xl">
+                    <form method="POST" action="{{ route('admin.update') }}" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="active_section" value="contact">
                         <div class="bg-white rounded-xl shadow-sm p-8">
                             <div class="flex items-center space-x-3 mb-6">
                                 <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
@@ -516,8 +547,21 @@
                                         value="{{ $sections['contact']['location']->value_ar ?? '' }}">
                                 </div>
                             </div>
+
+                            <!-- Submit Button for Contact Section -->
+                            <div class="flex items-center justify-end pt-6 border-t border-gray-200 mt-8">
+                                <button type="submit"
+                                    class="gradient-bg text-white px-8 py-3 rounded-lg font-bold shadow-lg hover:shadow-xl transition transform hover:scale-105 flex items-center space-x-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>{{ session('locale', 'en') === 'ar' ? 'حفظ معلومات التواصل' : 'Save Contact Info' }}</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
+                </div>
 
                     <!-- Messages Section -->
                     <div x-show="activeSection === 'messages'" class="max-w-5xl">
@@ -635,30 +679,6 @@
                             @endif
                         </div>
                     </div>
-
-                    <!-- Fixed Bottom Bar -->
-                    <div
-                        class="fixed bottom-0 right-0 left-0 md:left-64 bg-white border-t border-gray-200 px-6 py-4 z-10">
-                        <div class="flex justify-between items-center max-w-5xl">
-                            <div class="text-sm text-gray-500">
-                                <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                Changes will be applied to the live website
-                            </div>
-                            <button type="submit"
-                                class="gradient-bg text-white px-8 py-3 rounded-lg font-bold shadow-lg hover:shadow-xl transition transform hover:scale-105 flex items-center space-x-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span>Save Changes</span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
             </main>
         </div>
     </div>

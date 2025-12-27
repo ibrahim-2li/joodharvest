@@ -34,6 +34,7 @@ class DashboardController extends Controller
             'contents.*.value_ar' => 'nullable|string',
             'contents.*.type' => 'required|string',
             'hero_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120', // 5MB max
+            'active_section' => 'nullable|string',
         ]);
 
         // Handle hero image upload if present
@@ -73,6 +74,19 @@ class DashboardController extends Controller
             );
         }
 
-        return redirect()->route('admin.dashboard')->with('success', 'Content updated successfully!');
+        // Get the section that was just saved
+        $activeSection = $request->input('active_section', 'hero');
+        
+        // Get success message based on locale
+        $successMessage = session('locale', 'en') === 'ar' 
+            ? 'تم تحديث المحتوى بنجاح!'
+            : 'Content updated successfully!';
+
+        return redirect()
+            ->route('admin.dashboard')
+            ->with([
+                'success' => $successMessage,
+                'active_section' => $activeSection
+            ]);
     }
 }
