@@ -37,10 +37,10 @@
         @endif
 
         :root {
-            --primary-green: #3a522a;
-            --secondary-green: #a3be68;
+            --primary-green: #2d4526;
+            --secondary-green: #8fa863;
+            --light-green: #b5c78e;
             --dark-gray: #4A5568;
-            --light-green: #e8f5e0;
             --lighter-gray: #F7FAFC;
         }
 
@@ -49,11 +49,11 @@
         }
 
         .gradient-bg {
-            background: linear-gradient(135deg, #3a522a 0%, #a3be68 50%, #4A5568 100%);
+            background: linear-gradient(135deg, #2d4526 0%, #8fa863 50%, #4A5568 100%);
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, #3a522a 0%, #4A5568 100%);
+            background: linear-gradient(135deg, #2d4526 0%, #8fa863 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -88,11 +88,11 @@
         }
 
         .card-shadow {
-            box-shadow: 0 10px 30px rgba(58, 82, 42, 0.1);
+            box-shadow: 0 10px 30px rgba(45, 69, 38, 0.1);
         }
 
         .hero-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233a522a' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232d4526' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
         @media (max-width: 768px) {
@@ -203,7 +203,7 @@
                         <h1 class="text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-6">
                             {{ $content['hero']->firstWhere('key', 'title')->value_en ?? 'Your Trusted Partner in Cold Chain Excellence' }}
                         </h1>
-                        <p class="text-xl md:text-2xl mb-8 text-green-200">
+                        <p class="text-xl md:text-2xl mb-8 text-green-100">
                             {{ $content['hero']->firstWhere('key', 'description')->value_en ?? 'Importing, cold storage, and distribution of premium chilled and frozen food products.' }}
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4">

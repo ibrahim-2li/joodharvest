@@ -15,7 +15,7 @@
         }
 
         .gradient-bg {
-            background: linear-gradient(135deg, #3a522a 0%, #a3be68 50%, #4A5568 100%);
+            background: linear-gradient(135deg, #2d4526 0%, #8fa863 50%, #4A5568 100%);
         }
 
         .sidebar-item {
@@ -23,13 +23,13 @@
         }
 
         .sidebar-item:hover {
-            background: rgba(58, 82, 42, 0.1);
-            border-left: 3px solid #3a522a;
+            background: rgba(45, 69, 38, 0.1);
+            border-left: 3px solid #2d4526;
         }
 
         .sidebar-item.active {
-            background: rgba(58, 82, 42, 0.15);
-            border-left: 3px solid #3a522a;
+            background: rgba(45, 69, 38, 0.15);
+            border-left: 3px solid #2d4526;
             font-weight: 600;
         }
     </style>
