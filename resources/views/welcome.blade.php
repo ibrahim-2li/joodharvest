@@ -42,6 +42,8 @@
             --dark-gray: #4A5568;
             --light-red: #FEE2E2;
             --lighter-gray: #F7FAFC;
+            --new-primary-green: #3a522a;
+            --new-secondary-green: #a3be68;
         }
 
         body {
@@ -49,11 +51,11 @@
         }
 
         .gradient-bg {
-            background: linear-gradient(135deg, #C73534 0%, #B92F2E 50%, #4A5568 100%);
+            background: linear-gradient(135deg, #3a522a 0%, #a3be68 50%, #4A5568 100%);
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, #C73534 0%, #4A5568 100%);
+            background: linear-gradient(135deg, #3a522a 0%, #4A5568 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -92,7 +94,7 @@
         }
 
         .hero-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C73534' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233a522a' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
         @media (max-width: 768px) {
@@ -114,10 +116,9 @@
             <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
                 <div class="flex items-center space-x-3">
-                    <div class="text-2xl font-black">
-                        <span class="text-red-600">Jood</span>
-                        <span class="text-gray-700">Harvest</span>
-                        <div class="text-xs text-gray-600 font-semibold">جود هارفيست</div>
+                    <div class="">
+                        <img src="{{ asset('images/logo.png') }}" width="100" height="100"
+                            class="text-xs text-gray-600 font-semibold" alt="Jood Harvest">
                     </div>
                 </div>
 
