@@ -885,7 +885,7 @@
             <div class="grid md:grid-cols-3 gap-8 mb-8">
                 <div>
                     <div class="">
-                        <img src="{{ asset('images/jood.png') }}" width="100" height="100"
+                        <img src="{{ asset('images/JOOD.png') }}" width="100" height="100"
                             class="text-xs text-gray-600 font-semibold" alt="Jood Harvest">
                     </div>
                     <p class="text-gray-400">
