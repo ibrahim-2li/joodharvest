@@ -37,13 +37,11 @@
         @endif
 
         :root {
-            --primary-red: #C73534;
-            --secondary-red: #B92F2E;
+            --primary-green: #3a522a;
+            --secondary-green: #a3be68;
             --dark-gray: #4A5568;
-            --light-red: #FEE2E2;
+            --light-green: #e8f5e0;
             --lighter-gray: #F7FAFC;
-            --new-primary-green: #3a522a;
-            --new-secondary-green: #a3be68;
         }
 
         body {
@@ -90,7 +88,7 @@
         }
 
         .card-shadow {
-            box-shadow: 0 10px 30px rgba(199, 53, 52, 0.1);
+            box-shadow: 0 10px 30px rgba(58, 82, 42, 0.1);
         }
 
         .hero-pattern {
@@ -125,19 +123,19 @@
                 <!-- Desktop Navigation -->
                 <div
                     class="hidden md:flex items-center space-x-8":class="locale === 'ar' ? 'space-x-reverse' : ''">
-                    <a href="#home" class="text-gray-700 hover:text-red-600 font-medium transition">
+                    <a href="#home" class="text-gray-700 hover:text-green-700 font-medium transition">
                         <span x-show="locale === 'en'">Home</span>
                         <span x-show="locale === 'ar'">الرئيسية</span>
                     </a>
-                    <a href="#about" class="text-gray-700 hover:text-red-600 font-medium transition">
+                    <a href="#about" class="text-gray-700 hover:text-green-700 font-medium transition">
                         <span x-show="locale === 'en'">About</span>
                         <span x-show="locale === 'ar'">من نحن </span>
                     </a>
-                    <a href="#services" class="text-gray-700 hover:text-red-600 font-medium transition">
+                    <a href="#services" class="text-gray-700 hover:text-green-700 font-medium transition">
                         <span x-show="locale === 'en'">Services</span>
                         <span x-show="locale === 'ar'">خدماتنا</span>
                     </a>
-                    <a href="#contact" class="text-gray-700 hover:text-red-600 font-medium transition">
+                    <a href="#contact" class="text-gray-700 hover:text-green-700 font-medium transition">
                         <span x-show="locale === 'en'">Contact</span>
                         <span x-show="locale === 'ar'">اتصل بنا</span>
                     </a>
@@ -145,10 +143,10 @@
                     <!-- Language Switcher -->
                     <div class="flex items-center space-x-2 bg-gray-100 rounded-full p-1">
                         <button @click="window.location.href = '{{ route('locale.change', 'en') }}'"
-                            :class="locale === 'en' ? 'bg-red-600 text-white' : 'text-gray-600'"
+                            :class="locale === 'en' ? 'bg-green-700 text-white' : 'text-gray-600'"
                             class="px-4 py-2 rounded-full text-sm font-semibold transition">EN</button>
                         <button @click="window.location.href = '{{ route('locale.change', 'ar') }}'"
-                            :class="locale === 'ar' ? 'bg-red-600 text-white' : 'text-gray-600'"
+                            :class="locale === 'ar' ? 'bg-green-700 text-white' : 'text-gray-600'"
                             class="px-4 py-2 rounded-full text-sm font-semibold transition">AR</button>
                     </div>
                 </div>
@@ -166,28 +164,28 @@
 
             <!-- Mobile Menu -->
             <div x-show="open" class="md:hidden pb-4 space-y-3">
-                <a href="#home" class="block text-gray-700 hover:text-red-600 font-medium">
+                <a href="#home" class="block text-gray-700 hover:text-green-700 font-medium">
                     <span x-show="locale === 'en'">Dashboard</span>
                     <span x-show="locale === 'ar'">الرئيسية</span>
                 </a>
-                <a href="#about" class="block text-gray-700 hover:text-red-600 font-medium">
+                <a href="#about" class="block text-gray-700 hover:text-green-700 font-medium">
                     <span x-show="locale === 'en'">About</span>
                     <span x-show="locale === 'ar'">من نحن</span>
                 </a>
-                <a href="#services" class="block text-gray-700 hover:text-red-600 font-medium">
+                <a href="#services" class="block text-gray-700 hover:text-green-700 font-medium">
                     <span x-show="locale === 'en'">Services</span>
                     <span x-show="locale === 'ar'">خدماتنا</span>
                 </a>
-                <a href="#contact" class="block text-gray-700 hover:text-red-600 font-medium">
+                <a href="#contact" class="block text-gray-700 hover:text-green-700 font-medium">
                     <span x-show="locale === 'en'">Contact</span>
                     <span x-show="locale === 'ar'">اتصل بنا</span>
                 </a>
                 <div class="flex items-center space-x-2 bg-gray-100 rounded-full p-1 w-max">
                     <button @click="window.location.href = '{{ route('locale.change', 'en') }}'"
-                        :class="locale === 'en' ? 'bg-red-600 text-white' : 'text-gray-600'"
+                        :class="locale === 'en' ? 'bg-green-700 text-white' : 'text-gray-600'"
                         class="px-4 py-2 rounded-full text-sm font-semibold">EN</button>
                     <button @click="window.location.href = '{{ route('locale.change', 'ar') }}'"
-                        :class="locale === 'ar' ? 'bg-red-600 text-white' : 'text-gray-600'"
+                        :class="locale === 'ar' ? 'bg-green-700 text-white' : 'text-gray-600'"
                         class="px-4 py-2 rounded-full text-sm font-semibold">AR</button>
                 </div>
             </div>
@@ -205,16 +203,16 @@
                         <h1 class="text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-6">
                             {{ $content['hero']->firstWhere('key', 'title')->value_en ?? 'Your Trusted Partner in Cold Chain Excellence' }}
                         </h1>
-                        <p class="text-xl md:text-2xl mb-8 text-red-400">
+                        <p class="text-xl md:text-2xl mb-8 text-green-200">
                             {{ $content['hero']->firstWhere('key', 'description')->value_en ?? 'Importing, cold storage, and distribution of premium chilled and frozen food products.' }}
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4">
                             <a href="#contact"
-                                class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
+                                class="bg-green-700 hover:bg-green-800 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
                                 Request a Quote
                             </a>
                             <a href="#services"
-                                class="bg-white text-red-600 hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
+                                class="bg-white text-green-700 hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
                                 Our Services
                             </a>
                         </div>
@@ -224,16 +222,16 @@
                         <h1 class="text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-6">
                             {{ $content['hero']->firstWhere('key', 'title')->value_ar ?? 'شريكك الموثوق في التميز بسلسلة التبريد' }}
                         </h1>
-                        <p class="text-xl md:text-2xl mb-8 text-red-400">
+                        <p class="text-xl md:text-2xl mb-8 text-green-500">
                             {{ $content['hero']->firstWhere('key', 'description')->value_ar ?? 'استيراد وتخزين وتوزيع منتجات غذائية مبردة ومجمدة عالية الجودة.' }}
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4">
                             <a href="#contact"
-                                class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
+                                class="bg-green-700 hover:bg-green-800 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
                                 اطلب عرض سعر
                             </a>
                             <a href="#services"
-                                class="bg-white text-red-600 hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
+                                class="bg-white text-green-700 hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
                                 خدماتنا
                             </a>
                         </div>
@@ -288,8 +286,8 @@
             <!-- Vision & Mission -->
             <div class="grid md:grid-cols-2 gap-8 mb-16">
                 <div data-aos="fade-right"
-                    class="bg-gradient-to-br from-red-50 to-red-100 p-8 rounded-3xl card-shadow hover-scale">
-                    <div class="w-16 h-16 bg-red-600 rounded-2xl flex items-center justify-center mb-6">
+                    class="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-3xl card-shadow hover-scale">
+                    <div class="w-16 h-16 bg-green-700 rounded-2xl flex items-center justify-center mb-6">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -299,13 +297,13 @@
                         </svg>
                     </div>
                     <div x-show="locale === 'en'">
-                        <h3 class="text-2xl font-bold text-red-900 mb-4">Our Vision</h3>
+                        <h3 class="text-2xl font-bold text-green-900 mb-4">Our Vision</h3>
                         <p class="text-gray-700 text-lg">
                             {{ $content['about']->firstWhere('key', 'vision')->value_en ?? 'To be a leading and trusted destination for chilled and frozen food import and distribution in the region.' }}
                         </p>
                     </div>
                     <div x-show="locale === 'ar'">
-                        <h3 class="text-2xl font-bold text-red-900 mb-4">رؤيتنا</h3>
+                        <h3 class="text-2xl font-bold text-green-900 mb-4">رؤيتنا</h3>
                         <p class="text-gray-700 text-lg">
                             {{ $content['about']->firstWhere('key', 'vision')->value_ar ?? 'أن نكون وجهة رائدة وموثوقة في استيراد وتوزيع الأغذية المبردة والمجمدة في المنطقة.' }}
                         </p>
@@ -345,8 +343,8 @@
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                     <div class="text-center p-6 bg-white rounded-2xl card-shadow hover-scale">
-                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor"
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -430,7 +428,7 @@
                 <div data-aos="fade-up" data-aos-delay="100"
                     class="bg-white p-8 rounded-3xl card-shadow hover-scale">
                     <div
-                        class="w-20 h-20 bg-gradient-to-br from-red-500 to-blue-700 rounded-2xl flex items-center justify-center mb-6 transform -rotate-6">
+                        class="w-20 h-20 bg-gradient-to-br from-green-600 to-green-800 rounded-2xl flex items-center justify-center mb-6 transform -rotate-6">
                         <svg class="w-10 h-10 text-white transform rotate-6" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -517,8 +515,8 @@
 
             <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
                 <div data-aos="zoom-in" class="text-center p-6">
-                    <div class="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-12 h-12 text-red-600" fill="none" stroke="currentColor"
+                    <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-12 h-12 text-green-700" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
@@ -576,8 +574,8 @@
                 </div>
 
                 <div data-aos="zoom-in" data-aos-delay="400" class="text-center p-6">
-                    <div class="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-12 h-12 text-red-600" fill="none" stroke="currentColor"
+                    <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-12 h-12 text-green-700" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
@@ -594,7 +592,7 @@
     </section>
 
     <!-- Why Choose Us Section -->
-    <section class="py-20 bg-gradient-to-br from-red-600 to-gray-800 text-white">
+    <section class="py-20 bg-gradient-to-br from-green-700 to-gray-800 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div data-aos="fade-up" class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-black mb-4">
@@ -616,12 +614,12 @@
                     </div>
                     <div x-show="locale === 'en'">
                         <h3 class="text-2xl font-bold mb-4">Full Cold Chain Compliance</h3>
-                        <p class="text-red-100">Complete adherence to international cold chain standards ensuring
+                        <p class="text-green-100">Complete adherence to international cold chain standards ensuring
                             product safety and quality.</p>
                     </div>
                     <div x-show="locale === 'ar'">
                         <h3 class="text-2xl font-bold mb-4">التزام كامل بسلسلة التبريد</h3>
-                        <p class="text-red-100">الالتزام الكامل بمعايير سلسلة التبريد العالمية لضمان سلامة المنتج
+                        <p class="text-green-100">الالتزام الكامل بمعايير سلسلة التبريد العالمية لضمان سلامة المنتج
                             وجودته.</p>
                     </div>
                 </div>
@@ -638,12 +636,12 @@
                     </div>
                     <div x-show="locale === 'en'">
                         <h3 class="text-2xl font-bold mb-4">Strong Logistics Partnership</h3>
-                        <p class="text-red-100">Logistics partner of MS Logistics, providing comprehensive supply
+                        <p class="text-green-100">Logistics partner of MS Logistics, providing comprehensive supply
                             chain solutions.</p>
                     </div>
                     <div x-show="locale === 'ar'">
                         <h3 class="text-2xl font-bold mb-4">شراكة لوجستية قوية</h3>
-                        <p class="text-red-100">شريك لوجستي لشركة MS Logistics، نقدم حلول سلسلة توريد شاملة.</p>
+                        <p class="text-green-100">شريك لوجستي لشركة MS Logistics، نقدم حلول سلسلة توريد شاملة.</p>
                     </div>
                 </div>
 
@@ -658,12 +656,13 @@
                     </div>
                     <div x-show="locale === 'en'">
                         <h3 class="text-2xl font-bold mb-4">High Reliability in Supply</h3>
-                        <p class="text-red-100">Consistent, on-time delivery with our own refrigerated fleet and
+                        <p class="text-green-100">Consistent, on-time delivery with our own refrigerated fleet and
                             warehouse management.</p>
                     </div>
                     <div x-show="locale === 'ar'">
                         <h3 class="text-2xl font-bold mb-4">موثوقية عالية في التوريد</h3>
-                        <p class="text-red-100">تسليم متسق وفي الوقت المحدد مع أسطولنا المبرد وإدارة المستودعات الخاصة
+                        <p class="text-green-100">تسليم متسق وفي الوقت المحدد مع أسطولنا المبرد وإدارة المستودعات
+                            الخاصة
                             بنا.</p>
                     </div>
                 </div>
@@ -689,7 +688,7 @@
                 <!-- Contact Information -->
                 <div class="space-y-6" data-aos="fade-right">
                     <!-- Contact Info Card -->
-                    <div class="bg-gradient-to-br from-red-600 to-red-700 rounded-2xl p-8 text-white shadow-2xl">
+                    <div class="bg-gradient-to-br from-green-700 to-green-800 rounded-2xl p-8 text-white shadow-2xl">
                         <h4 class="text-2xl font-bold mb-6">
                             <span x-show="locale === 'en'">Contact Information</span>
                             <span x-show="locale === 'ar'">معلومات التواصل</span>
@@ -713,7 +712,7 @@
                                             <span x-show="locale === 'en'">Address</span>
                                             <span x-show="locale === 'ar'">العنوان</span>
                                         </h5>
-                                        <p class="text-red-100">
+                                        <p class="text-green-100">
                                             <span
                                                 x-show="locale === 'en'">{{ $content['contact']->firstWhere('key', 'location')->value_en }}</span>
                                             <span
@@ -740,7 +739,7 @@
                                         <span x-show="locale === 'ar'">البريد الإلكتروني</span>
                                     </h5>
                                     <a href="mailto:{{ $content['contact']->firstWhere('key', 'email')->value_en ?? 'info@joodharvest.com' }}"
-                                        class="text-red-100 hover:text-white transition-colors">
+                                        class="text-green-100 hover:text-white transition-colors">
                                         {{ $content['contact']->firstWhere('key', 'email')->value_en ?? 'info@joodharvest.com' }}
                                     </a>
                                 </div>
@@ -762,7 +761,7 @@
                                         <span x-show="locale === 'ar'">رقم الهاتف</span>
                                     </h5>
                                     <a href="tel:{{ str_replace(' ', '', $content['contact']->firstWhere('key', 'phone')->value_en ?? '+966XXXXXXXXX') }}"
-                                        class="text-red-100 hover:text-white transition-colors">
+                                        class="text-green-100 hover:text-white transition-colors">
                                         {{ $content['contact']->firstWhere('key', 'phone')->value_en ?? '+966 XX XXX XXXX' }}
                                     </a>
                                 </div>
@@ -771,7 +770,7 @@
                     </div>
 
                     <!-- Working Hours Card -->
-                    <div class="bg-white rounded-2xl shadow-lg p-8 border-l-4 border-red-600">
+                    <div class="bg-white rounded-2xl shadow-lg p-8 border-l-4 border-green-700">
                         <h4 class="text-xl font-bold text-gray-900 mb-4">
                             <span x-show="locale === 'en'">Working Hours</span>
                             <span x-show="locale === 'ar'">ساعات العمل</span>
@@ -792,7 +791,7 @@
                                     <span x-show="locale === 'en'">Friday - Saturday</span>
                                     <span x-show="locale === 'ar'">الجمعة - السبت</span>
                                 </span>
-                                <span class="font-bold text-red-600">
+                                <span class="font-bold text-green-700">
                                     <span x-show="locale === 'en'">Closed</span>
                                     <span x-show="locale === 'ar'">مغلق</span>
                                 </span>
@@ -804,13 +803,13 @@
                 <!-- Contact Form -->
                 <div data-aos="fade-left">
                     @if (session('success'))
-                        <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg mb-6">
+                        <div class="bg-green-100 border border-green-600 text-green-800 px-6 py-4 rounded-lg mb-6">
                             {{ session('success') }}
                         </div>
                     @endif
 
                     @if ($errors->any())
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded-lg mb-6">
+                        <div class="bg-red-100 border border-red-600 text-red-800 px-6 py-4 rounded-lg mb-6">
                             <ul class="list-disc list-inside">
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -829,7 +828,7 @@
                                     <span x-show="locale === 'ar'">اسمك</span>
                                 </label>
                                 <input type="text" name="name" value="{{ old('name') }}" required
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                                     :placeholder="locale === 'en' ? 'John Doe' : 'أحمد محمد'">
                             </div>
                             <div>
@@ -838,7 +837,7 @@
                                     <span x-show="locale === 'ar'">البريد الإلكتروني</span>
                                 </label>
                                 <input type="email" name="email" value="{{ old('email') }}" required
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                                     placeholder="email@example.com">
                             </div>
                         </div>
@@ -849,7 +848,7 @@
                                 <span x-show="locale === 'ar'">رقم الهاتف (اختياري)</span>
                             </label>
                             <input type="tel" name="phone" value="{{ old('phone') }}"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                                 placeholder="+966 XX XXX XXXX">
                         </div>
 
@@ -859,12 +858,12 @@
                                 <span x-show="locale === 'ar'">الرسالة</span>
                             </label>
                             <textarea name="message" rows="6" required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                                 :placeholder="locale === 'en' ? 'Tell us about your project...' : 'أخبرنا عن مشروعك...'">{{ old('message') }}</textarea>
                         </div>
 
                         <button type="submit"
-                            class="w-full bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale">
+                            class="w-full bg-green-700 hover:bg-green-800 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale">
                             <span x-show="locale === 'en'">Send Message</span>
                             <span x-show="locale === 'ar'">إرسال الرسالة</span>
                         </button>
@@ -874,13 +873,13 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="bg-gradient-to-br from-green-900 to-gray-900 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-3 gap-8 mb-8">
                 <div>
-                    <div class="text-2xl font-black mb-4">
-                        <span class="text-red-400">Jood</span>
-                        <span class="text-gray-300">Harvest</span>
+                    <div class="">
+                        <img src="{{ asset('images/jood.png') }}" width="100" height="100"
+                            class="text-xs text-gray-600 font-semibold" alt="Jood Harvest">
                     </div>
                     <p class="text-gray-400">
                         <span x-show="locale === 'en'">Your trusted partner in cold chain excellence</span>
@@ -922,7 +921,8 @@
             </div>
 
             <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 <span x-show="locale === 'en'">Jood Harvest</span><span x-show="locale === 'ar'">جود
+                <p>&copy; {{ date('Y') }} <span x-show="locale === 'en'">Jood Harvest</span><span
+                        x-show="locale === 'ar'">جود
                         هارفيست</span>.
                     <span x-show="locale === 'en'">All rights reserved.</span>
                     <span x-show="locale === 'ar'">جميع الحقوق محفوظة.</span>

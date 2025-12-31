@@ -15,7 +15,7 @@
         }
 
         .gradient-bg {
-            background: linear-gradient(135deg, #C73534 0%, #B92F2E 50%, #4A5568 100%);
+            background: linear-gradient(135deg, #3a522a 0%, #a3be68 50%, #4A5568 100%);
         }
 
         .sidebar-item {
@@ -23,13 +23,13 @@
         }
 
         .sidebar-item:hover {
-            background: rgba(199, 53, 52, 0.1);
-            border-left: 3px solid #C73534;
+            background: rgba(58, 82, 42, 0.1);
+            border-left: 3px solid #3a522a;
         }
 
         .sidebar-item.active {
-            background: rgba(199, 53, 52, 0.15);
-            border-left: 3px solid #C73534;
+            background: rgba(58, 82, 42, 0.15);
+            border-left: 3px solid #3a522a;
             font-weight: 600;
         }
     </style>
@@ -53,8 +53,8 @@
             <!-- User Info -->
             <div class="px-6 py-4 border-b border-gray-200">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-                        <span class="text-red-600 font-bold text-lg">{{ substr(auth()->user()->name, 0, 1) }}</span>
+                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                        <span class="text-green-700 font-bold text-lg">{{ substr(auth()->user()->name, 0, 1) }}</span>
                     </div>
                     <div>
                         <p class="text-sm font-semibold text-gray-800">{{ auth()->user()->name }}</p>
@@ -116,7 +116,7 @@
                     </div>
                     @if ($unreadCount > 0)
                         <span
-                            class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">{{ $unreadCount }}</span>
+                            class="bg-green-700 text-white text-xs font-bold px-2 py-1 rounded-full">{{ $unreadCount }}</span>
                     @endif
                 </button>
             </nav>
@@ -134,7 +134,7 @@
                 <form method="POST" action="{{ route('logout') }}" class="border-t border-gray-200">
                     @csrf
                     <button type="submit"
-                        class="flex items-center space-x-3 px-6 py-4 text-red-600 hover:bg-red-50 w-full">
+                        class="flex items-center space-x-3 px-6 py-4 text-green-700 hover:bg-green-50 w-full">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
@@ -195,8 +195,8 @@
                     <div x-show="activeSection === 'hero'" class="max-w-5xl">
                         <div class="bg-white rounded-xl shadow-sm p-8 space-y-6">
                             <div class="flex items-center space-x-3 mb-6">
-                                <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor"
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-green-700" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
@@ -215,7 +215,7 @@
                                         (English)</label>
                                     <input type="text" name="contents[0][value_en]"
                                         value="{{ $sections['hero']['title']->value_en ?? '' }}"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent">
                                     <input type="hidden" name="contents[0][section]" value="hero">
                                     <input type="hidden" name="contents[0][key]" value="title">
                                     <input type="hidden" name="contents[0][type]" value="text">
@@ -225,7 +225,7 @@
                                         (بالعربية)</label>
                                     <input type="text" name="contents[0][value_ar]"
                                         value="{{ $sections['hero']['title']->value_ar ?? '' }}"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                                         dir="rtl">
                                 </div>
                             </div>
@@ -235,7 +235,7 @@
                                     <label class="block text-sm font-semibold text-gray-700 mb-2">Description
                                         (English)</label>
                                     <textarea name="contents[1][value_en]" rows="4"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">{{ $sections['hero']['description']->value_en ?? '' }}</textarea>
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent">{{ $sections['hero']['description']->value_en ?? '' }}</textarea>
                                     <input type="hidden" name="contents[1][section]" value="hero">
                                     <input type="hidden" name="contents[1][key]" value="description">
                                     <input type="hidden" name="contents[1][type]" value="textarea">
@@ -244,7 +244,7 @@
                                     <label class="block text-sm font-semibold text-gray-700 mb-2">الوصف
                                         (بالعربية)</label>
                                     <textarea name="contents[1][value_ar]" rows="4"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                                         dir="rtl">{{ $sections['hero']['description']->value_ar ?? '' }}</textarea>
                                 </div>
                             </div>
@@ -269,7 +269,7 @@
                                         </div>
                                     @endif
                                     <input type="file" name="hero_image" accept="image/*"
-                                        class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100">
+                                        class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-800 hover:file:bg-green-100">
                                     <p class="text-xs text-gray-500 mt-2">Recommended: 1920x1080px. Max size: 5MB.
                                         Formats: JPG, PNG, GIF, WebP</p>
                                 </div>
@@ -281,8 +281,8 @@
                     <div x-show="activeSection === 'about'" class="max-w-5xl">
                         <div class="bg-white rounded-xl shadow-sm p-8 space-y-8">
                             <div class="flex items-center space-x-3 mb-6">
-                                <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor"
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-green-700" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -303,7 +303,7 @@
                                             (English)</label>
                                         <input type="text" name="contents[2][value_en]"
                                             value="{{ $sections['about']['title']->value_en ?? '' }}"
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent">
                                         <input type="hidden" name="contents[2][section]" value="about">
                                         <input type="hidden" name="contents[2][key]" value="title">
                                         <input type="hidden" name="contents[2][type]" value="text">
@@ -313,7 +313,7 @@
                                             (بالعربية)</label>
                                         <input type="text" name="contents[2][value_ar]"
                                             value="{{ $sections['about']['title']->value_ar ?? '' }}"
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                                             dir="rtl">
                                     </div>
                                 </div>
@@ -327,7 +327,7 @@
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">Description
                                             (English)</label>
                                         <textarea name="contents[3][value_en]" rows="4"
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">{{ $sections['about']['description']->value_en ?? '' }}</textarea>
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent">{{ $sections['about']['description']->value_en ?? '' }}</textarea>
                                         <input type="hidden" name="contents[3][section]" value="about">
                                         <input type="hidden" name="contents[3][key]" value="description">
                                         <input type="hidden" name="contents[3][type]" value="textarea">
@@ -336,7 +336,7 @@
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">الوصف
                                             (بالعربية)</label>
                                         <textarea name="contents[3][value_ar]" rows="4"
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                                             dir="rtl">{{ $sections['about']['description']->value_ar ?? '' }}</textarea>
                                     </div>
                                 </div>
@@ -350,7 +350,7 @@
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">Vision
                                             (English)</label>
                                         <textarea name="contents[4][value_en]" rows="3"
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">{{ $sections['about']['vision']->value_en ?? '' }}</textarea>
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent">{{ $sections['about']['vision']->value_en ?? '' }}</textarea>
                                         <input type="hidden" name="contents[4][section]" value="about">
                                         <input type="hidden" name="contents[4][key]" value="vision">
                                         <input type="hidden" name="contents[4][type]" value="textarea">
@@ -359,7 +359,7 @@
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">الرؤية
                                             (بالعربية)</label>
                                         <textarea name="contents[4][value_ar]" rows="3"
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                                             dir="rtl">{{ $sections['about']['vision']->value_ar ?? '' }}</textarea>
                                     </div>
                                 </div>
@@ -373,7 +373,7 @@
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">Mission
                                             (English)</label>
                                         <textarea name="contents[5][value_en]" rows="3"
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">{{ $sections['about']['mission']->value_en ?? '' }}</textarea>
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent">{{ $sections['about']['mission']->value_en ?? '' }}</textarea>
                                         <input type="hidden" name="contents[5][section]" value="about">
                                         <input type="hidden" name="contents[5][key]" value="mission">
                                         <input type="hidden" name="contents[5][type]" value="textarea">
@@ -382,7 +382,7 @@
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">الرسالة
                                             (بالعربية)</label>
                                         <textarea name="contents[5][value_ar]" rows="3"
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                                             dir="rtl">{{ $sections['about']['mission']->value_ar ?? '' }}</textarea>
                                     </div>
                                 </div>
@@ -394,8 +394,8 @@
                     <div x-show="activeSection === 'services'" class="max-w-5xl">
                         <div class="bg-white rounded-xl shadow-sm p-8">
                             <div class="flex items-center space-x-3 mb-6">
-                                <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor"
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-green-700" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
@@ -423,8 +423,8 @@
                     <div x-show="activeSection === 'contact'" class="max-w-5xl">
                         <div class="bg-white rounded-xl shadow-sm p-8">
                             <div class="flex items-center space-x-3 mb-6">
-                                <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor"
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-green-700" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
@@ -451,7 +451,7 @@
                                     </label>
                                     <input type="text" name="contents[6][value_en]"
                                         value="{{ $sections['contact']['phone']->value_en ?? '' }}"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                                         placeholder="+966 XX XXX XXXX">
                                     <input type="hidden" name="contents[6][section]" value="contact">
                                     <input type="hidden" name="contents[6][key]" value="phone">
@@ -471,7 +471,7 @@
                                     </label>
                                     <input type="email" name="contents[7][value_en]"
                                         value="{{ $sections['contact']['email']->value_en ?? '' }}"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                                         placeholder="info@joodharvest.com">
                                     <input type="hidden" name="contents[7][section]" value="contact">
                                     <input type="hidden" name="contents[7][key]" value="email">
@@ -492,7 +492,7 @@
                                         Location / Google Maps Embed
                                     </label>
                                     <textarea name="contents[8][value_en]" rows="3"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent font-mono text-sm"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent font-mono text-sm"
                                         placeholder="Paste Google Maps embed code or enter address">{{ $sections['contact']['location']->value_en ?? '' }}</textarea>
                                     <p class="text-xs text-gray-500 mt-1">Enter address or paste Google Maps iframe
                                         embed code</p>
@@ -511,8 +511,8 @@
                         <div class="bg-white rounded-xl shadow-sm p-8">
                             <div class="flex items-center justify-between mb-6">
                                 <div class="flex items-center space-x-3">
-                                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                                        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor"
+                                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-green-700" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
@@ -541,14 +541,14 @@
                                 <div class="space-y-4">
                                     @foreach ($messages as $message)
                                         <div
-                                            class="border rounded-lg p-4 {{ $message->is_read ? 'bg-gray-50' : 'bg-red-50 border-red-200' }}">
+                                            class="border rounded-lg p-4 {{ $message->is_read ? 'bg-gray-50' : 'bg-green-50 border-green-200' }}">
                                             <div class="flex items-start justify-between">
                                                 <div class="flex-1">
                                                     <div class="flex items-center space-x-3 mb-2">
                                                         <h3 class="font-bold text-gray-900">{{ $message->name }}</h3>
                                                         @if (!$message->is_read)
                                                             <span
-                                                                class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">New</span>
+                                                                class="bg-green-700 text-white text-xs font-bold px-2 py-1 rounded-full">New</span>
                                                         @endif
                                                     </div>
                                                     <div class="text-sm text-gray-600 space-y-1 mb-3">
@@ -603,7 +603,7 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit"
-                                                            class="text-red-600 hover:text-red-800 text-sm font-medium flex items-center space-x-1">
+                                                            class="text-green-700 hover:text-green-900 text-sm font-medium flex items-center space-x-1">
                                                             <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                                 viewBox="0 0 24 24">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
