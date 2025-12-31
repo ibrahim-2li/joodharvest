@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ session('locale', 'en') === 'ar' ? 'جود هارفيست - لوحة التحكم' : 'Jood Harvest - Admin Dashboard' }}</title>
+    <title>{{ session('locale', 'en') === 'ar' ? 'جود هارفيست - لوحة التحكم' : 'Jood Harvest - Admin Dashboard' }}
+    </title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <style>
         * {
@@ -50,18 +53,21 @@
 
 
             <!-- Logo Section -->
-            <div class="gradient-bg px-6 py-6 relative">
+            <div class="bg-green-700 hover:bg-green-800 text-white px-6 py-6 relative">
                 <div class="flex items-center justify-between">
                     <div>
                         <div class="text-2xl font-black text-white">
                             <span>Jood</span><span class="text-gray-200">Harvest</span>
                         </div>
-                        <p class="text-gray-100 text-sm mt-1">{{ session('locale', 'en') === 'ar' ? 'لوحة التحكم' : 'Admin Dashboard' }}</p>
+                        <p class="text-gray-100 text-sm mt-1">
+                            {{ session('locale', 'en') === 'ar' ? 'لوحة التحكم' : 'Admin Dashboard' }}</p>
                     </div>
                     <!-- Close Sidebar Button -->
-                    <button @click="sidebarCollapsed = true" class="text-white hover:text-gray-200 focus:outline-none" :title="'{{ session('locale', 'en') === 'ar' ? 'إخفاء القائمة الجانبية' : 'Hide Sidebar' }}'">
+                    <button @click="sidebarCollapsed = true" class="text-white hover:text-gray-200 focus:outline-none"
+                        :title="'{{ session('locale', 'en') === 'ar' ? 'إخفاء القائمة الجانبية' : 'Hide Sidebar' }}'">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
                 </div>
@@ -75,14 +81,16 @@
                     </div>
                     <div>
                         <p class="text-sm font-semibold text-gray-800">{{ auth()->user()->name }}</p>
-                        <p class="text-xs text-gray-500">{{ session('locale', 'en') === 'ar' ? 'مدير النظام' : 'Administrator' }}</p>
+                        <p class="text-xs text-gray-500">
+                            {{ session('locale', 'en') === 'ar' ? 'مدير النظام' : 'Administrator' }}</p>
                     </div>
                 </div>
             </div>
 
             <!-- Navigation -->
             <nav class="px-4 py-6 space-y-2">
-                <button @click="activeSection = 'hero'; mobileSidebarOpen = false" :class="activeSection === 'hero' ? 'active' : ''"
+                <button @click="activeSection = 'hero'; mobileSidebarOpen = false"
+                    :class="activeSection === 'hero' ? 'active' : ''"
                     class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-gray-700 flex items-center space-x-3">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -92,7 +100,8 @@
                     <span>{{ session('locale', 'en') === 'ar' ? 'قسم الHero ' : 'Hero Section' }}</span>
                 </button>
 
-                <button @click="activeSection = 'about'; mobileSidebarOpen = false" :class="activeSection === 'about' ? 'active' : ''"
+                <button @click="activeSection = 'about'; mobileSidebarOpen = false"
+                    :class="activeSection === 'about' ? 'active' : ''"
                     class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-gray-700 flex items-center space-x-3">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -101,7 +110,8 @@
                     <span>{{ session('locale', 'en') === 'ar' ? 'قسم من نحن' : 'About Section' }}</span>
                 </button>
 
-                <button @click="activeSection = 'services'; mobileSidebarOpen = false" :class="activeSection === 'services' ? 'active' : ''"
+                <button @click="activeSection = 'services'; mobileSidebarOpen = false"
+                    :class="activeSection === 'services' ? 'active' : ''"
                     class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-gray-700 flex items-center space-x-3">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -111,7 +121,8 @@
                     <span>{{ session('locale', 'en') === 'ar' ? 'قسم الخدمات' : 'Services Section' }}</span>
                 </button>
 
-                <button @click="activeSection = 'contact'; mobileSidebarOpen = false" :class="activeSection === 'contact' ? 'active' : ''"
+                <button @click="activeSection = 'contact'; mobileSidebarOpen = false"
+                    :class="activeSection === 'contact' ? 'active' : ''"
                     class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-gray-700 flex items-center space-x-3">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -121,7 +132,8 @@
                     <span>{{ session('locale', 'en') === 'ar' ? 'معلومات التواصل' : 'Contact Info' }}</span>
                 </button>
 
-                <button @click="activeSection = 'messages'; mobileSidebarOpen = false" :class="activeSection === 'messages' ? 'active' : ''"
+                <button @click="activeSection = 'messages'; mobileSidebarOpen = false"
+                    :class="activeSection === 'messages' ? 'active' : ''"
                     class="sidebar-item w-full text-left px-4 py-3 rounded-lg text-gray-700 flex items-center justify-between">
                     <div class="flex items-center space-x-3">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -140,13 +152,14 @@
 
             <!-- Language Switcher -->
             <div class="px-4 py-4 border-t border-gray-200" x-data="{ locale: '{{ session('locale', 'en') }}' }">
-                <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">{{ session('locale', 'en') === 'ar' ? 'اللغة' : 'Language' }}</label>
+                <label
+                    class="block text-xs font-semibold text-gray-500 uppercase mb-2">{{ session('locale', 'en') === 'ar' ? 'اللغة' : 'Language' }}</label>
                 <div class="flex items-center space-x-2 bg-gray-100 rounded-full p-1">
                     <button @click="window.location.href = '{{ route('locale.change', 'en') }}'"
-                        :class="locale === 'en' ? 'bg-red-600 text-white' : 'text-gray-600'"
+                        :class="locale === 'en' ? 'bg-green-600 text-white' : 'text-gray-600'"
                         class="flex-1 px-3 py-2 rounded-full text-sm font-semibold transition">EN</button>
                     <button @click="window.location.href = '{{ route('locale.change', 'ar') }}'"
-                        :class="locale === 'ar' ? 'bg-red-600 text-white' : 'text-gray-600'"
+                        :class="locale === 'ar' ? 'bg-green-600 text-white' : 'text-gray-600'"
                         class="flex-1 px-3 py-2 rounded-full text-sm font-semibold transition">AR</button>
                 </div>
             </div>
@@ -159,7 +172,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                     </svg>
-                    <span class="text-sm font-medium">{{ session('locale', 'en') === 'ar' ? 'معاينة الموقع' : 'Preview Site' }}</span>
+                    <span
+                        class="text-sm font-medium">{{ session('locale', 'en') === 'ar' ? 'معاينة الموقع' : 'Preview Site' }}</span>
                 </a>
                 <form method="POST" action="{{ route('logout') }}" class="border-t border-gray-200">
                     @csrf
@@ -170,7 +184,8 @@
                                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
                             </path>
                         </svg>
-                        <span class="text-sm font-medium">{{ session('locale', 'en') === 'ar' ? 'تسجيل الخروج' : 'Logout' }}</span>
+                        <span
+                            class="text-sm font-medium">{{ session('locale', 'en') === 'ar' ? 'تسجيل الخروج' : 'Logout' }}</span>
                     </button>
                 </form>
             </div>
@@ -187,24 +202,37 @@
                 <div class="flex items-center justify-between px-6 py-4">
                     <div class="flex items-center space-x-4">
                         <!-- Sidebar Toggle Button (All Screen Sizes) -->
-                        <button @click="sidebarCollapsed = !sidebarCollapsed" class="text-gray-600 hover:text-gray-800 focus:outline-none" :title="sidebarCollapsed ? '{{ session('locale', 'en') === 'ar' ? 'إظهار القائمة الجانبية' : 'Show Sidebar' }}' : '{{ session('locale', 'en') === 'ar' ? 'إخفاء القائمة الجانبية' : 'Hide Sidebar' }}'">
+                        <button @click="sidebarCollapsed = !sidebarCollapsed"
+                            class="text-gray-600 hover:text-gray-800 focus:outline-none"
+                            :title="sidebarCollapsed ?
+                                '{{ session('locale', 'en') === 'ar' ? 'إظهار القائمة الجانبية' : 'Show Sidebar' }}' :
+                                '{{ session('locale', 'en') === 'ar' ? 'إخفاء القائمة الجانبية' : 'Hide Sidebar' }}'">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path x-show="!sidebarCollapsed" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path>
-                                <path x-show="sidebarCollapsed" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+                                <path x-show="!sidebarCollapsed" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path>
+                                <path x-show="sidebarCollapsed" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
                             </svg>
                         </button>
-                        
+
                         <div>
                             <h1 class="text-2xl font-bold text-gray-800">
-                                <span x-show="activeSection === 'hero'">{{ session('locale', 'en') === 'ar' ? 'قسم الHero ' : 'Hero Section' }}</span>
-                                <span x-show="activeSection === 'about'">{{ session('locale', 'en') === 'ar' ? 'قسم من نحن' : 'About Section' }}</span>
-                                <span x-show="activeSection === 'services'">{{ session('locale', 'en') === 'ar' ? 'قسم الخدمات' : 'Services Section' }}</span>
-                                <span x-show="activeSection === 'contact'">{{ session('locale', 'en') === 'ar' ? 'معلومات التواصل' : 'Contact Information' }}</span>
-                                <span x-show="activeSection === 'messages'">{{ session('locale', 'en') === 'ar' ? 'رسائل التواصل' : 'Contact Messages' }}</span>
+                                <span
+                                    x-show="activeSection === 'hero'">{{ session('locale', 'en') === 'ar' ? 'قسم الHero ' : 'Hero Section' }}</span>
+                                <span
+                                    x-show="activeSection === 'about'">{{ session('locale', 'en') === 'ar' ? 'قسم من نحن' : 'About Section' }}</span>
+                                <span
+                                    x-show="activeSection === 'services'">{{ session('locale', 'en') === 'ar' ? 'قسم الخدمات' : 'Services Section' }}</span>
+                                <span
+                                    x-show="activeSection === 'contact'">{{ session('locale', 'en') === 'ar' ? 'معلومات التواصل' : 'Contact Information' }}</span>
+                                <span
+                                    x-show="activeSection === 'messages'">{{ session('locale', 'en') === 'ar' ? 'رسائل التواصل' : 'Contact Messages' }}</span>
                             </h1>
                             <p class="text-sm text-gray-500">
-                                <span x-show="activeSection !== 'messages'">{{ session('locale', 'en') === 'ar' ? 'إدارة محتوى الصفحة الرئيسية' : 'Manage landing page content' }}</span>
-                                <span x-show="activeSection === 'messages'">{{ session('locale', 'en') === 'ar' ? 'عرض وإدارة رسائل نموذج الاتصال' : 'View and manage contact form submissions' }}</span>
+                                <span
+                                    x-show="activeSection !== 'messages'">{{ session('locale', 'en') === 'ar' ? 'إدارة محتوى الصفحة الرئيسية' : 'Manage landing page content' }}</span>
+                                <span
+                                    x-show="activeSection === 'messages'">{{ session('locale', 'en') === 'ar' ? 'عرض وإدارة رسائل نموذج الاتصال' : 'View and manage contact form submissions' }}</span>
                             </p>
                         </div>
                     </div>
@@ -235,8 +263,12 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h2 class="text-xl font-bold text-gray-800">{{ session('locale', 'en') === 'ar' ? 'محتوى قسم الHero ' : 'Hero Section Content' }}</h2>
-                                    <p class="text-sm text-gray-500">{{ session('locale', 'en') === 'ar' ? 'نص اللافتة الرئيسية المعروض على الصفحة' : 'Main banner text displayed on homepage' }}</p>
+                                    <h2 class="text-xl font-bold text-gray-800">
+                                        {{ session('locale', 'en') === 'ar' ? 'محتوى قسم الHero ' : 'Hero Section Content' }}
+                                    </h2>
+                                    <p class="text-sm text-gray-500">
+                                        {{ session('locale', 'en') === 'ar' ? 'نص اللافتة الرئيسية المعروض على الصفحة' : 'Main banner text displayed on homepage' }}
+                                    </p>
                                 </div>
                             </div>
 
@@ -309,7 +341,7 @@
                             <!-- Submit Button for Hero Section -->
                             <div class="flex items-center justify-end pt-6 border-t border-gray-200">
                                 <button type="submit"
-                                    class="gradient-bg text-white px-8 py-3 rounded-lg font-bold shadow-lg hover:shadow-xl transition transform hover:scale-105 flex items-center space-x-2">
+                                    class="bg-green-700 hover:bg-green-800 text-white px-8 py-3 rounded-lg font-bold shadow-lg flex items-center space-x-2">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M5 13l4 4L19 7"></path>
@@ -438,7 +470,7 @@
                             <!-- Submit Button for About Section -->
                             <div class="flex items-center justify-end pt-6 border-t border-gray-200">
                                 <button type="submit"
-                                    class="gradient-bg text-white px-8 py-3 rounded-lg font-bold shadow-lg hover:shadow-xl transition transform hover:scale-105 flex items-center space-x-2">
+                                    class="bg-green-700 hover:bg-green-800 text-white px-8 py-3 rounded-lg font-bold shadow-lg flex items-center space-x-2">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M5 13l4 4L19 7"></path>
@@ -450,34 +482,34 @@
                     </form>
                 </div>
 
-                    <!-- Services Section -->
-                    <div x-show="activeSection === 'services'" class="max-w-5xl">
-                        <div class="bg-white rounded-xl shadow-sm p-8">
-                            <div class="flex items-center space-x-3 mb-6">
-                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                                    <svg class="w-6 h-6 text-green-700" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h2 class="text-xl font-bold text-gray-800">Services Section</h2>
-                                    <p class="text-sm text-gray-500">Services content will be added here</p>
-                                </div>
-                            </div>
-                            <div class="text-center py-12">
-                                <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24">
+                <!-- Services Section -->
+                <div x-show="activeSection === 'services'" class="max-w-5xl">
+                    <div class="bg-white rounded-xl shadow-sm p-8">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-green-700" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
                                     </path>
                                 </svg>
-                                <p class="text-gray-500">Services management coming soon...</p>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-bold text-gray-800">Services Section</h2>
+                                <p class="text-sm text-gray-500">Services content will be added here</p>
                             </div>
                         </div>
+                        <div class="text-center py-12">
+                            <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                </path>
+                            </svg>
+                            <p class="text-gray-500">Services management coming soon...</p>
+                        </div>
                     </div>
+                </div>
 
                 <!-- Contact Section -->
                 <div x-show="activeSection === 'contact'" class="max-w-5xl">
@@ -570,7 +602,7 @@
                             <!-- Submit Button for Contact Section -->
                             <div class="flex items-center justify-end pt-6 border-t border-gray-200 mt-8">
                                 <button type="submit"
-                                    class="gradient-bg text-white px-8 py-3 rounded-lg font-bold shadow-lg hover:shadow-xl transition transform hover:scale-105 flex items-center space-x-2">
+                                    class="bg-green-700 hover:bg-green-800 text-white px-8 py-3 rounded-lg font-bold shadow-lg flex items-center space-x-2">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M5 13l4 4L19 7"></path>
@@ -582,122 +614,120 @@
                     </form>
                 </div>
 
-                    <!-- Messages Section -->
-                    <div x-show="activeSection === 'messages'" class="max-w-5xl">
-                        <div class="bg-white rounded-xl shadow-sm p-8">
-                            <div class="flex items-center justify-between mb-6">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                                        <svg class="w-6 h-6 text-green-700" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h2 class="text-xl font-bold text-gray-800">Contact Messages</h2>
-                                        <p class="text-sm text-gray-500">{{ $messages->count() }} total messages,
-                                            {{ $unreadCount }} unread</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            @if ($messages->isEmpty())
-                                <div class="text-center py-12">
-                                    <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24">
+                <!-- Messages Section -->
+                <div x-show="activeSection === 'messages'" class="max-w-5xl">
+                    <div class="bg-white rounded-xl shadow-sm p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-green-700" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4">
+                                            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
                                         </path>
                                     </svg>
-                                    <p class="text-gray-500">No messages yet</p>
                                 </div>
-                            @else
-                                <div class="space-y-4">
-                                    @foreach ($messages as $message)
-                                        <div
-                                            class="border rounded-lg p-4 {{ $message->is_read ? 'bg-gray-50' : 'bg-green-50 border-green-200' }}">
-                                            <div class="flex items-start justify-between">
-                                                <div class="flex-1">
-                                                    <div class="flex items-center space-x-3 mb-2">
-                                                        <h3 class="font-bold text-gray-900">{{ $message->name }}</h3>
-                                                        @if (!$message->is_read)
-                                                            <span
-                                                                class="bg-green-700 text-white text-xs font-bold px-2 py-1 rounded-full">New</span>
-                                                        @endif
-                                                    </div>
-                                                    <div class="text-sm text-gray-600 space-y-1 mb-3">
+                                <div>
+                                    <h2 class="text-xl font-bold text-gray-800">Contact Messages</h2>
+                                    <p class="text-sm text-gray-500">{{ $messages->count() }} total messages,
+                                        {{ $unreadCount }} unread</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        @if ($messages->isEmpty())
+                            <div class="text-center py-12">
+                                <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4">
+                                    </path>
+                                </svg>
+                                <p class="text-gray-500">No messages yet</p>
+                            </div>
+                        @else
+                            <div class="space-y-4">
+                                @foreach ($messages as $message)
+                                    <div
+                                        class="border rounded-lg p-4 {{ $message->is_read ? 'bg-gray-50' : 'bg-green-50 border-green-200' }}">
+                                        <div class="flex items-start justify-between">
+                                            <div class="flex-1">
+                                                <div class="flex items-center space-x-3 mb-2">
+                                                    <h3 class="font-bold text-gray-900">{{ $message->name }}</h3>
+                                                    @if (!$message->is_read)
+                                                        <span
+                                                            class="bg-green-700 text-white text-xs font-bold px-2 py-1 rounded-full">New</span>
+                                                    @endif
+                                                </div>
+                                                <div class="text-sm text-gray-600 space-y-1 mb-3">
+                                                    <p><svg class="w-4 h-4 inline mr-1" fill="none"
+                                                            stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                                            </path>
+                                                        </svg>{{ $message->email }}</p>
+                                                    @if ($message->phone)
                                                         <p><svg class="w-4 h-4 inline mr-1" fill="none"
                                                                 stroke="currentColor" viewBox="0 0 24 24">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                     stroke-width="2"
-                                                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
                                                                 </path>
-                                                            </svg>{{ $message->email }}</p>
-                                                        @if ($message->phone)
-                                                            <p><svg class="w-4 h-4 inline mr-1" fill="none"
-                                                                    stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round"
-                                                                        stroke-linejoin="round" stroke-width="2"
-                                                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
-                                                                    </path>
-                                                                </svg>{{ $message->phone }}</p>
-                                                        @endif
-                                                        <p class="text-xs text-gray-500"><svg
-                                                                class="w-4 h-4 inline mr-1" fill="none"
-                                                                stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
-                                                                </path>
-                                                            </svg>{{ $message->created_at->diffForHumans() }}</p>
-                                                    </div>
-                                                    <p class="text-gray-700 bg-white p-3 rounded border">
-                                                        {{ $message->message }}</p>
-                                                </div>
-                                                <div class="flex flex-col space-y-2 ml-4">
-                                                    @if (!$message->is_read)
-                                                        <form method="POST"
-                                                            action="{{ route('admin.messages.read', $message->id) }}">
-                                                            @csrf
-                                                            <button type="submit"
-                                                                class="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center space-x-1">
-                                                                <svg class="w-4 h-4" fill="none"
-                                                                    stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round"
-                                                                        stroke-linejoin="round" stroke-width="2"
-                                                                        d="M5 13l4 4L19 7"></path>
-                                                                </svg>
-                                                                <span>Mark Read</span>
-                                                            </button>
-                                                        </form>
+                                                            </svg>{{ $message->phone }}</p>
                                                     @endif
+                                                    <p class="text-xs text-gray-500"><svg class="w-4 h-4 inline mr-1"
+                                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
+                                                            </path>
+                                                        </svg>{{ $message->created_at->diffForHumans() }}</p>
+                                                </div>
+                                                <p class="text-gray-700 bg-white p-3 rounded border">
+                                                    {{ $message->message }}</p>
+                                            </div>
+                                            <div class="flex flex-col space-y-2 ml-4">
+                                                @if (!$message->is_read)
                                                     <form method="POST"
-                                                        action="{{ route('admin.messages.delete', $message->id) }}"
-                                                        onsubmit="return confirm('Are you sure you want to delete this message?');">
+                                                        action="{{ route('admin.messages.read', $message->id) }}">
                                                         @csrf
-                                                        @method('DELETE')
                                                         <button type="submit"
-                                                            class="text-green-700 hover:text-green-900 text-sm font-medium flex items-center space-x-1">
+                                                            class="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center space-x-1">
                                                             <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                                 viewBox="0 0 24 24">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                                                </path>
+                                                                    stroke-width="2" d="M5 13l4 4L19 7"></path>
                                                             </svg>
-                                                            <span>Delete</span>
+                                                            <span>Mark Read</span>
                                                         </button>
                                                     </form>
-                                                </div>
+                                                @endif
+                                                <form method="POST"
+                                                    action="{{ route('admin.messages.delete', $message->id) }}"
+                                                    onsubmit="return confirm('Are you sure you want to delete this message?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="text-green-700 hover:text-green-900 text-sm font-medium flex items-center space-x-1">
+                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                            viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                                            </path>
+                                                        </svg>
+                                                        <span>Delete</span>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
-                                    @endforeach
-                                </div>
-                            @endif
-                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
+                </div>
             </main>
         </div>
     </div>

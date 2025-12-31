@@ -118,10 +118,9 @@
             <div class="flex justify-between items-center h-16 sm:h-20">
                 <!-- Logo -->
                 <div class="flex items-center space-x-3">
-                    <div class="text-2xl font-black">
-                        <span class="text-red-600">Jood</span>
-                        <span class="text-gray-700">Harvest</span>
-                        <div class="text-xs text-gray-600 font-semibold">جود هارفيست</div>
+                    <div class="">
+                        <img src="{{ asset('images/logo.png') }}" width="100" height="100"
+                            class="text-xs text-gray-600 font-semibold" alt="Jood Harvest">
                     </div>
                 </div>
 
@@ -211,7 +210,7 @@
                         <h1 class="text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-6">
                             {{ $content['hero']->firstWhere('key', 'title')->value_en ?? 'Your Trusted Partner in Cold Chain Excellence' }}
                         </h1>
-                        <p class="text-xl md:text-2xl mb-8 text-green-100">
+                        <p class="text-xl md:text-2xl mb-8 text-green-500">
                             {{ $content['hero']->firstWhere('key', 'description')->value_en ?? 'Importing, cold storage, and distribution of premium chilled and frozen food products.' }}
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4">
