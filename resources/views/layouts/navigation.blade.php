@@ -20,6 +20,16 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <!-- Language Switcher -->
+                <div class="flex items-center space-x-2 bg-gray-100 rounded-full p-1 me-4" x-data="{ locale: '{{ session('locale', 'en') }}' }">
+                    <button @click="window.location.href = '{{ route('locale.change', 'en') }}'"
+                        :class="locale === 'en' ? 'bg-red-600 text-white' : 'text-gray-600'"
+                        class="px-3 py-1.5 rounded-full text-xs font-semibold transition">EN</button>
+                    <button @click="window.location.href = '{{ route('locale.change', 'ar') }}'"
+                        :class="locale === 'ar' ? 'bg-red-600 text-white' : 'text-gray-600'"
+                        class="px-3 py-1.5 rounded-full text-xs font-semibold transition">AR</button>
+                </div>
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -83,6 +93,18 @@
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
+
+                <!-- Language Switcher Mobile -->
+                <div class="px-4 py-3">
+                    <div class="flex items-center space-x-2 bg-gray-100 rounded-full p-1 w-max" x-data="{ locale: '{{ session('locale', 'en') }}' }">
+                        <button @click="window.location.href = '{{ route('locale.change', 'en') }}'"
+                            :class="locale === 'en' ? 'bg-red-600 text-white' : 'text-gray-600'"
+                            class="px-4 py-2 rounded-full text-sm font-semibold transition">EN</button>
+                        <button @click="window.location.href = '{{ route('locale.change', 'ar') }}'"
+                            :class="locale === 'ar' ? 'bg-red-600 text-white' : 'text-gray-600'"
+                            class="px-4 py-2 rounded-full text-sm font-semibold transition">AR</button>
+                    </div>
+                </div>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

@@ -48,6 +48,10 @@
             overflow-x: hidden;
         }
 
+        html {
+            overflow-x: hidden;
+        }
+
         .gradient-bg {
             background: linear-gradient(135deg, #2d4526 0%, #8fa863 50%, #4A5568 100%);
         }
@@ -110,13 +114,14 @@
 
     <!-- Navbar -->
     <nav class="w-full bg-white shadow-md fixed top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 sm:h-20">
                 <!-- Logo -->
                 <div class="flex items-center space-x-3">
-                    <div class="">
-                        <img src="{{ asset('images/logo.png') }}" width="100" height="100"
-                            class="text-xs text-gray-600 font-semibold" alt="Jood Harvest">
+                    <div class="text-2xl font-black">
+                        <span class="text-red-600">Jood</span>
+                        <span class="text-gray-700">Harvest</span>
+                        <div class="text-xs text-gray-600 font-semibold">جود هارفيست</div>
                     </div>
                 </div>
 
@@ -141,7 +146,8 @@
                     </a>
 
                     <!-- Language Switcher -->
-                    <div class="flex items-center space-x-2 bg-gray-100 rounded-full p-1">
+                    <div class="flex items-center bg-gray-100 rounded-full p-1"
+                        :class="locale === 'ar' ? 'space-x-reverse space-x-2' : 'space-x-2'">
                         <button @click="window.location.href = '{{ route('locale.change', 'en') }}'"
                             :class="locale === 'en' ? 'bg-green-700 text-white' : 'text-gray-600'"
                             class="px-4 py-2 rounded-full text-sm font-semibold transition">EN</button>
@@ -152,7 +158,8 @@
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button @click="open = !open" class="md:hidden text-gray-700 focus:outline-none">
+                <button @click="open = !open" class="md:hidden text-gray-700 focus:outline-none flex-shrink-0"
+                    aria-label="Toggle menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16"></path>
@@ -164,7 +171,7 @@
 
             <!-- Mobile Menu -->
             <div x-show="open" class="md:hidden pb-4 space-y-3">
-                <a href="#home" class="block text-gray-700 hover:text-green-700 font-medium">
+                <a href="#home" class="block text-gray-700 hover:text-red-600 font-medium">
                     <span x-show="locale === 'en'">Dashboard</span>
                     <span x-show="locale === 'ar'">الرئيسية</span>
                 </a>
@@ -180,7 +187,8 @@
                     <span x-show="locale === 'en'">Contact</span>
                     <span x-show="locale === 'ar'">اتصل بنا</span>
                 </a>
-                <div class="flex items-center space-x-2 bg-gray-100 rounded-full p-1 w-max">
+                <div class="flex items-center bg-gray-100 rounded-full p-1 w-max"
+                    :class="locale === 'ar' ? 'space-x-reverse space-x-2' : 'space-x-2'">
                     <button @click="window.location.href = '{{ route('locale.change', 'en') }}'"
                         :class="locale === 'en' ? 'bg-green-700 text-white' : 'text-gray-600'"
                         class="px-4 py-2 rounded-full text-sm font-semibold">EN</button>
@@ -193,7 +201,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-pattern gradient-bg pt-32 pb-20 relative overflow-hidden">
+    <section id="home" class="hero-pattern gradient-bg pt-24 sm:pt-32 pb-20 relative overflow-hidden">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid md:grid-cols-2 gap-12 items-center">
