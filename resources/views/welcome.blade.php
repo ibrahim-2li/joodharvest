@@ -391,15 +391,15 @@
                                     $content['hero']->firstWhere('key', 'image') &&
                                     $content['hero']->firstWhere('key', 'image')->value_en)
                                 <img src="{{ asset($content['hero']->firstWhere('key', 'image')->value_en) }}"
-                                    alt="Hero" class="max-w-2xl mx-auto">
+                                    alt="Hero" class="max-w-4xl mx-auto">
                             @else
                                 <img src="{{ asset('images/hero-truck.png') }}" alt="Jood Harvest"
-                                    class="max-w-2xl mx-auto"
+                                    class="max-w-4xl mx-auto"
                                     onerror="this.src='https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800'">
                             @endif
                             <!-- Bottom fade -->
                             <div
-                                class="absolute bottom-0 left-[-15%] right-0 h-32 mx-auto max-w-2xl bg-gradient-to-t from-white to-transparent">
+                                class="absolute bottom-0 left-[-100%] right-[10%] h-32 mx-auto max-w-2xl bg-gradient-to-t from-white to-transparent">
                             </div>
                         </div>
                     </div>
@@ -511,9 +511,25 @@
         </div>
     </section> --}}
 
-    <section id="services" class="why-us-section">
+    <section id="why-us" class="why-us-section">
         <div class="container">
             <div class="why-us-layout">
+                <!-- Right Side: Title, Subtitle and Image -->
+                <div class="why-us-right">
+                    <div class="why-us-header">
+                        <h2 class="section-title-right">لماذا تختار جود هارفيست</h2>
+                        <div class="flex gap-1 justify-start">
+                            <span class="w-12 h-1 bg-jood-green rounded-full"></span>
+                            <span class="w-2 h-1 bg-jood-green rounded-full"></span>
+                        </div>
+                        <p class="section-subtitle-right">نهتم بكل تفصيلة لنوصّل لك أفضل منتج بأعلى جودة</p>
+                    </div>
+                    <div class="why-us-image-wrapper">
+                        {{-- <div class="decorative-shape"></div> --}}
+                        <img src="{{ asset('images/why-us-image.png') }}" alt="Fresh Food Products"
+                            class="food-image">
+                    </div>
+                </div>
                 <!-- Left Side: Cards Grid -->
                 <div class="why-us-cards-grid">
                     <div class="why-card">
@@ -562,18 +578,7 @@
                     </div>
                 </div>
 
-                <!-- Right Side: Title, Subtitle and Image -->
-                <div class="why-us-right">
-                    <div class="why-us-header">
-                        <h2 class="section-title-right">لماذا تختار جود هارفيست</h2>
-                        <p class="section-subtitle-right">نهتم بكل تفصيلة لنوصّل لك أفضل منتج بأعلى جودة</p>
-                    </div>
-                    <div class="why-us-image-wrapper">
-                        {{-- <div class="decorative-shape"></div> --}}
-                        <img src="{{ asset('images/why-us-image.png') }}" alt="Fresh Food Products"
-                            class="food-image">
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
@@ -638,14 +643,14 @@
                         style="font-family: 'Cairo', sans-serif;">
                         {{ session('locale', 'en') === 'ar' ? 'خدماتنا الأساسية' : 'Our Core Services' }}
                     </h2>
-                    <div class="flex items-center justify-center gap-2 mb-4">
-                        <span class="w-1.5 h-1.5 bg-jood-accent rounded-full"></span>
-                        <span class="w-8 h-0.5 bg-jood-accent"></span>
-                        <span class="w-1.5 h-1.5 bg-jood-accent rounded-full"></span>
+                    <div class="flex gap-1 justify-center">
+                        <span class="w-12 h-1 bg-white rounded-full"></span>
+                        <span class="w-2 h-1 bg-white rounded-full"></span>
                     </div>
                     <p class="text-jood-accent text-lg">
                         {{ session('locale', 'en') === 'ar' ? 'لأن الجودة تبدأ من الخدمة' : 'Because quality starts with service' }}
                     </p>
+
                 </div>
 
                 <!-- Card 2: Transport (Left in RTL) -->
@@ -709,6 +714,10 @@
                 <h2 class="text-3xl flex justify-start md:text-4xl font-bold text-jood-green mb-4">
                     {{ session('locale', 'en') === 'ar' ? 'لمن نقدم الخدمة' : 'Who We Serve' }}
                 </h2>
+                <div class="flex gap-1 justify-start">
+                    <span class="w-12 h-1 bg-jood-green rounded-full"></span>
+                    <span class="w-2 h-1 bg-jood-green rounded-full"></span>
+                </div>
                 <p class="text-gray-600 text-lg flex justify-start">
                     {{ session('locale', 'en') === 'ar' ? 'نقدم منتجات عالية الجودة لتلبية احتياجات مختلف  القطاعات الغذائية بكفاءة...' : 'We offer high-quality products to efficiently meet the needs of various food sectors...' }}
                 </p>
@@ -722,12 +731,6 @@
                                 '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>',
                             'ar' => 'السوبرماركت',
                             'en' => 'Supermarkets',
-                        ],
-                        [
-                            'icon' =>
-                                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>',
-                            'ar' => 'تجار الجملة',
-                            'en' => 'Wholesalers',
                         ],
                         [
                             'icon' =>
@@ -746,6 +749,12 @@
                                 '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>',
                             'ar' => 'معامل تجهيز الأغذية',
                             'en' => 'Food Processing',
+                        ],
+                        [
+                            'icon' =>
+                                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>',
+                            'ar' => 'شركات البيع بالجملة',
+                            'en' => 'Wholesalers',
                         ],
                     ];
                 @endphp
@@ -769,21 +778,21 @@
     <!-- CTA Section -->
     <section class="py-12 md:py-20 bg-white overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 md:px-8">
-            <div class="bg-jood-accent rounded-3xl relative" data-aos="fade-up">
+            <div class="bg-[#a1bd68] rounded-3xl relative p-6 md:p-12 lg:p-12" data-aos="fade-up">
                 <div class="grid md:grid-cols-2 gap-0 items-center">
 
 
                     <!-- Content Side -->
                     <div
-                        class="p-6 md:p-10 lg:p-12 {{ session('locale', 'en') === 'ar' ? 'md:order-2 text-right' : 'md:order-1 text-left' }}">
-                        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-jood-green-dark leading-tight mb-4">
+                        class="p-6 md:p-12 lg:p-12 {{ session('locale', 'en') === 'ar' ? 'md:order-2 text-right' : 'md:order-1 text-left' }}">
+                        <h2 class="text-xl md:text-2xl lg:text-2xl font-bold text-jood-green-dark leading-tight mb-4">
                             {{ session('locale', 'en') === 'ar' ? 'جودة تُحفظ بعناية ، طعم طبيعي يدوم وثقة تبدأ من أول تجربة' : 'Quality preserved with care, natural taste that lasts, and trust starting from the first experience' }}
                         </h2>
-                        <p class="text-jood-green-dark/80 text-base md:text-lg mb-6">
+                        <p class="text-white text-base md:text-lg mb-6">
                             {{ session('locale', 'en') === 'ar' ? 'عناية دقيقة في كل خطوة، وجودة تُلاحظ من أول تجربة.' : 'Meticulous care at every step, and quality you notice from the first experience.' }}
                         </p>
                         <a href="#contact"
-                            class="inline-block bg-jood-green text-white px-8 py-3 rounded-xl font-bold text-lg hover:bg-jood-green-dark transition shadow-lg">
+                            class="inline-block w-full  bg-jood-green text-center text-white px-8 py-3 rounded-xl font-bold text-lg hover:bg-jood-green-dark transition shadow-lg">
                             {{ session('locale', 'en') === 'ar' ? 'تواصل معنا' : 'Contact Us' }}
                         </a>
                     </div>
@@ -813,13 +822,13 @@
                     data-aos="fade-right">
 
                     <div
-                        class="bg-jood-green text-white rounded-3xl p-8 md:p-10 shadow-2xl flex flex-col justify-center items-center text-center">
+                        class="bg-jood-green text-white rounded-3xl p-8 md:p-10 shadow-2xl flex flex-col justify-start items-center text-center">
 
                         <div class="mb-8 w-full">
-                            <h4 class="text-2xl font-bold mb-2">
+                            <h4 class="text-2xl flex justify-start font-bold mb-2">
                                 {{ session('locale', 'en') === 'ar' ? 'معلومات التواصل' : 'Contact Info' }}
                             </h4>
-                            <div class="flex gap-1 justify-center">
+                            <div class="flex gap-1 justify-start">
                                 <span class="w-12 h-1 bg-white/50 rounded-full"></span>
                                 <span class="w-2 h-1 bg-white/50 rounded-full"></span>
                             </div>
@@ -827,7 +836,7 @@
 
                         <div class="space-y-6 w-full">
                             <div
-                                class="flex items-center gap-4 justify-center {{ session('locale', 'en') === 'ar' ? 'flex-row-reverse' : '' }}">
+                                class="flex items-center gap-4 justify-start {{ session('locale', 'en') === 'ar' ? '' : '' }}">
                                 <div
                                     class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -836,13 +845,13 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                                <p class="text-sm leading-relaxed text-white/90">
-                                    ul. Sawickiej Hanki 54Świętochłowi5
+                                <p class="text-sm text-white/90">
+                                    Hanki 54Świętochłowi5
                                 </p>
                             </div>
 
                             <div
-                                class="flex items-center gap-4 justify-center {{ session('locale', 'en') === 'ar' ? 'flex-row-reverse' : '' }}">
+                                class="flex items-center gap-4 justify-start {{ session('locale', 'en') === 'ar' ? '' : '' }}">
                                 <div
                                     class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -855,7 +864,7 @@
                             </div>
 
                             <div
-                                class="flex items-center gap-4 justify-center {{ session('locale', 'en') === 'ar' ? 'flex-row-reverse' : '' }}">
+                                class="flex items-center gap-4 justify-start {{ session('locale', 'en') === 'ar' ? '' : '' }}">
                                 <div
                                     class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
