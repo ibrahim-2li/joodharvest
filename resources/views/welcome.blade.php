@@ -7,671 +7,794 @@
     <title>
         {{ session('locale', 'en') === 'ar' ? 'جود هارفيست - الاستيراد والتخزين المبرد' : 'Jood Harvest - Import & Cold Storage' }}
     </title>
-    <!-- Tailwind -->
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Alpine -->
-    <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
-    <!-- AOS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <style>
-        * {
-            font-family: {!! session('locale', 'en') === 'ar' ? "'Cairo', sans-serif" : "'Inter', sans-serif" !!};
-        }
-
-        /* Ensure all headings use the same font in Arabic */
-        @if (session('locale', 'en') === 'ar')
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-                font-family: 'Cairo', sans-serif !important;
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'jood-green': '#3A522A',
+                        'jood-green-dark': '#29391D',
+                        'jood-light': '#E9F4D3',
+                        'jood-light-75': '#D9E4C1',
+                        'jood-accent': '#C9D9A7',
+                    }
+                }
             }
-        @endif
-
-        :root {
-            --primary-green: #2d4526;
-            --secondary-green: #8fa863;
-            --light-green: #b5c78e;
-            --dark-gray: #4A5568;
-            --lighter-gray: #F7FAFC;
+        }
+    </script>
+    <style>
+        [x-cloak] {
+            display: none !important;
         }
 
-        body {
-            overflow-x: hidden;
+        * {
+            font-family: 'Cairo', sans-serif;
         }
 
         html {
-            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        .gradient-bg {
-            background: linear-gradient(135deg, #2d4526 0%, #8fa863 50%, #4A5568 100%);
+        .hero-gradient {
+            background: linear-gradient({{ session('locale', 'en') === 'ar' ? '90deg' : '270deg' }},
+                    rgba(58, 82, 42, 0) 0%,
+                    rgba(58, 82, 42, 0.1) 30%,
+                    rgba(58, 82, 42, 0.8) 70%,
+                    rgba(58, 82, 42, 1) 100%);
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #2d4526 0%, #8fa863 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .abstract-dots {
+            background-image: radial-gradient(rgba(58, 82, 42, 0.1) 2px, transparent 2px);
+            background-size: 20px 20px;
         }
 
-        .floating {
-            animation: floating 3s ease-in-out infinite;
+        /* CSS Variables */
+        :root {
+            --color-primary-green: #3A522A;
+            --color-primary-green-dark: #29391D;
+            --color-beige-light: #E9F4D3;
+            --color-accent-lime-light: #D9E4C1;
+            --color-text-primary: #3A522A;
+            --color-text-secondary: #5a6f4a;
+            --color-white: #ffffff;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
+            --radius-2xl: 1.5rem;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --transition-base: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            --font-weight-extra-bold: 800;
         }
 
-        .floating-slow {
-            animation: floating 4s ease-in-out infinite;
+        /* Why Us Section Styles */
+        .why-us-section {
+            background-color: var(--color-white);
+            padding: 5rem 0;
         }
 
-        @keyframes floating {
+        .why-us-section .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
 
-            0%,
-            100% {
-                transform: translateY(0px);
+        .section-title {
+            text-align: center;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        /* New Layout: Left Cards Grid + Right Title/Image */
+        .why-us-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-3xl);
+            align-items: center;
+            margin-top: var(--spacing-2xl);
+        }
+
+        /* Left Side: 2x2 Grid of Cards */
+        .why-us-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        .why-card {
+            background-color: var(--color-accent-lime-light);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-base);
+            box-shadow: var(--shadow-sm);
+            text-align: right;
+        }
+
+        .why-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .why-icon {
+            width: 56px;
+            height: 56px;
+            background-color: var(--color-primary-green);
+            color: var(--color-white);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-md);
+            margin-right: auto;
+        }
+
+        .why-card h3 {
+            color: var(--color-text-primary);
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-sm);
+            font-weight: 700;
+        }
+
+        .why-card p {
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Right Side: Title, Subtitle and Image */
+        .why-us-right {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xl);
+        }
+
+        .why-us-header {
+            text-align: right;
+        }
+
+        .section-title-right {
+            color: var(--color-text-primary);
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            font-weight: var(--font-weight-extra-bold);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.3;
+        }
+
+        .section-subtitle-right {
+            color: var(--color-text-secondary);
+            font-size: 1.125rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .why-us-image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .decorative-shape {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--color-primary-green) 0%, rgba(5, 51, 3, 0.8) 100%);
+            border-radius: 50% 30% 50% 30%;
+            transform: rotate(-10deg);
+            z-index: 0;
+            filter: blur(20px);
+            opacity: 0.3;
+        }
+
+        .food-image {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-lg);
+            transform: rotate(-3deg);
+            transition: transform var(--transition-slow);
+            z-index: 1;
+        }
+
+        .food-image:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        /* Responsive Design for Why Us Section */
+        @media (max-width: 1024px) {
+            .why-us-layout {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-2xl);
             }
 
-            50% {
-                transform: translateY(-20px);
+            .why-us-right {
+                order: -1;
+            }
+
+            .why-us-header {
+                text-align: center;
+            }
+
+            .section-title-right,
+            .section-subtitle-right {
+                text-align: center;
             }
         }
 
-        .hover-scale {
-            transition: transform 0.3s ease;
-        }
-
-        .hover-scale:hover {
-            transform: scale(1.05);
-        }
-
-        .card-shadow {
-            box-shadow: 0 10px 30px rgba(45, 69, 38, 0.1);
-        }
-
-        .hero-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232d4526' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        @media (max-width: 768px) {
-            .language-switcher {
-                position: fixed;
-                top: 20px;
-                {{ session('locale', 'en') === 'ar' ? 'left' : 'right' }}: 20px;
-                z-index: 1000;
+        @media (max-width: 640px) {
+            .why-us-cards-grid {
+                grid-template-columns: 1fr;
             }
+
+            .why-card {
+                text-align: center;
+            }
+
+            .why-icon {
+                margin: 0 auto var(--spacing-md) auto;
+            }
+        }
+
+        /* Hero Abstract Shape */
+        .side-abstract {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: auto;
+            max-width: 50vw;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .side-abstract-right {
+            right: 0;
+            transform: scaleX(-1);
+        }
+
+        .side-abstract-left {
+            left: 0;
         }
     </style>
 </head>
 
-<body class="antialiased" x-data="{ locale: '{{ session('locale', 'en') }}', open: false }">
+<body class="antialiased bg-white" x-data="{ locale: '{{ session('locale', 'en') }}', mobileMenu: false }">
 
-    <!-- Navbar -->
-    <nav class="w-full bg-white shadow-md fixed top-0 z-50">
-        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16 sm:h-20">
-                <!-- Logo -->
-                <div class="flex items-center space-x-3">
-                    <div class="">
-                        <img src="{{ asset('images/logo.png') }}" width="100" height="100"
-                            class="text-xs text-gray-600 font-semibold" alt="Jood Harvest">
-                    </div>
-                </div>
+    <!-- Header/Navbar - Floating Pill Style -->
+    <header class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl">
+        <nav dir="ltr"
+            class="bg-jood-light rounded-full shadow-lg px-4 md:px-8 py-3 flex items-center justify-between flex-row-reverse">
+            <!-- Logo -->
+            <a href="#" class="flex-shrink-0">
+                <img src="{{ asset('images/logo.png') }}" class="h-12 md:h-16 w-auto" alt="Jood Harvest">
+            </a>
 
-                <!-- Desktop Navigation -->
-                <div
-                    class="hidden md:flex items-center space-x-8":class="locale === 'ar' ? 'space-x-reverse' : ''">
-                    <a href="#home" class="text-gray-700 hover:text-green-700 font-medium transition">
-                        <span x-show="locale === 'en'">Home</span>
-                        <span x-show="locale === 'ar'">الرئيسية</span>
-                    </a>
-                    <a href="#about" class="text-gray-700 hover:text-green-700 font-medium transition">
-                        <span x-show="locale === 'en'">About</span>
-                        <span x-show="locale === 'ar'">من نحن </span>
-                    </a>
-                    <a href="#services" class="text-gray-700 hover:text-green-700 font-medium transition">
-                        <span x-show="locale === 'en'">Services</span>
-                        <span x-show="locale === 'ar'">خدماتنا</span>
-                    </a>
-                    <a href="#contact" class="text-gray-700 hover:text-green-700 font-medium transition">
-                        <span x-show="locale === 'en'">Contact</span>
-                        <span x-show="locale === 'ar'">اتصل بنا</span>
-                    </a>
-
-                    <!-- Language Switcher -->
-                    <div class="flex items-center bg-gray-100 rounded-full p-1"
-                        :class="locale === 'ar' ? 'space-x-reverse space-x-2' : 'space-x-2'">
-                        <button @click="window.location.href = '{{ route('locale.change', 'en') }}'"
-                            :class="locale === 'en' ? 'bg-green-700 text-white' : 'text-gray-600'"
-                            class="px-4 py-2 rounded-full text-sm font-semibold transition">EN</button>
-                        <button @click="window.location.href = '{{ route('locale.change', 'ar') }}'"
-                            :class="locale === 'ar' ? 'bg-green-700 text-white' : 'text-gray-600'"
-                            class="px-4 py-2 rounded-full text-sm font-semibold transition">AR</button>
-                    </div>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button @click="open = !open" class="md:hidden text-gray-700 focus:outline-none flex-shrink-0"
-                    aria-label="Toggle menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16"></path>
-                        <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
+            <!-- Desktop Navigation -->
+            <div
+                class="hidden md:flex items-center gap-4 {{ session('locale', 'en') === 'ar' ? 'flex-row-reverse' : '' }}">
+                <a href="#home"
+                    class="px-3 py-2 text-black hover:text-jood-green font-bold text-lg transition flex flex-col items-center group">
+                    <span>{{ session('locale', 'en') === 'ar' ? 'الرئيسية' : 'Home' }}</span>
+                    <span class="w-0 group-hover:w-full h-0.5 bg-jood-green transition-all"></span>
+                </a>
+                <a href="#why-us" class="px-3 py-2 text-black hover:text-jood-green text-lg transition">
+                    {{ session('locale', 'en') === 'ar' ? 'لماذا نحن' : 'Why Us' }}
+                </a>
+                <a href="#services" class="px-3 py-2 text-black hover:text-jood-green text-lg transition">
+                    {{ session('locale', 'en') === 'ar' ? 'خدماتنا' : 'Services' }}
+                </a>
+                <a href="#clients" class="px-3 py-2 text-black hover:text-jood-green text-lg transition">
+                    {{ session('locale', 'en') === 'ar' ? 'عملاؤنا' : 'Clients' }}
+                </a>
             </div>
 
-            <!-- Mobile Menu -->
-            <div x-show="open" class="md:hidden pb-4 space-y-3">
-                <a href="#home" class="block text-gray-700 hover:text-red-600 font-medium">
-                    <span x-show="locale === 'en'">Home</span>
-                    <span x-show="locale === 'ar'">الرئيسية</span>
-                </a>
-                <a href="#about" class="block text-gray-700 hover:text-green-700 font-medium">
-                    <span x-show="locale === 'en'">About</span>
-                    <span x-show="locale === 'ar'">من نحن</span>
-                </a>
-                <a href="#services" class="block text-gray-700 hover:text-green-700 font-medium">
-                    <span x-show="locale === 'en'">Services</span>
-                    <span x-show="locale === 'ar'">خدماتنا</span>
-                </a>
-                <a href="#contact" class="block text-gray-700 hover:text-green-700 font-medium">
-                    <span x-show="locale === 'en'">Contact</span>
-                    <span x-show="locale === 'ar'">اتصل بنا</span>
-                </a>
-                <div class="flex items-center bg-gray-100 rounded-full p-1 w-max"
-                    :class="locale === 'ar' ? 'space-x-reverse space-x-2' : 'space-x-2'">
-                    <button @click="window.location.href = '{{ route('locale.change', 'en') }}'"
-                        :class="locale === 'en' ? 'bg-green-700 text-white' : 'text-gray-600'"
-                        class="px-4 py-2 rounded-full text-sm font-semibold">EN</button>
-                    <button @click="window.location.href = '{{ route('locale.change', 'ar') }}'"
-                        :class="locale === 'ar' ? 'bg-green-700 text-white' : 'text-gray-600'"
-                        class="px-4 py-2 rounded-full text-sm font-semibold">AR</button>
+            <!-- Right Side - Language + CTA -->
+            <div class="hidden md:flex items-center gap-3 flex-row-reverse">
+                <!-- Language Switcher -->
+                <div class="relative" x-data="{ open: false }">
+                    <button @click="open = !open"
+                        class="flex items-center gap-1 px-4 py-2 border border-gray-300 rounded-full text-jood-green-dark font-medium hover:bg-gray-50 transition">
+                        <span>{{ session('locale', 'en') === 'ar' ? 'AR' : 'EN' }}</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div x-show="open" @click.away="open = false" x-cloak
+                        class="absolute top-full mt-2 bg-white border rounded-xl shadow-lg overflow-hidden {{ session('locale', 'en') === 'ar' ? 'left-0' : 'right-0' }}">
+                        <a href="{{ route('locale.change', 'en') }}"
+                            class="block px-4 py-2 hover:bg-gray-100">English</a>
+                        <a href="{{ route('locale.change', 'ar') }}"
+                            class="block px-4 py-2 hover:bg-gray-100">العربية</a>
+                    </div>
                 </div>
+                <!-- CTA Button -->
+                <a href="#contact"
+                    class="bg-jood-green text-white px-6 py-2.5 rounded-full font-bold hover:bg-jood-green-dark transition">
+                    {{ session('locale', 'en') === 'ar' ? 'تواصل معنا' : 'Contact Us' }}
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path x-show="!mobileMenu" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16" />
+                    <path x-show="mobileMenu" x-cloak stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenu" x-cloak class="md:hidden mt-2 bg-white rounded-2xl shadow-lg p-4">
+            <a href="#home"
+                class="block py-3 font-bold">{{ session('locale', 'en') === 'ar' ? 'الرئيسية' : 'Home' }}</a>
+            <a href="#why-us" class="block py-3">{{ session('locale', 'en') === 'ar' ? 'لماذا نحن' : 'Why Us' }}</a>
+            <a href="#services" class="block py-3">{{ session('locale', 'en') === 'ar' ? 'خدماتنا' : 'Services' }}</a>
+            <a href="#clients" class="block py-3">{{ session('locale', 'en') === 'ar' ? 'عملاؤنا' : 'Clients' }}</a>
+            <a href="#contact" class="block py-3">{{ session('locale', 'en') === 'ar' ? 'تواصل معنا' : 'Contact' }}</a>
+            <div class="flex gap-2 mt-3">
+                <a href="{{ route('locale.change', 'en') }}"
+                    class="px-4 py-2 rounded-full {{ session('locale', 'en') === 'en' ? 'bg-jood-green text-white' : 'bg-gray-100' }}">EN</a>
+                <a href="{{ route('locale.change', 'ar') }}"
+                    class="px-4 py-2 rounded-full {{ session('locale', 'en') === 'ar' ? 'bg-jood-green text-white' : 'bg-gray-100' }}">AR</a>
             </div>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-pattern gradient-bg pt-24 sm:pt-32 pb-20 relative overflow-hidden">
+    <section id="home" class="min-h-screen relative overflow-hidden">
+        <!-- Background with gradient overlay -->
+        <div class="absolute inset-0 "></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <!-- Hero Content -->
-                <div data-aos="fade-right" class="text-white">
-                    <div x-show="locale === 'en'">
-                        <h1 class="text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-6">
-                            {{ $content['hero']->firstWhere('key', 'title')->value_en ?? 'Your Trusted Partner in Cold Chain Excellence' }}
+        <!-- Abstract decorative elements -->
+        <div class="absolute inset-0 abstract-dots opacity-30"></div>
+
+        <!-- Abstract Side Shape -->
+        <svg class="side-abstract {{ session('locale', 'en') === 'ar' ? 'side-abstract-left' : 'side-abstract-right' }}"
+            viewBox="0 0 320 800" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,0
+                     L180,0
+                     C180,0 120,200 120,300
+                     C120,450 320,500 320,650
+                     C320,750 220,800 180,800
+                     L0,800 Z" fill="#e4eed3" />
+            <path d="M0,0
+                     L140,0
+                     C140,0 80,200 80,300
+                     C80,450 280,500 280,650
+                     C280,750 180,800 140,800
+                     L0,800 Z" fill="#b4cc94" />
+        </svg>
+
+        <div class="relative z-10 min-h-screen flex items-center">
+            <div class="w-full max-w-7xl mx-auto px-4 md:px-8">
+                <div class="grid lg:grid-cols-2 gap-8 items-center pt-32 pb-16">
+
+                    <!-- Image Side -->
+                    <div class="lg:order-2" data-aos="fade-up">
+                        <div class="relative">
+                            @if (isset($content['hero']) &&
+                                    $content['hero']->firstWhere('key', 'image') &&
+                                    $content['hero']->firstWhere('key', 'image')->value_en)
+                                <img src="{{ asset($content['hero']->firstWhere('key', 'image')->value_en) }}"
+                                    alt="Hero" class="w-full max-w-xl mx-auto">
+                            @else
+                                <img src="{{ asset('images/hero-truck.png') }}" alt="Jood Harvest"
+                                    class="w-full max-w-xl mx-auto"
+                                    onerror="this.src='https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800'">
+                            @endif
+                            <!-- Bottom fade -->
+                            <div
+                                class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Side -->
+                    <div class="lg:order-1 {{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }} px-4 lg:px-8"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-jood-green leading-tight mb-6">
+                            @if (session('locale', 'en') === 'ar')
+                                {{ $content['hero']->firstWhere('key', 'title')->value_ar ?? 'منتجات غذائية مبردة ومجمدة بجودة تثق بها' }}
+                            @else
+                                {{ $content['hero']->firstWhere('key', 'title')->value_en ?? 'Refrigerated and frozen food products with quality you trust' }}
+                            @endif
                         </h1>
-                        <p class="text-xl md:text-2xl mb-8 text-green-500">
-                            {{ $content['hero']->firstWhere('key', 'description')->value_en ?? 'Importing, cold storage, and distribution of premium chilled and frozen food products.' }}
+                        <p
+                            class="text-lg md:text-xl text-gray-700 leading-relaxed mb-8 max-w-lg {{ session('locale', 'en') === 'ar' ? 'mr-0 ml-auto' : '' }}">
+                            @if (session('locale', 'en') === 'ar')
+                                {{ $content['hero']->firstWhere('key', 'description')->value_ar ?? 'نختص في استيراد وتخزين وتوزيع المنتجات الغذائية المبردة والمجمدة بجودة عالية والتزام تام بالمعايير العالمية.' }}
+                            @else
+                                {{ $content['hero']->firstWhere('key', 'description')->value_en ?? 'We specialize in importing, storing, and distributing chilled and frozen food products with high quality and full compliance to international standards.' }}
+                            @endif
                         </p>
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="#contact"
-                                class="bg-green-700 hover:bg-green-800 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
-                                Request a Quote
-                            </a>
-                            <a href="#services"
-                                class="bg-white text-green-700 hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
-                                Our Services
-                            </a>
-                        </div>
+                        <a href="#contact"
+                            class="inline-flex items-center gap-2 px-8 py-3 border-2 border-jood-green text-jood-green rounded-full font-bold text-lg hover:bg-jood-green hover:text-white transition">
+                            {{ session('locale', 'en') === 'ar' ? 'اطلب عرض سعر' : 'Request a Quote' }}
+                        </a>
                     </div>
-
-                    <div x-show="locale === 'ar'">
-                        <h1 class="text-5xl md:text-6xl font-black text-gray-900 leading-tight mb-6">
-                            {{ $content['hero']->firstWhere('key', 'title')->value_ar ?? 'شريكك الموثوق في التميز بسلسلة التبريد' }}
-                        </h1>
-                        <p class="text-xl md:text-2xl mb-8 text-green-500">
-                            {{ $content['hero']->firstWhere('key', 'description')->value_ar ?? 'استيراد وتخزين وتوزيع منتجات غذائية مبردة ومجمدة عالية الجودة.' }}
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="#contact"
-                                class="bg-green-700 hover:bg-green-800 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
-                                اطلب عرض سعر
-                            </a>
-                            <a href="#services"
-                                class="bg-white text-green-700 hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale inline-block text-center">
-                                خدماتنا
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hero Image -->
-                <div data-aos="fade-left" class="relative">
-                    <div class="relative z-10 floating-slow">
-                        @if (isset($content['hero']) &&
-                                $content['hero']->firstWhere('key', 'image') &&
-                                $content['hero']->firstWhere('key', 'image')->value_en)
-                            <img src="{{ asset($content['hero']->firstWhere('key', 'image')->value_en) }}"
-                                alt="Hero Image" class="rounded-3xl shadow-2xl">
-                        @else
-                            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800"
-                                alt="Cold Storage" class="rounded-3xl shadow-2xl">
-                        @endif
-                    </div>
-                    <div class="absolute -top-10 -right-10 w-72 h-72 bg-green-400 rounded-full opacity-20 blur-3xl">
-                    </div>
-                    <div class="absolute -bottom-10 -left-10 w-96 h-96 bg-gray-400 rounded-full opacity-20 blur-3xl">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div data-aos="fade-up" class="text-center mb-16">
-                <div x-show="locale === 'en'">
-                    <h2 class="text-4xl md:text-5xl font-black mb-4">
-                        {{ $content['about']->firstWhere('key', 'title')->value_en ?? 'About Jood Harvest' }}
-                    </h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                        {{ $content['about']->firstWhere('key', 'description')->value_en ?? 'Jood Harvest specializes in importing and distributing high-quality chilled and frozen food products.' }}
-                    </p>
-                </div>
-
-                <div x-show="locale === 'ar'">
-                    <h2 class="text-4xl md:text-5xl font-black mb-4">
-                        {{ $content['about']->firstWhere('key', 'title')->value_ar ?? 'عن جود هارفيست' }}
-                    </h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                        {{ $content['about']->firstWhere('key', 'description')->value_ar ?? 'تعمل جود هارفيست في استيراد وتوزيع الأغذية المبردة والمجمدة عالية الجودة.' }}
-                    </p>
-                </div>
-            </div>
-
-            <!-- Vision & Mission -->
-            <div class="grid md:grid-cols-2 gap-8 mb-16">
-                <div data-aos="fade-right"
-                    class="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-3xl card-shadow hover-scale">
-                    <div class="w-16 h-16 bg-green-700 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                            </path>
-                        </svg>
-                    </div>
-                    <div x-show="locale === 'en'">
-                        <h3 class="text-2xl font-bold text-green-900 mb-4">Our Vision</h3>
-                        <p class="text-gray-700 text-lg">
-                            {{ $content['about']->firstWhere('key', 'vision')->value_en ?? 'To be a leading and trusted destination for chilled and frozen food import and distribution in the region.' }}
-                        </p>
-                    </div>
-                    <div x-show="locale === 'ar'">
-                        <h3 class="text-2xl font-bold text-green-900 mb-4">رؤيتنا</h3>
-                        <p class="text-gray-700 text-lg">
-                            {{ $content['about']->firstWhere('key', 'vision')->value_ar ?? 'أن نكون وجهة رائدة وموثوقة في استيراد وتوزيع الأغذية المبردة والمجمدة في المنطقة.' }}
-                        </p>
-                    </div>
-                </div>
-
-                <div data-aos="fade-left"
-                    class="bg-gradient-to-br from-gray-50 to-gray-100 p-8 rounded-3xl card-shadow hover-scale">
-                    <div class="w-16 h-16 bg-gray-700 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                    </div>
-                    <div x-show="locale === 'en'">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
-                        <p class="text-gray-700 text-lg">
-                            {{ $content['about']->firstWhere('key', 'mission')->value_en ?? 'To deliver safe, high-quality food products supported by efficient and reliable logistics services.' }}
-                        </p>
-                    </div>
-                    <div x-show="locale === 'ar'">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4">رسالتنا</h3>
-                        <p class="text-gray-700 text-lg">
-                            {{ $content['about']->firstWhere('key', 'mission')->value_ar ?? 'تقديم منتجات غذائية آمنة وعالية الجودة مع خدمات لوجستية فعّالة وموثوقة.' }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Values -->
-            <div data-aos="fade-up">
-                <div class="text-center mb-12">
-                    <h3 class="text-3xl font-black">
-                        <span x-show="locale === 'en'">Our Values</span>
-                        <span x-show="locale === 'ar'">قيمنا</span>
-                    </h3>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="text-center p-6 bg-white rounded-2xl card-shadow hover-scale">
-                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </div>
-                        <h4 class="font-bold text-lg">
-                            <span x-show="locale === 'en'">Quality</span>
-                            <span x-show="locale === 'ar'">الجودة</span>
-                        </h4>
-                    </div>
-
-                    <div class="text-center p-6 bg-white rounded-2xl card-shadow hover-scale">
-                        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
-                                </path>
-                            </svg>
-                        </div>
-                        <h4 class="font-bold text-lg">
-                            <span x-show="locale === 'en'">Trust</span>
-                            <span x-show="locale === 'ar'">الثقة</span>
-                        </h4>
-                    </div>
-
-                    <div class="text-center p-6 bg-white rounded-2xl card-shadow hover-scale">
-                        <div
-                            class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                                </path>
-                            </svg>
-                        </div>
-                        <h4 class="font-bold text-lg">
-                            <span x-show="locale === 'en'">Professionalism</span>
-                            <span x-show="locale === 'ar'">الاحترافية</span>
-                        </h4>
-                    </div>
-
-                    <div class="text-center p-6 bg-white rounded-2xl card-shadow hover-scale">
-                        <div
-                            class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                </path>
-                            </svg>
-                        </div>
-                        <h4 class="font-bold text-lg">
-                            <span x-show="locale === 'en'">Transparency</span>
-                            <span x-show="locale === 'ar'">الشفافية</span>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div data-aos="fade-up" class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-black mb-4">
-                    <span x-show="locale === 'en'">Our Core <span class="gradient-text">Services</span></span>
-                    <span x-show="locale === 'ar'"><span class="gradient-text">خدماتنا</span> الأساسية</span>
-                </h2>
-                <p class="text-xl text-gray-600">
-                    <span x-show="locale === 'en'">Comprehensive cold chain solutions for your business</span>
-                    <span x-show="locale === 'ar'">حلول سلسلة التبريد الشاملة لأعمالك</span>
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div data-aos="fade-up" data-aos-delay="100"
-                    class="bg-white p-8 rounded-3xl card-shadow hover-scale">
-                    <div
-                        class="w-20 h-20 bg-gradient-to-br from-green-600 to-green-800 rounded-2xl flex items-center justify-center mb-6 transform -rotate-6">
-                        <svg class="w-10 h-10 text-white transform rotate-6" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
-                            </path>
-                        </svg>
-                    </div>
-                    <div x-show="locale === 'en'">
-                        <h3 class="text-2xl font-bold mb-4 text-gray-900">Import of Chilled & Frozen Foods</h3>
-                        <p class="text-gray-600">High-quality imported chilled and frozen food products with full
-                            compliance to international standards.</p>
-                    </div>
-                    <div x-show="locale === 'ar'">
-                        <h3 class="text-2xl font-bold mb-4 text-gray-900">استيراد الأغذية المبردة والمجمدة</h3>
-                        <p class="text-gray-600">منتجات غذائية مبردة ومجمدة مستوردة عالية الجودة مع الالتزام الكامل
-                            بالمعايير العالمية.</p>
-                    </div>
-                </div>
-
-                <!-- Service 2 -->
-                <div data-aos="fade-up" data-aos-delay="200"
-                    class="bg-white p-8 rounded-3xl card-shadow hover-scale">
-                    <div
-                        class="w-20 h-20 bg-gradient-to-br from-gray-500 to-gray-700 rounded-2xl flex items-center justify-center mb-6 transform rotate-6">
-                        <svg class="w-10 h-10 text-white transform -rotate-6" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
-                            </path>
-                        </svg>
-                    </div>
-                    <div x-show="locale === 'en'">
-                        <h3 class="text-2xl font-bold mb-4 text-gray-900">Cold Storage & Warehouse Management</h3>
-                        <p class="text-gray-600">State-of-the-art cold storage facilities with advanced temperature
-                            control and monitoring systems.</p>
-                    </div>
-                    <div x-show="locale === 'ar'">
-                        <h3 class="text-2xl font-bold mb-4 text-gray-900">التخزين المبرد وإدارة المخازن</h3>
-                        <p class="text-gray-600">مرافق تخزين مبردة حديثة مع أنظمة تحكم ومراقبة درجة حرارة متقدمة.</p>
-                    </div>
-                </div>
-
-                <!-- Service 3 -->
-                <div data-aos="fade-up" data-aos-delay="300"
-                    class="bg-white p-8 rounded-3xl card-shadow hover-scale">
-                    <div
-                        class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-700 rounded-2xl flex items-center justify-center mb-6 transform -rotate-6">
-                        <svg class="w-10 h-10 text-white transform rotate-6" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0">
-                            </path>
-                        </svg>
-                    </div>
-                    <div x-show="locale === 'en'">
-                        <h3 class="text-2xl font-bold mb-4 text-gray-900">Refrigerated Transportation</h3>
-                        <p class="text-gray-600">Reliable refrigerated transport via our own fleet, ensuring product
-                            integrity from warehouse to destination.</p>
-                    </div>
-                    <div x-show="locale === 'ar'">
-                        <h3 class="text-2xl font-bold mb-4 text-gray-900">النقل المبرد عبر أسطول جود هارفيست</h3>
-                        <p class="text-gray-600">نقل مبرد موثوق عبر أسطولنا الخاص، مما يضمن سلامة المنتج من المستودع
-                            إلى الوجهة.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Clients Section -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div data-aos="fade-up" class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-black mb-4">
-                    <span x-show="locale === 'en'">Who We <span class="gradient-text">Serve</span></span>
-                    <span x-show="locale === 'ar'">من <span class="gradient-text">نخدم</span></span>
-                </h2>
-                <p class="text-xl text-gray-600">
-                    <span x-show="locale === 'en'">Our B2B clients across the food industry</span>
-                    <span x-show="locale === 'ar'">عملاؤنا من الشركات عبر صناعة الأغذية</span>
-                </p>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
-                <div data-aos="zoom-in" class="text-center p-6">
-                    <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-12 h-12 text-green-700" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
-                            </path>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold">
-                        <span x-show="locale === 'en'">Supermarkets</span>
-                        <span x-show="locale === 'ar'">السوبرماركت</span>
-                    </h3>
-                </div>
-
-                <div data-aos="zoom-in" data-aos-delay="100" class="text-center p-6">
-                    <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-12 h-12 text-gray-700" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold">
-                        <span x-show="locale === 'en'">Wholesalers</span>
-                        <span x-show="locale === 'ar'">شركات البيع بالجملة</span>
-                    </h3>
-                </div>
-
-                <div data-aos="zoom-in" data-aos-delay="200" class="text-center p-6">
-                    <div class="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-12 h-12 text-purple-600" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
-                            </path>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold">
-                        <span x-show="locale === 'en'">Restaurants & Hotels</span>
-                        <span x-show="locale === 'ar'">المطاعم والفنادق</span>
-                    </h3>
-                </div>
-
-                <div data-aos="zoom-in" data-aos-delay="300" class="text-center p-6">
-                    <div class="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-12 h-12 text-yellow-600" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4">
-                            </path>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold">
-                        <span x-show="locale === 'en'">Food Suppliers</span>
-                        <span x-show="locale === 'ar'">شركات التوريد</span>
-                    </h3>
-                </div>
-
-                <div data-aos="zoom-in" data-aos-delay="400" class="text-center p-6">
-                    <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-12 h-12 text-green-700" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                            </path>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold">
-                        <span x-show="locale === 'en'">Food Processing</span>
-                        <span x-show="locale === 'ar'">معامل تجهيز الأغذية</span>
-                    </h3>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Why Choose Us Section -->
-    <section class="py-20 bg-gradient-to-br from-green-700 to-gray-800 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div data-aos="fade-up" class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-black mb-4">
-                    <span x-show="locale === 'en'">Why Choose <span class="text-gray-300">Jood Harvest?</span></span>
-                    <span x-show="locale === 'ar'">لماذا <span class="text-gray-300">جود هارفيست؟</span></span>
-                </h2>
+    {{-- <section id="why-us" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-jood-green text-center mb-16" data-aos="fade-up">
+                {{ session('locale', 'en') === 'ar' ? 'لماذا تختار جود هارفيست؟' : 'Why Choose Jood Harvest?' }}
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-jood-light rounded-3xl p-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-12 h-12 bg-jood-green rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3
+                        class="text-xl font-bold text-jood-green mb-2 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
+                        {{ session('locale', 'en') === 'ar' ? 'جودة معتمدة' : 'Certified Quality' }}
+                    </h3>
+                    <p class="text-gray-700 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
+                        {{ session('locale', 'en') === 'ar' ? 'نلتزم بأعلى معايير الجودة والسلامة الغذائية المعتمدة محليًا وعالميًا.' : 'Adherence to highest quality and food safety standards locally and internationally.' }}
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-jood-light rounded-3xl p-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-12 h-12 bg-jood-green rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                        </svg>
+                    </div>
+                    <h3
+                        class="text-xl font-bold text-jood-green mb-2 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
+                        {{ session('locale', 'en') === 'ar' ? 'الخبرة والتخصص' : 'Expertise & Specialization' }}
+                    </h3>
+                    <p class="text-gray-700 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
+                        {{ session('locale', 'en') === 'ar' ? 'خبرة متراكمة في مجال الأغذية المبردة والمجمدة وسلاسل الإمداد.' : 'Accumulated experience in chilled and frozen food and supply chains.' }}
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-jood-light rounded-3xl p-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-12 h-12 bg-jood-green rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                    </div>
+                    <h3
+                        class="text-xl font-bold text-jood-green mb-2 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
+                        {{ session('locale', 'en') === 'ar' ? 'تخزين آمن' : 'Safe Storage' }}
+                    </h3>
+                    <p class="text-gray-700 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
+                        {{ session('locale', 'en') === 'ar' ? 'مستودعات مبردة ومجهزة بأحدث أنظمة التحكم والمراقبة.' : 'Cold storage facilities equipped with latest control and monitoring systems.' }}
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-jood-light rounded-3xl p-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-12 h-12 bg-jood-green rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+                        </svg>
+                    </div>
+                    <h3
+                        class="text-xl font-bold text-jood-green mb-2 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
+                        {{ session('locale', 'en') === 'ar' ? 'نقل موثوق' : 'Reliable Transport' }}
+                    </h3>
+                    <p class="text-gray-700 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
+                        {{ session('locale', 'en') === 'ar' ? 'أسطول نقل مبرد يضمن وصول المنتجات بأفضل حالة.' : 'Refrigerated transport fleet ensuring products arrive in best condition.' }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section> --}}
+
+    <section id="services" class="why-us-section">
+        <div class="container">
+            <div class="why-us-layout">
+                <!-- Left Side: Cards Grid -->
+                <div class="why-us-cards-grid">
+                    <div class="why-card">
+                        <div class="why-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+                                    fill="currentColor" />
+                            </svg>
+                        </div>
+                        <h3>خبرة وتخصص</h3>
+                        <p>خبرة في مجال المنتجات الغذائية المبردة والمجمدة، و فهم دقيق لاحتياجات عملائنا</p>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM9 17H7V10H9V17ZM13 17H11V7H13V17ZM17 17H15V13H17V17Z"
+                                    fill="currentColor" />
+                            </svg>
+                        </div>
+                        <h3>جودة معتمدة</h3>
+                        <p>نلتزم بأعلى معايير الجودة والسلامة الغذائية المعتمدة محليا وعالميا</p>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V11H13V17ZM13 9H11V7H13V9Z"
+                                    fill="currentColor" />
+                            </svg>
+                        </div>
+                        <h3>تخزين ونقل آمن</h3>
+                        <p>أنظمة تبريد وتجميد حديثة تحافظ على الطعم والقيمة الغذائية</p>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M20 6H16V4C16 2.89 15.11 2 14 2H10C8.89 2 8 2.89 8 4V6H4C2.89 6 2.01 6.89 2.01 8L2 19C2 20.11 2.89 21 4 21H20C21.11 21 22 20.11 22 19V8C22 6.89 21.11 6 20 6ZM10 4H14V6H10V4Z"
+                                    fill="currentColor" />
+                            </svg>
+                        </div>
+                        <h3>شريك موثوق</h3>
+                        <p>نلتزم ببناء الجودة، نظام التوريد، وبناء شراكات طويلة المدى</p>
+                    </div>
+                </div>
+
+                <!-- Right Side: Title, Subtitle and Image -->
+                <div class="why-us-right">
+                    <div class="why-us-header">
+                        <h2 class="section-title-right">لماذا تختار جود هارفيست</h2>
+                        <p class="section-subtitle-right">نهتم بكل تفصيلة لنوصّل لك أفضل منتج بأعلى جودة</p>
+                    </div>
+                    <div class="why-us-image-wrapper">
+                        <div class="decorative-shape"></div>
+                        <img src="{{ asset('images/food-products.png') }}" alt="Fresh Food Products"
+                            class="food-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-jood-green relative overflow-hidden">
+        <!-- Decorative Corner Elements -->
+        <!-- Top Right Corner -->
+        <div class="absolute top-8 right-8 hidden md:block">
+            <div class="relative">
+                <div class="w-16 h-16 border-t-2 border-r-2 border-jood-accent/50"></div>
+                <div
+                    class="absolute top-0 right-0 w-2 h-2 bg-jood-accent/50 rounded-full -translate-y-1 translate-x-1">
+                </div>
+            </div>
+        </div>
+        <!-- Bottom Left Corner -->
+        <div class="absolute bottom-8 left-8 hidden md:block">
+            <div class="relative">
+                <div class="w-16 h-16 border-b-2 border-l-2 border-jood-accent/50"></div>
+                <div
+                    class="absolute bottom-0 left-0 w-2 h-2 bg-jood-accent/50 rounded-full translate-y-1 -translate-x-1">
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+
+            <!-- Top Row: Import - Header - Transport -->
+            <div class="grid lg:grid-cols-3 gap-6 items-center mb-6">
+
+                <!-- Card 1: Import (Right in RTL) -->
+                <!-- Mobile: Order 2, Desktop: Order 1 (or natural flow) -->
+                <div class="bg-jood-light rounded-3xl p-6 order-2 lg:order-none" data-aos="fade-up"
+                    data-aos-delay="100">
+                    <div
+                        class="flex items-start gap-4 {{ session('locale', 'en') === 'ar' ? 'flex-row-reverse' : '' }}">
+                        <div class="w-14 h-14 bg-jood-green rounded-xl flex items-center justify-center flex-shrink-0">
+                            <!-- Building/Import Icon -->
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                        </div>
+                        <div class="flex-1 {{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">
+                            <h3 class="text-lg font-bold text-jood-green mb-2">
+                                {{ session('locale', 'en') === 'ar' ? 'استيراد الأغذية المبردة والمجمدة' : 'Import of Chilled & Frozen Foods' }}
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                {{ session('locale', 'en') === 'ar' ? 'نستورد الأغذية المبردة والمجمدة بعناية، لنضمن وصولها طازجة، آمنة، وبجودة يمكنك الوثوق بها.' : 'We carefully import chilled and frozen foods to ensure they arrive fresh, safe, and with quality you can trust.' }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Header (Center) -->
+                <!-- Mobile: Order 1, Desktop: Order 2 (or natural flow) -->
+                <div class="text-center order-1 lg:order-none mb-4 lg:mb-0" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-2"
+                        style="font-family: 'Cairo', sans-serif;">
+                        {{ session('locale', 'en') === 'ar' ? 'خدماتنا الأساسية' : 'Our Core Services' }}
+                    </h2>
+                    <div class="flex items-center justify-center gap-2 mb-4">
+                        <span class="w-1.5 h-1.5 bg-jood-accent rounded-full"></span>
+                        <span class="w-8 h-0.5 bg-jood-accent"></span>
+                        <span class="w-1.5 h-1.5 bg-jood-accent rounded-full"></span>
+                    </div>
+                    <p class="text-jood-accent text-lg">
+                        {{ session('locale', 'en') === 'ar' ? 'لأن الجودة تبدأ من الخدمة' : 'Because quality starts with service' }}
+                    </p>
+                </div>
+
+                <!-- Card 2: Transport (Left in RTL) -->
+                <!-- Mobile: Order 3, Desktop: Order 3 (or natural flow) -->
+                <div class="bg-jood-light rounded-3xl p-6 order-3 lg:order-none" data-aos="fade-up"
+                    data-aos-delay="200">
+                    <div
+                        class="flex items-start gap-4 {{ session('locale', 'en') === 'ar' ? 'flex-row-reverse' : '' }}">
+                        <div class="w-14 h-14 bg-jood-green rounded-xl flex items-center justify-center flex-shrink-0">
+                            <!-- Truck Icon -->
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+                            </svg>
+                        </div>
+                        <div class="flex-1 {{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">
+                            <h3 class="text-lg font-bold text-jood-green mb-2">
+                                {{ session('locale', 'en') === 'ar' ? 'النقل المبرد عبر أسطول جود هارفيست' : 'Refrigerated Transport via Jood Harvest Fleet' }}
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                {{ session('locale', 'en') === 'ar' ? 'بأسطول نقل مبرد متطور، تضمن جود هارفيست وصول منتجاتك طازجة وآمنة في كل رحلة.' : 'With our advanced refrigerated fleet, Jood Harvest ensures your products arrive fresh and safe on every journey.' }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <div data-aos="fade-up" class="text-center">
+            <!-- Bottom Row - 1 Centered Card -->
+            <div class="flex justify-center">
+                <div class="bg-jood-light rounded-3xl p-6 max-w-lg w-full" data-aos="fade-up" data-aos-delay="300">
                     <div
-                        class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
-                            </path>
-                        </svg>
-                    </div>
-                    <div x-show="locale === 'en'">
-                        <h3 class="text-2xl font-bold mb-4">Full Cold Chain Compliance</h3>
-                        <p class="text-green-100">Complete adherence to international cold chain standards ensuring
-                            product safety and quality.</p>
-                    </div>
-                    <div x-show="locale === 'ar'">
-                        <h3 class="text-2xl font-bold mb-4">التزام كامل بسلسلة التبريد</h3>
-                        <p class="text-green-100">الالتزام الكامل بمعايير سلسلة التبريد العالمية لضمان سلامة المنتج
-                            وجودته.</p>
+                        class="flex items-start gap-4 {{ session('locale', 'en') === 'ar' ? 'flex-row-reverse' : '' }}">
+                        <div class="w-14 h-14 bg-jood-green rounded-xl flex items-center justify-center flex-shrink-0">
+                            <!-- Warehouse/Storage Icon -->
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1 {{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">
+                            <h3 class="text-lg font-bold text-jood-green mb-2">
+                                {{ session('locale', 'en') === 'ar' ? 'التخزين المبرد وإدارة المخازن' : 'Cold Storage & Warehouse Management' }}
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">
+                                {{ session('locale', 'en') === 'ar' ? 'نوفر حلول تخزين مبردة متطورة مع إدارة مخازن دقيقة تضمن سلامة المنتجات وجودتها في كل مرحلة.' : 'We provide advanced cold storage solutions with precise warehouse management ensuring product safety and quality at every stage.' }}
+                            </p>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div data-aos="fade-up" data-aos-delay="100" class="text-center">
-                    <div
-                        class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
-                            </path>
-                        </svg>
-                    </div>
-                    <div x-show="locale === 'en'">
-                        <h3 class="text-2xl font-bold mb-4">Strong Logistics Partnership</h3>
-                        <p class="text-green-100">Logistics partner of MS Logistics, providing comprehensive supply
-                            chain solutions.</p>
-                    </div>
-                    <div x-show="locale === 'ar'">
-                        <h3 class="text-2xl font-bold mb-4">شراكة لوجستية قوية</h3>
-                        <p class="text-green-100">شريك لوجستي لشركة MS Logistics، نقدم حلول سلسلة توريد شاملة.</p>
-                    </div>
-                </div>
+    <!-- Who We Serve Section -->
+    <section id="clients" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-jood-green mb-4">
+                    {{ session('locale', 'en') === 'ar' ? 'من نخدم' : 'Who We Serve' }}
+                </h2>
+                <p class="text-gray-600 text-lg">
+                    {{ session('locale', 'en') === 'ar' ? 'عملاؤنا من قطاع الأعمال' : 'Our B2B clients across the food industry' }}
+                </p>
+            </div>
 
-                <div data-aos="fade-up" data-aos-delay="200" class="text-center">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                @php
+                    $clients = [
+                        [
+                            'icon' =>
+                                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>',
+                            'ar' => 'السوبرماركت',
+                            'en' => 'Supermarkets',
+                        ],
+                        [
+                            'icon' =>
+                                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>',
+                            'ar' => 'تجار الجملة',
+                            'en' => 'Wholesalers',
+                        ],
+                        [
+                            'icon' =>
+                                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>',
+                            'ar' => 'المطاعم والفنادق',
+                            'en' => 'Restaurants & Hotels',
+                        ],
+                        [
+                            'icon' =>
+                                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>',
+                            'ar' => 'شركات التوريد',
+                            'en' => 'Food Suppliers',
+                        ],
+                        [
+                            'icon' =>
+                                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>',
+                            'ar' => 'معامل تجهيز الأغذية',
+                            'en' => 'Food Processing',
+                        ],
+                    ];
+                @endphp
+
+                @foreach ($clients as $index => $client)
+                    <div class="bg-jood-light rounded-3xl p-4 text-center" data-aos="zoom-in"
+                        data-aos-delay="{{ $index * 100 }}">
+                        <div
+                            class="w-12 h-12 bg-jood-light-75 rounded-lg flex items-center justify-center mx-auto mb-3 shadow-sm">
+                            <svg class="w-6 h-6 text-jood-green" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">{!! $client['icon'] !!}</svg>
+                        </div>
+                        <h3 class="font-bold text-jood-green text-sm">
+                            {{ session('locale', 'en') === 'ar' ? $client['ar'] : $client['en'] }}</h3>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-12 md:py-20 bg-white overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 md:px-8">
+            <div class="bg-jood-accent rounded-3xl relative" data-aos="fade-up">
+                <div class="grid md:grid-cols-2 gap-0 items-center">
+
+
+                    <!-- Content Side -->
                     <div
-                        class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
+                        class="p-6 md:p-10 lg:p-12 {{ session('locale', 'en') === 'ar' ? 'md:order-2 text-right' : 'md:order-1 text-left' }}">
+                        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-jood-green-dark leading-tight mb-4">
+                            {{ session('locale', 'en') === 'ar' ? 'جودة تُحفظ بعناية ، طعم طبيعي يدوم وثقة تبدأ من أول تجربة' : 'Quality preserved with care, natural taste that lasts, and trust starting from the first experience' }}
+                        </h2>
+                        <p class="text-jood-green-dark/80 text-base md:text-lg mb-6">
+                            {{ session('locale', 'en') === 'ar' ? 'عناية دقيقة في كل خطوة، وجودة تُلاحظ من أول تجربة.' : 'Meticulous care at every step, and quality you notice from the first experience.' }}
+                        </p>
+                        <a href="#contact"
+                            class="inline-block bg-jood-green text-white px-8 py-3 rounded-xl font-bold text-lg hover:bg-jood-green-dark transition shadow-lg">
+                            {{ session('locale', 'en') === 'ar' ? 'تواصل معنا' : 'Contact Us' }}
+                        </a>
                     </div>
-                    <div x-show="locale === 'en'">
-                        <h3 class="text-2xl font-bold mb-4">High Reliability in Supply</h3>
-                        <p class="text-green-100">Consistent, on-time delivery with our own refrigerated fleet and
-                            warehouse management.</p>
+                    <!-- Truck Image Side - Extends outside the card -->
+                    <div
+                        class="relative  {{ session('locale', 'en') === 'ar' ? 'md:order-2' : 'md:order-1' }} p-6 md:p-0">
+                        <img src="{{ asset('images/cta-truck.png') }}" alt="Jood Harvest Truck"
+                            class="w-full max-w-md mx-auto md:max-w-none md:absolute md:top-1/2 md:-translate-y-1/2 {{ session('locale', 'en') === 'ar' ? 'md:left-0 md:-translate-x-1/4 lg:-translate-x-1/3' : 'md:right-0 md:translate-x-1/4 lg:translate-x-1/3' }} md:w-auto md:h-auto object-contain"
+                            style="max-height: 280px; min-width: 400px;">
                     </div>
-                    <div x-show="locale === 'ar'">
-                        <h3 class="text-2xl font-bold mb-4">موثوقية عالية في التوريد</h3>
-                        <p class="text-green-100">تسليم متسق وفي الوقت المحدد مع أسطولنا المبرد وإدارة المستودعات
-                            الخاصة
-                            بنا.</p>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -679,129 +802,87 @@
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div data-aos="fade-up" class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-black mb-4">
-                    <span x-show="locale === 'en'">Get in <span class="gradient-text">Touch</span></span>
-                    <span x-show="locale === 'ar'">تواصل <span class="gradient-text">معنا</span></span>
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-jood-green mb-4">
+                    {{ session('locale', 'en') === 'ar' ? 'تواصل معنا' : 'Get in Touch' }}
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    <span x-show="locale === 'en'">Have a question or want to work together? Send us a message!</span>
-                    <span x-show="locale === 'ar'">لديك سؤال أو ترغب في العمل معنا؟ أرسل لنا رسالة!</span>
+                <p class="text-gray-600 text-lg">
+                    {{ session('locale', 'en') === 'ar' ? 'لديك سؤال أو ترغب في العمل معنا؟ أرسل لنا رسالة!' : 'Have a question or want to work together? Send us a message!' }}
                 </p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-8">
-                <!-- Contact Information -->
+                <!-- Contact Info -->
                 <div class="space-y-6" data-aos="fade-right">
-                    <!-- Contact Info Card -->
-                    <div class="bg-gradient-to-br from-green-700 to-green-800 rounded-2xl p-8 text-white shadow-2xl">
+                    <div class="bg-jood-green rounded-3xl p-8 text-white">
                         <h4 class="text-2xl font-bold mb-6">
-                            <span x-show="locale === 'en'">Contact Information</span>
-                            <span x-show="locale === 'ar'">معلومات التواصل</span>
-                        </h4>
-                        <div class="space-y-6">
-                            <!-- Location -->
-                            @if (isset($content['contact']) &&
-                                    $content['contact']->firstWhere('key', 'location') &&
-                                    $content['contact']->firstWhere('key', 'location')->value_en)
+                            {{ session('locale', 'en') === 'ar' ? 'معلومات التواصل' : 'Contact Information' }}</h4>
+                        <div class="space-y-5">
+                            @if (isset($content['contact']) && $content['contact']->firstWhere('key', 'location'))
                                 <div class="flex items-start gap-4">
                                     <div
-                                        class="flex-shrink-0 w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                        class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd"
                                                 d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                                clip-rule="evenodd"></path>
+                                                clip-rule="evenodd" />
                                         </svg>
                                     </div>
                                     <div>
-                                        <h5 class="font-bold mb-1">
-                                            <span x-show="locale === 'en'">Address</span>
-                                            <span x-show="locale === 'ar'">العنوان</span>
-                                        </h5>
-                                        <p class="text-green-100">
-                                            <span
-                                                x-show="locale === 'en'">{{ $content['contact']->firstWhere('key', 'location')->value_en }}</span>
-                                            <span
-                                                x-show="locale === 'ar'">{{ $content['contact']->firstWhere('key', 'location')->value_ar ?: $content['contact']->firstWhere('key', 'location')->value_en }}</span>
+                                        <h5 class="font-bold">
+                                            {{ session('locale', 'en') === 'ar' ? 'العنوان' : 'Address' }}</h5>
+                                        <p class="text-jood-accent">
+                                            {{ session('locale', 'en') === 'ar' ? ($content['contact']->firstWhere('key', 'location')->value_ar ?: $content['contact']->firstWhere('key', 'location')->value_en) : $content['contact']->firstWhere('key', 'location')->value_en }}
                                         </p>
                                     </div>
                                 </div>
                             @endif
-
-                            <!-- Email -->
                             <div class="flex items-start gap-4">
                                 <div
-                                    class="flex-shrink-0 w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                    class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path
-                                            d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
-                                        </path>
-                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                            d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                     </svg>
                                 </div>
                                 <div>
-                                    <h5 class="font-bold mb-1">
-                                        <span x-show="locale === 'en'">Email</span>
-                                        <span x-show="locale === 'ar'">البريد الإلكتروني</span>
-                                    </h5>
+                                    <h5 class="font-bold">
+                                        {{ session('locale', 'en') === 'ar' ? 'البريد الإلكتروني' : 'Email' }}</h5>
                                     <a href="mailto:{{ $content['contact']->firstWhere('key', 'email')->value_en ?? 'info@joodharvest.com' }}"
-                                        class="text-green-100 hover:text-white transition-colors">
-                                        {{ $content['contact']->firstWhere('key', 'email')->value_en ?? 'info@joodharvest.com' }}
-                                    </a>
+                                        class="text-jood-accent hover:text-white transition">{{ $content['contact']->firstWhere('key', 'email')->value_en ?? 'info@joodharvest.com' }}</a>
                                 </div>
                             </div>
-
-                            <!-- Phone -->
                             <div class="flex items-start gap-4">
                                 <div
-                                    class="flex-shrink-0 w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                    class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path
-                                            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z">
-                                        </path>
+                                            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                                     </svg>
                                 </div>
                                 <div>
-                                    <h5 class="font-bold mb-1">
-                                        <span x-show="locale === 'en'">Phone</span>
-                                        <span x-show="locale === 'ar'">رقم الهاتف</span>
-                                    </h5>
+                                    <h5 class="font-bold">
+                                        {{ session('locale', 'en') === 'ar' ? 'رقم الهاتف' : 'Phone' }}</h5>
                                     <a href="tel:{{ str_replace(' ', '', $content['contact']->firstWhere('key', 'phone')->value_en ?? '+966XXXXXXXXX') }}"
-                                        class="text-green-100 hover:text-white transition-colors">
-                                        {{ $content['contact']->firstWhere('key', 'phone')->value_en ?? '+966 XX XXX XXXX' }}
-                                    </a>
+                                        class="text-jood-accent hover:text-white transition">{{ $content['contact']->firstWhere('key', 'phone')->value_en ?? '+966 XX XXX XXXX' }}</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Working Hours Card -->
-                    <div class="bg-white rounded-2xl shadow-lg p-8 border-l-4 border-green-700">
-                        <h4 class="text-xl font-bold text-gray-900 mb-4">
-                            <span x-show="locale === 'en'">Working Hours</span>
-                            <span x-show="locale === 'ar'">ساعات العمل</span>
-                        </h4>
-                        <div class="space-y-3 text-gray-600">
-                            <div class="flex justify-between items-center pb-3 border-b border-gray-200">
-                                <span class="font-medium">
-                                    <span x-show="locale === 'en'">Sunday - Thursday</span>
-                                    <span x-show="locale === 'ar'">الأحد - الخميس</span>
-                                </span>
-                                <span class="font-bold text-gray-900">
-                                    <span x-show="locale === 'en'">8:30 AM - 4:30 PM</span>
-                                    <span x-show="locale === 'ar'">8:30 ص - 4:30 م</span>
-                                </span>
+                    <div class="bg-white rounded-3xl shadow-lg p-6 border-l-4 border-jood-green">
+                        <h4 class="text-lg font-bold text-jood-green mb-4">
+                            {{ session('locale', 'en') === 'ar' ? 'ساعات العمل' : 'Working Hours' }}</h4>
+                        <div class="space-y-2 text-gray-700">
+                            <div class="flex justify-between">
+                                <span>{{ session('locale', 'en') === 'ar' ? 'الأحد - الخميس' : 'Sunday - Thursday' }}</span><span
+                                    class="font-bold text-jood-green">{{ session('locale', 'en') === 'ar' ? '8:30 ص - 4:30 م' : '8:30 AM - 4:30 PM' }}</span>
                             </div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-medium">
-                                    <span x-show="locale === 'en'">Friday - Saturday</span>
-                                    <span x-show="locale === 'ar'">الجمعة - السبت</span>
-                                </span>
-                                <span class="font-bold text-green-700">
-                                    <span x-show="locale === 'en'">Closed</span>
-                                    <span x-show="locale === 'ar'">مغلق</span>
-                                </span>
+                            <div class="flex justify-between">
+                                <span>{{ session('locale', 'en') === 'ar' ? 'الجمعة - السبت' : 'Friday - Saturday' }}</span><span
+                                    class="font-bold text-jood-green">{{ session('locale', 'en') === 'ar' ? 'مغلق' : 'Closed' }}</span>
                             </div>
                         </div>
                     </div>
@@ -811,10 +892,8 @@
                 <div data-aos="fade-left">
                     @if (session('success'))
                         <div class="bg-green-100 border border-green-600 text-green-800 px-6 py-4 rounded-lg mb-6">
-                            {{ session('success') }}
-                        </div>
+                            {{ session('success') }}</div>
                     @endif
-
                     @if ($errors->any())
                         <div class="bg-red-100 border border-red-600 text-red-800 px-6 py-4 rounded-lg mb-6">
                             <ul class="list-disc list-inside">
@@ -826,125 +905,131 @@
                     @endif
 
                     <form method="POST" action="{{ route('contact.store') }}"
-                        class="bg-gray-50 p-8 rounded-3xl shadow-xl">
+                        class="bg-jood-light p-8 rounded-3xl">
                         @csrf
-                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">
-                                    <span x-show="locale === 'en'">Your Name</span>
-                                    <span x-show="locale === 'ar'">اسمك</span>
-                                </label>
+                                <label
+                                    class="block text-sm font-bold text-jood-green mb-2">{{ session('locale', 'en') === 'ar' ? 'اسمك' : 'Your Name' }}</label>
                                 <input type="text" name="name" value="{{ old('name') }}" required
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                                    :placeholder="locale === 'en' ? 'John Doe' : 'أحمد محمد'">
+                                    class="w-full px-4 py-3 border border-jood-light-75 rounded-xl focus:ring-2 focus:ring-jood-green bg-white">
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">
-                                    <span x-show="locale === 'en'">Email Address</span>
-                                    <span x-show="locale === 'ar'">البريد الإلكتروني</span>
-                                </label>
+                                <label
+                                    class="block text-sm font-bold text-jood-green mb-2">{{ session('locale', 'en') === 'ar' ? 'البريد الإلكتروني' : 'Email' }}</label>
                                 <input type="email" name="email" value="{{ old('email') }}" required
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                                    placeholder="email@example.com">
+                                    class="w-full px-4 py-3 border border-jood-light-75 rounded-xl focus:ring-2 focus:ring-jood-green bg-white">
                             </div>
                         </div>
-
-                        <div class="mb-6">
-                            <label class="block text-sm font-bold text-gray-700 mb-2">
-                                <span x-show="locale === 'en'">Phone Number (Optional)</span>
-                                <span x-show="locale === 'ar'">رقم الهاتف (اختياري)</span>
-                            </label>
+                        <div class="mb-4">
+                            <label
+                                class="block text-sm font-bold text-jood-green mb-2">{{ session('locale', 'en') === 'ar' ? 'رقم الهاتف (اختياري)' : 'Phone (Optional)' }}</label>
                             <input type="tel" name="phone" value="{{ old('phone') }}"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                                placeholder="+966 XX XXX XXXX">
+                                class="w-full px-4 py-3 border border-jood-light-75 rounded-xl focus:ring-2 focus:ring-jood-green bg-white">
                         </div>
-
                         <div class="mb-6">
-                            <label class="block text-sm font-bold text-gray-700 mb-2">
-                                <span x-show="locale === 'en'">Message</span>
-                                <span x-show="locale === 'ar'">الرسالة</span>
-                            </label>
-                            <textarea name="message" rows="6" required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                                :placeholder="locale === 'en' ? 'Tell us about your project...' : 'أخبرنا عن مشروعك...'">{{ old('message') }}</textarea>
+                            <label
+                                class="block text-sm font-bold text-jood-green mb-2">{{ session('locale', 'en') === 'ar' ? 'الرسالة' : 'Message' }}</label>
+                            <textarea name="message" rows="4" required
+                                class="w-full px-4 py-3 border border-jood-light-75 rounded-xl focus:ring-2 focus:ring-jood-green bg-white">{{ old('message') }}</textarea>
                         </div>
-
                         <button type="submit"
-                            class="w-full bg-green-700 hover:bg-green-800 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover-scale">
-                            <span x-show="locale === 'en'">Send Message</span>
-                            <span x-show="locale === 'ar'">إرسال الرسالة</span>
+                            class="w-full bg-jood-green text-white py-4 rounded-full font-bold text-lg hover:bg-jood-green-dark transition">
+                            {{ session('locale', 'en') === 'ar' ? 'إرسال الرسالة' : 'Send Message' }}
                         </button>
                     </form>
                 </div>
             </div>
+        </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gradient-to-br from-green-900 to-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 gap-8 mb-8">
-                <div>
-                    <div class="">
-                        <img src="{{ asset('images/JOOD.png') }}" width="100" height="100"
-                            class="text-xs text-gray-600 font-semibold" alt="Jood Harvest">
-                    </div>
-                    <p class="text-gray-400">
-                        <span x-show="locale === 'en'">Your trusted partner in cold chain excellence</span>
-                        <span x-show="locale === 'ar'">شريكك الموثوق في التميز بسلسلة التبريد</span>
-                    </p>
-                </div>
-
-                <div>
-                    <h3 class="font-bold text-lg mb-4">
-                        <span x-show="locale === 'en'">Quick Links</span>
-                        <span x-show="locale === 'ar'">روابط سريعة</span>
-                    </h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#about" class="hover:text-white transition">
-                                <span x-show="locale === 'en'">About Us</span>
-                                <span x-show="locale === 'ar'">من نحن</span>
-                            </a></li>
-                        <li><a href="#services" class="hover:text-white transition">
-                                <span x-show="locale === 'en'">Services</span>
-                                <span x-show="locale === 'ar'">خدماتنا</span>
-                            </a></li>
-                        <li><a href="#contact" class="hover:text-white transition">
-                                <span x-show="locale === 'en'">Contact</span>
-                                <span x-show="locale === 'ar'">اتصل بنا</span>
-                            </a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="font-bold text-lg mb-4">
-                        <span x-show="locale === 'en'">Partnership</span>
-                        <span x-show="locale === 'ar'">الشراكة</span>
-                    </h3>
-                    <p class="text-gray-400">
-                        <span x-show="locale === 'en'">Logistics Partner of MS Logistics</span>
-                        <span x-show="locale === 'ar'">شريك لوجستي لشركة MS Logistics</span>
-                    </p>
-                </div>
+    <footer class="py-16" style="background: linear-gradient(to right, #ebede9, #fdfdfd 50%, #ebede9);">
+        <div class="max-w-6xl mx-auto px-4 md:px-8">
+            <!-- Centered Logo -->
+            <div class="text-center mb-8">
+                <img src="{{ asset('images/logo.png') }}" class="h-20 md:h-24 mx-auto mb-4" alt="Jood Harvest">
+                <p class="text-jood-green-dark text-lg">
+                    {{ session('locale', 'en') === 'ar' ? 'نهتم بكل تفصيلة لنوصّل لك أفضل منتج بأعلى جودة' : 'We care about every detail to deliver the best product with the highest quality' }}
+                </p>
             </div>
 
-            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
-                <p>&copy; {{ date('Y') }} <span x-show="locale === 'en'">Jood Harvest</span><span
-                        x-show="locale === 'ar'">جود
-                        هارفيست</span>.
-                    <span x-show="locale === 'en'">All rights reserved.</span>
-                    <span x-show="locale === 'ar'">جميع الحقوق محفوظة.</span>
+            <!-- Navigation Links -->
+            <nav class="mb-8">
+                <ul class="flex flex-wrap justify-center items-center gap-4 md:gap-8 text-jood-green-dark font-medium">
+                    <li>
+                        <a href="#home" class="hover:text-jood-green transition">
+                            {{ session('locale', 'en') === 'ar' ? 'الرئيسية' : 'Home' }}
+                        </a>
+                    </li>
+                    <li class="text-jood-accent hidden md:block">|</li>
+                    <li>
+                        <a href="#about" class="hover:text-jood-green transition">
+                            {{ session('locale', 'en') === 'ar' ? 'من نحن' : 'About Us' }}
+                        </a>
+                    </li>
+                    <li class="text-jood-accent hidden md:block">|</li>
+                    <li>
+                        <a href="#clients" class="hover:text-jood-green transition">
+                            {{ session('locale', 'en') === 'ar' ? 'لمن نقدم الخدمة' : 'Who We Serve' }}
+                        </a>
+                    </li>
+                    <li class="text-jood-accent hidden md:block">|</li>
+                    <li>
+                        <a href="#why-us" class="hover:text-jood-green transition">
+                            {{ session('locale', 'en') === 'ar' ? 'لماذا تختار هارفيست' : 'Why Choose Harvest' }}
+                        </a>
+                    </li>
+                    <li class="text-jood-accent hidden md:block">|</li>
+                    <li>
+                        <a href="#services" class="hover:text-jood-green transition">
+                            {{ session('locale', 'en') === 'ar' ? 'خدماتنا' : 'Our Services' }}
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Social Media Icons -->
+            <div class="flex justify-center items-center gap-4">
+                <a href="#"
+                    class="w-10 h-10 bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 rounded-lg flex items-center justify-center text-white hover:opacity-80 transition">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
+                </a>
+                <a href="#"
+                    class="w-10 h-10 bg-[#0A66C2] rounded-lg flex items-center justify-center text-white hover:opacity-80 transition">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                    </svg>
+                </a>
+                <a href="#"
+                    class="w-10 h-10 bg-[#1877F2] rounded-lg flex items-center justify-center text-white hover:opacity-80 transition">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Copyright -->
+            <div class="mt-8 pt-6 border-t border-jood-accent/30 text-center">
+                <p class="text-jood-green-dark/60 text-sm">
+                    &copy; {{ date('Y') }}
+                    {{ session('locale', 'en') === 'ar' ? 'جود هارفيست. جميع الحقوق محفوظة.' : 'Jood Harvest. All rights reserved.' }}
                 </p>
             </div>
         </div>
     </footer>
 
-    <!-- AOS init -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init({
-            duration: 1000,
+            duration: 800,
             once: true,
-            offset: 100
+            offset: 50
         });
     </script>
 </body>
