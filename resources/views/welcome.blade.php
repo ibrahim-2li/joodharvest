@@ -203,8 +203,8 @@
             width: 100%;
             max-width: 450px;
             height: auto;
-            border-radius: var(--radius-2xl);
-            box-shadow: var(--shadow-lg);
+            /* border-radius: var(--radius-2xl); */
+            /* box-shadow: var(--shadow-lg); */
             transform: rotate(-3deg);
             transition: transform var(--transition-slow);
             z-index: 1;
@@ -391,15 +391,15 @@
                                     $content['hero']->firstWhere('key', 'image') &&
                                     $content['hero']->firstWhere('key', 'image')->value_en)
                                 <img src="{{ asset($content['hero']->firstWhere('key', 'image')->value_en) }}"
-                                    alt="Hero" class="w-full max-w-xl mx-auto">
+                                    alt="Hero" class="max-w-2xl mx-auto">
                             @else
                                 <img src="{{ asset('images/hero-truck.png') }}" alt="Jood Harvest"
-                                    class="w-full max-w-xl mx-auto"
+                                    class="max-w-2xl mx-auto"
                                     onerror="this.src='https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800'">
                             @endif
                             <!-- Bottom fade -->
                             <div
-                                class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent">
+                                class="absolute bottom-0 left-[-15%] right-0 h-32 mx-auto max-w-2xl bg-gradient-to-t from-white to-transparent">
                             </div>
                         </div>
                     </div>
@@ -569,8 +569,8 @@
                         <p class="section-subtitle-right">نهتم بكل تفصيلة لنوصّل لك أفضل منتج بأعلى جودة</p>
                     </div>
                     <div class="why-us-image-wrapper">
-                        <div class="decorative-shape"></div>
-                        <img src="{{ asset('images/food-products.png') }}" alt="Fresh Food Products"
+                        {{-- <div class="decorative-shape"></div> --}}
+                        <img src="{{ asset('images/why-us-image.png') }}" alt="Fresh Food Products"
                             class="food-image">
                     </div>
                 </div>
@@ -706,11 +706,11 @@
     <section id="clients" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 md:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-bold text-jood-green mb-4">
-                    {{ session('locale', 'en') === 'ar' ? 'من نخدم' : 'Who We Serve' }}
+                <h2 class="text-3xl flex justify-start md:text-4xl font-bold text-jood-green mb-4">
+                    {{ session('locale', 'en') === 'ar' ? 'لمن نقدم الخدمة' : 'Who We Serve' }}
                 </h2>
-                <p class="text-gray-600 text-lg">
-                    {{ session('locale', 'en') === 'ar' ? 'عملاؤنا من قطاع الأعمال' : 'Our B2B clients across the food industry' }}
+                <p class="text-gray-600 text-lg flex justify-start">
+                    {{ session('locale', 'en') === 'ar' ? 'نقدم منتجات عالية الجودة لتلبية احتياجات مختلف  القطاعات الغذائية بكفاءة...' : 'We offer high-quality products to efficiently meet the needs of various food sectors...' }}
                 </p>
             </div>
 
@@ -800,145 +800,134 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 md:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-bold text-jood-green mb-4">
-                    {{ session('locale', 'en') === 'ar' ? 'تواصل معنا' : 'Get in Touch' }}
-                </h2>
-                <p class="text-gray-600 text-lg">
-                    {{ session('locale', 'en') === 'ar' ? 'لديك سؤال أو ترغب في العمل معنا؟ أرسل لنا رسالة!' : 'Have a question or want to work together? Send us a message!' }}
-                </p>
-            </div>
 
-            <div class="grid lg:grid-cols-2 gap-8">
-                <!-- Contact Info -->
-                <div class="space-y-6" data-aos="fade-right">
-                    <div class="bg-jood-green rounded-3xl p-8 text-white">
-                        <h4 class="text-2xl font-bold mb-6">
-                            {{ session('locale', 'en') === 'ar' ? 'معلومات التواصل' : 'Contact Information' }}</h4>
-                        <div class="space-y-5">
-                            @if (isset($content['contact']) && $content['contact']->firstWhere('key', 'location'))
-                                <div class="flex items-start gap-4">
-                                    <div
-                                        class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h5 class="font-bold">
-                                            {{ session('locale', 'en') === 'ar' ? 'العنوان' : 'Address' }}</h5>
-                                        <p class="text-jood-accent">
-                                            {{ session('locale', 'en') === 'ar' ? ($content['contact']->firstWhere('key', 'location')->value_ar ?: $content['contact']->firstWhere('key', 'location')->value_en) : $content['contact']->firstWhere('key', 'location')->value_en }}
-                                        </p>
-                                    </div>
-                                </div>
-                            @endif
-                            <div class="flex items-start gap-4">
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white overflow-visible"
+        dir="{{ session('locale', 'en') === 'ar' ? 'rtl' : 'ltr' }}">
+        <div class="max-w-6xl mx-auto px-4 md:px-8">
+            <div class="relative flex flex-col md:block">
+
+                <!-- Contact Info Card - Out of frame -->
+                <div class="order-1 md:absolute md:top-[18%] md:-translate-y-1/2 z-20 w-full md:w-80 lg:w-96 md:p-6
+                        {{ session('locale', 'en') === 'ar' ? 'md:-left-16 lg:-left-24' : 'md:-right-16 lg:-right-24' }}"
+                    data-aos="fade-right">
+
+                    <div
+                        class="bg-jood-green text-white rounded-3xl p-8 md:p-10 shadow-2xl flex flex-col justify-center items-center text-center">
+
+                        <div class="mb-8 w-full">
+                            <h4 class="text-2xl font-bold mb-2">
+                                {{ session('locale', 'en') === 'ar' ? 'معلومات التواصل' : 'Contact Info' }}
+                            </h4>
+                            <div class="flex gap-1 justify-center">
+                                <span class="w-12 h-1 bg-white/50 rounded-full"></span>
+                                <span class="w-2 h-1 bg-white/50 rounded-full"></span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6 w-full">
+                            <div
+                                class="flex items-center gap-4 justify-center {{ session('locale', 'en') === 'ar' ? 'flex-row-reverse' : '' }}">
                                 <div
-                                    class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <p class="text-sm leading-relaxed text-white/90">
+                                    ul. Sawickiej Hanki 54Świętochłowi5
+                                </p>
+                            </div>
+
+                            <div
+                                class="flex items-center gap-4 justify-center {{ session('locale', 'en') === 'ar' ? 'flex-row-reverse' : '' }}">
+                                <div
+                                    class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                     </svg>
                                 </div>
-                                <div>
-                                    <h5 class="font-bold">
-                                        {{ session('locale', 'en') === 'ar' ? 'البريد الإلكتروني' : 'Email' }}</h5>
-                                    <a href="mailto:{{ $content['contact']->firstWhere('key', 'email')->value_en ?? 'info@joodharvest.com' }}"
-                                        class="text-jood-accent hover:text-white transition">{{ $content['contact']->firstWhere('key', 'email')->value_en ?? 'info@joodharvest.com' }}</a>
-                                </div>
+                                <p class="text-sm text-white/90">nvt.isst.nute@gmail.com</p>
                             </div>
-                            <div class="flex items-start gap-4">
+
+                            <div
+                                class="flex items-center gap-4 justify-center {{ session('locale', 'en') === 'ar' ? 'flex-row-reverse' : '' }}">
                                 <div
-                                    class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                                     </svg>
                                 </div>
-                                <div>
-                                    <h5 class="font-bold">
-                                        {{ session('locale', 'en') === 'ar' ? 'رقم الهاتف' : 'Phone' }}</h5>
-                                    <a href="tel:{{ str_replace(' ', '', $content['contact']->firstWhere('key', 'phone')->value_en ?? '+966XXXXXXXXX') }}"
-                                        class="text-jood-accent hover:text-white transition">{{ $content['contact']->firstWhere('key', 'phone')->value_en ?? '+966 XX XXX XXXX' }}</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-3xl shadow-lg p-6 border-l-4 border-jood-green">
-                        <h4 class="text-lg font-bold text-jood-green mb-4">
-                            {{ session('locale', 'en') === 'ar' ? 'ساعات العمل' : 'Working Hours' }}</h4>
-                        <div class="space-y-2 text-gray-700">
-                            <div class="flex justify-between">
-                                <span>{{ session('locale', 'en') === 'ar' ? 'الأحد - الخميس' : 'Sunday - Thursday' }}</span><span
-                                    class="font-bold text-jood-green">{{ session('locale', 'en') === 'ar' ? '8:30 ص - 4:30 م' : '8:30 AM - 4:30 PM' }}</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>{{ session('locale', 'en') === 'ar' ? 'الجمعة - السبت' : 'Friday - Saturday' }}</span><span
-                                    class="font-bold text-jood-green">{{ session('locale', 'en') === 'ar' ? 'مغلق' : 'Closed' }}</span>
+                                <p class="text-sm text-white/90" dir="ltr">+966 XXXX XXX XX</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Contact Form -->
-                <div data-aos="fade-left">
+                <!-- Form Container -->
+                <div class="order-2 bg-[#d4e4bc] rounded-3xl p-8 md:py-16 md:px-12 mt-6 md:mt-0 min-h-[500px] flex flex-col justify-center
+                        {{ session('locale', 'en') === 'ar' ? 'md:pl-80 lg:pl-72 md:pr-12' : 'md:pr-80 lg:pr-72 md:pl-12' }}"
+                    data-aos="fade-up">
+
                     @if (session('success'))
                         <div class="bg-green-100 border border-green-600 text-green-800 px-6 py-4 rounded-lg mb-6">
-                            {{ session('success') }}</div>
-                    @endif
-                    @if ($errors->any())
-                        <div class="bg-red-100 border border-red-600 text-red-800 px-6 py-4 rounded-lg mb-6">
-                            <ul class="list-disc list-inside">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                            {{ session('success') }}
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('contact.store') }}"
-                        class="bg-jood-light p-8 rounded-3xl">
+                    <form method="POST" action="{{ route('contact.store') }}">
                         @csrf
+
                         <div class="grid md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <label
-                                    class="block text-sm font-bold text-jood-green mb-2">{{ session('locale', 'en') === 'ar' ? 'اسمك' : 'Your Name' }}</label>
-                                <input type="text" name="name" value="{{ old('name') }}" required
-                                    class="w-full px-4 py-3 border border-jood-light-75 rounded-xl focus:ring-2 focus:ring-jood-green bg-white">
+                                <label class="block text-sm font-bold text-jood-green-dark mb-2">
+                                    {{ session('locale', 'en') === 'ar' ? 'الأسم' : 'Name' }}
+                                </label>
+                                <input type="text" name="name" required
+                                    placeholder="{{ session('locale', 'en') === 'ar' ? 'الأسم' : 'Your Name' }}"
+                                    class="w-full px-4 py-3 bg-white border-none rounded-lg focus:ring-2 focus:ring-jood-green outline-none placeholder-gray-400">
                             </div>
+
                             <div>
-                                <label
-                                    class="block text-sm font-bold text-jood-green mb-2">{{ session('locale', 'en') === 'ar' ? 'البريد الإلكتروني' : 'Email' }}</label>
-                                <input type="email" name="email" value="{{ old('email') }}" required
-                                    class="w-full px-4 py-3 border border-jood-light-75 rounded-xl focus:ring-2 focus:ring-jood-green bg-white">
+                                <label class="block text-sm font-bold text-jood-green-dark mb-2">
+                                    {{ session('locale', 'en') === 'ar' ? 'البريد الإلكتروني' : 'Email' }}
+                                </label>
+                                <input type="email" name="email" required
+                                    placeholder="{{ session('locale', 'en') === 'ar' ? 'البريد الإلكتروني' : 'Your Email' }}"
+                                    class="w-full px-4 py-3 bg-white border-none rounded-lg focus:ring-2 focus:ring-jood-green outline-none placeholder-gray-400">
                             </div>
                         </div>
+
                         <div class="mb-4">
-                            <label
-                                class="block text-sm font-bold text-jood-green mb-2">{{ session('locale', 'en') === 'ar' ? 'رقم الهاتف (اختياري)' : 'Phone (Optional)' }}</label>
-                            <input type="tel" name="phone" value="{{ old('phone') }}"
-                                class="w-full px-4 py-3 border border-jood-light-75 rounded-xl focus:ring-2 focus:ring-jood-green bg-white">
+                            <label class="block text-sm font-bold text-jood-green-dark mb-2">
+                                {{ session('locale', 'en') === 'ar' ? 'رقم الهاتف (اختياري)' : 'Phone (Optional)' }}
+                            </label>
+                            <input type="tel" name="phone"
+                                placeholder="{{ session('locale', 'en') === 'ar' ? 'رقم الهاتف' : 'Your Phone' }}"
+                                class="w-full px-4 py-3 bg-white border-none rounded-lg focus:ring-2 focus:ring-jood-green outline-none placeholder-gray-400">
                         </div>
+
                         <div class="mb-6">
-                            <label
-                                class="block text-sm font-bold text-jood-green mb-2">{{ session('locale', 'en') === 'ar' ? 'الرسالة' : 'Message' }}</label>
+                            <label class="block text-sm font-bold text-jood-green-dark mb-2">
+                                {{ session('locale', 'en') === 'ar' ? 'نص الرسالة' : 'Message' }}
+                            </label>
                             <textarea name="message" rows="4" required
-                                class="w-full px-4 py-3 border border-jood-light-75 rounded-xl focus:ring-2 focus:ring-jood-green bg-white">{{ old('message') }}</textarea>
+                                placeholder="{{ session('locale', 'en') === 'ar' ? 'نص الرسالة' : 'Your Message' }}"
+                                class="w-full px-4 py-3 bg-white border-none rounded-lg focus:ring-2 focus:ring-jood-green outline-none resize-none placeholder-gray-400"></textarea>
                         </div>
+
                         <button type="submit"
-                            class="w-full bg-jood-green text-white py-4 rounded-full font-bold text-lg hover:bg-jood-green-dark transition">
-                            {{ session('locale', 'en') === 'ar' ? 'إرسال الرسالة' : 'Send Message' }}
+                            class="w-full bg-jood-green text-white py-3 rounded-lg font-bold text-lg hover:bg-opacity-90 transition shadow-lg">
+                            {{ session('locale', 'en') === 'ar' ? 'ارسال' : 'Send' }}
                         </button>
                     </form>
                 </div>
+
             </div>
         </div>
     </section>
