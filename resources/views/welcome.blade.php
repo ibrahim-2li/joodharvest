@@ -105,11 +105,17 @@
             margin-top: var(--spacing-2xl);
         }
 
-        /* Left Side: 2x2 Grid of Cards */
+        /* Left Side: 2x2 Grid of Cards - Staggered Layout */
         .why-us-cards-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: var(--spacing-lg);
+            padding-top: 50px;
+        }
+
+        /* Staggered effect: Right column (odd cards) shifted upward */
+        .why-us-cards-grid .why-card:nth-child(odd) {
+            transform: translateY(-50px);
         }
 
         .why-card {
@@ -238,6 +244,12 @@
         @media (max-width: 640px) {
             .why-us-cards-grid {
                 grid-template-columns: 1fr;
+                padding-top: 0;
+            }
+
+            /* Reset staggered effect on mobile */
+            .why-us-cards-grid .why-card:nth-child(odd) {
+                transform: none;
             }
 
             .why-card {
@@ -391,15 +403,15 @@
                                     $content['hero']->firstWhere('key', 'image') &&
                                     $content['hero']->firstWhere('key', 'image')->value_en)
                                 <img src="{{ asset($content['hero']->firstWhere('key', 'image')->value_en) }}"
-                                    alt="Hero" class="max-w-4xl mx-auto">
+                                    alt="Hero" class="max-w-2xl mx-auto">
                             @else
                                 <img src="{{ asset('images/hero-truck.png') }}" alt="Jood Harvest"
-                                    class="max-w-4xl mx-auto"
+                                    class="max-w-2xl mx-auto"
                                     onerror="this.src='https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800'">
                             @endif
                             <!-- Bottom fade -->
                             <div
-                                class="absolute bottom-0 left-[-100%] right-[10%] h-32 mx-auto max-w-2xl bg-gradient-to-t from-white to-transparent">
+                                class="absolute bottom-0 left-[-15%] right-[0%] h-32 mx-auto max-w-2xl bg-gradient-to-t from-white to-transparent">
                             </div>
                         </div>
                     </div>
@@ -433,96 +445,18 @@
     </section>
 
     <!-- Why Choose Us Section -->
-    {{-- <section id="why-us" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 md:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-jood-green text-center mb-16" data-aos="fade-up">
-                {{ session('locale', 'en') === 'ar' ? 'لماذا تختار جود هارفيست؟' : 'Why Choose Jood Harvest?' }}
-            </h2>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Card 1 -->
-                <div class="bg-jood-light rounded-3xl p-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-12 h-12 bg-jood-green rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                    </div>
-                    <h3
-                        class="text-xl font-bold text-jood-green mb-2 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
-                        {{ session('locale', 'en') === 'ar' ? 'جودة معتمدة' : 'Certified Quality' }}
-                    </h3>
-                    <p class="text-gray-700 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
-                        {{ session('locale', 'en') === 'ar' ? 'نلتزم بأعلى معايير الجودة والسلامة الغذائية المعتمدة محليًا وعالميًا.' : 'Adherence to highest quality and food safety standards locally and internationally.' }}
-                    </p>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="bg-jood-light rounded-3xl p-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-12 h-12 bg-jood-green rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                        </svg>
-                    </div>
-                    <h3
-                        class="text-xl font-bold text-jood-green mb-2 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
-                        {{ session('locale', 'en') === 'ar' ? 'الخبرة والتخصص' : 'Expertise & Specialization' }}
-                    </h3>
-                    <p class="text-gray-700 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
-                        {{ session('locale', 'en') === 'ar' ? 'خبرة متراكمة في مجال الأغذية المبردة والمجمدة وسلاسل الإمداد.' : 'Accumulated experience in chilled and frozen food and supply chains.' }}
-                    </p>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-jood-light rounded-3xl p-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-12 h-12 bg-jood-green rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                    </div>
-                    <h3
-                        class="text-xl font-bold text-jood-green mb-2 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
-                        {{ session('locale', 'en') === 'ar' ? 'تخزين آمن' : 'Safe Storage' }}
-                    </h3>
-                    <p class="text-gray-700 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
-                        {{ session('locale', 'en') === 'ar' ? 'مستودعات مبردة ومجهزة بأحدث أنظمة التحكم والمراقبة.' : 'Cold storage facilities equipped with latest control and monitoring systems.' }}
-                    </p>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="bg-jood-light rounded-3xl p-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="w-12 h-12 bg-jood-green rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
-                        </svg>
-                    </div>
-                    <h3
-                        class="text-xl font-bold text-jood-green mb-2 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
-                        {{ session('locale', 'en') === 'ar' ? 'نقل موثوق' : 'Reliable Transport' }}
-                    </h3>
-                    <p class="text-gray-700 {{ session('locale', 'en') === 'ar' ? 'text-right' : '' }}">
-                        {{ session('locale', 'en') === 'ar' ? 'أسطول نقل مبرد يضمن وصول المنتجات بأفضل حالة.' : 'Refrigerated transport fleet ensuring products arrive in best condition.' }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
     <section id="why-us" class="why-us-section">
         <div class="container">
             <div class="why-us-layout">
                 <!-- Right Side: Title, Subtitle and Image -->
                 <div class="why-us-right">
                     <div class="why-us-header">
-                        <h2 class="section-title-right">لماذا تختار جود هارفيست</h2>
+                        <h2 class="section-title-right {{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">{{ session('locale', 'en') === 'ar' ? 'لماذا تختار جود هارفيست' : 'Why Choose Jood Harvest' }}</h2>
                         <div class="flex gap-1 justify-start">
                             <span class="w-12 h-1 bg-jood-green rounded-full"></span>
                             <span class="w-2 h-1 bg-jood-green rounded-full"></span>
                         </div>
-                        <p class="section-subtitle-right">نهتم بكل تفصيلة لنوصّل لك أفضل منتج بأعلى جودة</p>
+                        <p class="section-subtitle-right {{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">{{ session('locale', 'en') === 'ar' ? 'نهتم بكل تفصيلة لنوصّل لك أفضل منتج بأعلى جودة' : 'We care about every detail to deliver the best products with the highest quality' }}</p>
                     </div>
                     <div class="why-us-image-wrapper">
                         {{-- <div class="decorative-shape"></div> --}}
@@ -540,8 +474,8 @@
                                     fill="currentColor" />
                             </svg>
                         </div>
-                        <h3>خبرة وتخصص</h3>
-                        <p>خبرة في مجال المنتجات الغذائية المبردة والمجمدة، و فهم دقيق لاحتياجات عملائنا</p>
+                        <h3 class="{{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">{{ session('locale', 'en') === 'ar' ? 'خبرة وتخصص' : 'Expertise & Specialization' }}</h3>
+                        <p class="{{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">{{ session('locale', 'en') === 'ar' ? 'خبرة في مجال المنتجات الغذائية المبردة والمجمدة، و فهم دقيق لاحتياجات عملائنا' : 'Expertise in chilled and frozen food products, with a deep understanding of our customers\' needs' }}</p>
                     </div>
                     <div class="why-card">
                         <div class="why-icon">
@@ -551,8 +485,8 @@
                                     fill="currentColor" />
                             </svg>
                         </div>
-                        <h3>جودة معتمدة</h3>
-                        <p>نلتزم بأعلى معايير الجودة والسلامة الغذائية المعتمدة محليا وعالميا</p>
+                        <h3 class="{{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">{{ session('locale', 'en') === 'ar' ? 'جودة معتمدة' : 'Certified Quality' }}</h3>
+                        <p class="{{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">{{ session('locale', 'en') === 'ar' ? 'نلتزم بأعلى معايير الجودة والسلامة الغذائية المعتمدة محليا وعالميا' : 'We adhere to the highest local and international food quality and safety standards' }}</p>
                     </div>
                     <div class="why-card">
                         <div class="why-icon">
@@ -562,8 +496,8 @@
                                     fill="currentColor" />
                             </svg>
                         </div>
-                        <h3>تخزين ونقل آمن</h3>
-                        <p>أنظمة تبريد وتجميد حديثة تحافظ على الطعم والقيمة الغذائية</p>
+                        <h3 class="{{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">{{ session('locale', 'en') === 'ar' ? 'تخزين ونقل آمن' : 'Safe Storage & Transport' }}</h3>
+                        <p class="{{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">{{ session('locale', 'en') === 'ar' ? 'أنظمة تبريد وتجميد حديثة تحافظ على الطعم والقيمة الغذائية' : 'Modern cooling and freezing systems that preserve taste and nutritional value' }}</p>
                     </div>
                     <div class="why-card">
                         <div class="why-icon">
@@ -573,8 +507,8 @@
                                     fill="currentColor" />
                             </svg>
                         </div>
-                        <h3>شريك موثوق</h3>
-                        <p>نلتزم ببناء الجودة، نظام التوريد، وبناء شراكات طويلة المدى</p>
+                        <h3 class="{{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">{{ session('locale', 'en') === 'ar' ? 'شريك موثوق' : 'Trusted Partner' }}</h3>
+                        <p class="{{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">{{ session('locale', 'en') === 'ar' ? 'نلتزم ببناء الجودة، نظام التوريد، وبناء شراكات طويلة المدى' : 'We are committed to quality, reliable supply chains, and building long-term partnerships' }}</p>
                     </div>
                 </div>
 
