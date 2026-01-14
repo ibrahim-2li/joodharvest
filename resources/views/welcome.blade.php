@@ -745,76 +745,13 @@
 
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white overflow-visible"
+    <section id="contact" class="py-20 bg-white"
         dir="{{ session('locale', 'en') === 'ar' ? 'rtl' : 'ltr' }}">
         <div class="max-w-6xl mx-auto px-4 md:px-8">
+            
             <div class="relative flex flex-col md:block">
-
-                <!-- Contact Info Card - Out of frame -->
-                <div class="order-1 md:absolute md:top-[18%] md:-translate-y-1/2 z-20 w-full md:w-80 lg:w-96 md:p-6
-                        {{ session('locale', 'en') === 'ar' ? 'md:-left-10 lg:-left-20' : 'md:-right-16 lg:-right-24' }}"
-                    data-aos="fade-right">
-
-                    <div
-                        class="bg-jood-green text-white rounded-3xl p-8 md:p-10 shadow-2xl flex flex-col justify-start items-center text-center">
-
-                        <div class="mb-8 w-full">
-                            <h4 class="text-2xl flex justify-start font-bold mb-2">
-                                {{ session('locale', 'en') === 'ar' ? 'معلومات التواصل' : 'Contact Info' }}
-                            </h4>
-                            <div class="flex gap-1 justify-start">
-                                <span class="w-12 h-1 bg-white/50 rounded-full"></span>
-                                <span class="w-2 h-1 bg-white/50 rounded-full"></span>
-                            </div>
-                        </div>
-
-                        <div class="space-y-6 w-full">
-                            <div
-                                class="flex items-center gap-4 justify-start {{ session('locale', 'en') === 'ar' ? '' : '' }}">
-                                <div
-                                    class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                                <p class="text-sm text-white/90">
-                                    Hanki 54Świętochłowi5
-                                </p>
-                            </div>
-
-                            <div
-                                class="flex items-center gap-4 justify-start {{ session('locale', 'en') === 'ar' ? '' : '' }}">
-                                <div
-                                    class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                        <path
-                                            d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                                    </svg>
-                                </div>
-                                <p class="text-sm text-white/90">nvt.isst.nute@gmail.com</p>
-                            </div>
-
-                            <div
-                                class="flex items-center gap-4 justify-start {{ session('locale', 'en') === 'ar' ? '' : '' }}">
-                                <div
-                                    class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                        <path
-                                            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                                    </svg>
-                                </div>
-                                <p class="text-sm text-white/90" dir="ltr">+966 XXXX XXX XX</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Form Container -->
-                <div class="order-2 bg-[#d4e4bc] rounded-3xl p-8 md:py-16 md:px-12 mt-6 md:mt-0 min-h-[500px] flex flex-col justify-center
-                        {{ session('locale', 'en') === 'ar' ? 'md:pl-80 lg:pl-72 md:pr-12' : 'md:pr-80 lg:pr-72 md:pl-12' }}"
+                <!-- Form Container (Background) -->
+                <div class="bg-[#d4e4bc] rounded-3xl p-8 md:py-12 {{ session('locale', 'en') === 'ar' ? 'md:pr-12 md:pl-80 lg:pl-96' : 'md:pl-12 md:pr-80 lg:pr-96' }}"
                     data-aos="fade-up">
 
                     @if (session('success'))
@@ -827,7 +764,7 @@
                         @csrf
 
                         <div class="grid md:grid-cols-2 gap-4 mb-4">
-                            <div>
+                            <div class="{{ session('locale', 'en') === 'ar' ? 'md:order-2' : 'md:order-1' }}">
                                 <label class="block text-sm font-bold text-jood-green-dark mb-2">
                                     {{ session('locale', 'en') === 'ar' ? 'الأسم' : 'Name' }}
                                 </label>
@@ -836,7 +773,7 @@
                                     class="w-full px-4 py-3 bg-white border-none rounded-lg focus:ring-2 focus:ring-jood-green outline-none placeholder-gray-400">
                             </div>
 
-                            <div>
+                            <div class="{{ session('locale', 'en') === 'ar' ? 'md:order-1' : 'md:order-2' }}">
                                 <label class="block text-sm font-bold text-jood-green-dark mb-2">
                                     {{ session('locale', 'en') === 'ar' ? 'البريد الإلكتروني' : 'Email' }}
                                 </label>
@@ -859,7 +796,7 @@
                             <label class="block text-sm font-bold text-jood-green-dark mb-2">
                                 {{ session('locale', 'en') === 'ar' ? 'نص الرسالة' : 'Message' }}
                             </label>
-                            <textarea name="message" rows="4" required
+                            <textarea name="message" rows="3" required
                                 placeholder="{{ session('locale', 'en') === 'ar' ? 'نص الرسالة' : 'Your Message' }}"
                                 class="w-full px-4 py-3 bg-white border-none rounded-lg focus:ring-2 focus:ring-jood-green outline-none resize-none placeholder-gray-400"></textarea>
                         </div>
@@ -871,9 +808,64 @@
                     </form>
                 </div>
 
+                <!-- Contact Info Card (Overlapping) -->
+                <div class="order-first md:order-none mt-0 md:mt-0 md:absolute md:top-1/4 md:-translate-y-1/2 z-10 w-full md:w-72 lg:w-80
+                        {{ session('locale', 'en') === 'ar' ? 'md:left-0 lg:left-[-4%]' : 'md:right-4 lg:right-[-10%] md:left-0 lg:left-[74%]' }}"
+                    data-aos="fade-up" data-aos-delay="100">
+
+                    <div class="bg-jood-green text-white rounded-3xl p-8 shadow-2xl">
+
+                        <div class="mb-6 {{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">
+                            <h4 class="text-xl font-bold mb-2">
+                                {{ session('locale', 'en') === 'ar' ? 'معلومات التواصل' : 'Contact Info' }}
+                            </h4>
+                            <div class="flex gap-1 {{ session('locale', 'en') === 'ar' ? 'justify-end' : 'justify-start' }}">
+                                <span class="w-10 h-1 bg-white/50 rounded-full"></span>
+                                <span class="w-2 h-1 bg-white/50 rounded-full"></span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-5">
+                            <div class="flex items-center gap-3 {{ session('locale', 'en') === 'ar' ? 'flex-row-reverse' : '' }}">
+                                <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <p class="text-sm text-white/90 {{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">
+                                    ul. Sawickiej Hanki 54Świętochłowi5
+                                </p>
+                            </div>
+
+                            <div class="flex items-center gap-3 {{ session('locale', 'en') === 'ar' ? 'flex-row-reverse' : '' }}">
+                                <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                    </svg>
+                                </div>
+                                <p class="text-sm text-white/90 {{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">nvt.isst.nute@gmail.com</p>
+                            </div>
+
+                            <div class="flex items-center gap-3 {{ session('locale', 'en') === 'ar' ? 'flex-row-reverse' : '' }}">
+                                <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                                    </svg>
+                                </div>
+                                <p class="text-sm text-white/90" dir="ltr">+966 XXXX XXX XX</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
+
 
     <!-- Footer -->
     <footer class="py-16" style="background: linear-gradient(to right, #ebede9, #fdfdfd 50%, #ebede9);">
