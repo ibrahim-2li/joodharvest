@@ -368,7 +368,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen relative overflow-hidden">
+    <section id="home" class="min-h-screen relative overflow-hidden ">
         <!-- Background with gradient overlay -->
         <div class="absolute inset-0 "></div>
 
@@ -394,10 +394,10 @@
 
         <div class="relative z-10 min-h-screen flex items-center">
             <div class="w-full max-w-7xl mx-auto px-4 md:px-8">
-                <div class="grid lg:grid-cols-2 gap-8 items-center pt-32 pb-16">
+                <div class="grid lg:grid-cols-2 gap-8 items-center pt-32 pb-0">
 
                     <!-- Image Side -->
-                    <div class="lg:order-2" data-aos="fade-up">
+                    <div class="lg:order-2 pt-64" data-aos="fade-up">
                         <div class="relative">
                             @if (isset($content['hero']) &&
                                     $content['hero']->firstWhere('key', 'image') &&
@@ -752,7 +752,7 @@
 
                 <!-- Contact Info Card - Out of frame -->
                 <div class="order-1 md:absolute md:top-[18%] md:-translate-y-1/2 z-20 w-full md:w-80 lg:w-96 md:p-6
-                        {{ session('locale', 'en') === 'ar' ? 'md:-left-16 lg:-left-24' : 'md:-right-16 lg:-right-24' }}"
+                        {{ session('locale', 'en') === 'ar' ? 'md:-left-10 lg:-left-20' : 'md:-right-16 lg:-right-24' }}"
                     data-aos="fade-right">
 
                     <div
