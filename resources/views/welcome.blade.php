@@ -37,6 +37,11 @@
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            overflow-x: hidden;
         }
 
         .hero-gradient {
@@ -280,6 +285,13 @@
         .side-abstract-left {
             left: 0;
         }
+
+        /* Hide abstract shapes on mobile to prevent overflow */
+        @media (max-width: 768px) {
+            .side-abstract {
+                display: none;
+            }
+        }
     </style>
 </head>
 
@@ -394,19 +406,19 @@
 
         <div class="relative z-10 min-h-screen flex items-center">
             <div class="w-full max-w-7xl mx-auto px-4 md:px-8">
-                <div class="grid lg:grid-cols-2 gap-8 items-center pt-32 pb-0">
+                <div class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center pt-24 lg:pt-32 pb-8 lg:pb-0">
 
                     <!-- Image Side -->
-                    <div class="lg:order-2 pt-64" data-aos="fade-up">
+                    <div class="order-2 lg:order-2 pt-8 lg:pt-64" data-aos="fade-up">
                         <div class="relative">
                             @if (isset($content['hero']) &&
                                     $content['hero']->firstWhere('key', 'image') &&
                                     $content['hero']->firstWhere('key', 'image')->value_en)
                                 <img src="{{ asset($content['hero']->firstWhere('key', 'image')->value_en) }}"
-                                    alt="Hero" class="max-w-2xl mx-auto">
+                                    alt="Hero" class="w-full max-w-md lg:max-w-2xl mx-auto">
                             @else
                                 <img src="{{ asset('images/hero-truck.png') }}" alt="Jood Harvest"
-                                    class="max-w-2xl mx-auto"
+                                    class="w-full max-w-md lg:max-w-2xl mx-auto"
                                     onerror="this.src='https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800'">
                             @endif
                             <!-- Bottom fade -->
@@ -417,9 +429,9 @@
                     </div>
 
                     <!-- Content Side -->
-                    <div class="lg:order-1 {{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }} px-4 lg:px-8"
+                    <div class="order-1 lg:order-1 {{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }} px-2 sm:px-4 lg:px-8"
                         data-aos="fade-up" data-aos-delay="200">
-                        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-jood-green leading-tight mb-6">
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-jood-green leading-tight mb-4 lg:mb-6">
                             @if (session('locale', 'en') === 'ar')
                                 {{ $content['hero']->firstWhere('key', 'title')->value_ar ?? 'منتجات غذائية مبردة ومجمدة بجودة تثق بها' }}
                             @else
@@ -427,7 +439,7 @@
                             @endif
                         </h1>
                         <p
-                            class="text-lg md:text-xl text-gray-700 leading-relaxed mb-8 max-w-lg {{ session('locale', 'en') === 'ar' ? 'mr-0 ml-auto' : '' }}">
+                            class="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed mb-6 lg:mb-8 max-w-lg {{ session('locale', 'en') === 'ar' ? 'mr-0 ml-auto' : '' }}">
                             @if (session('locale', 'en') === 'ar')
                                 {{ $content['hero']->firstWhere('key', 'description')->value_ar ?? 'نختص في استيراد وتخزين وتوزيع المنتجات الغذائية المبردة والمجمدة بجودة عالية والتزام تام بالمعايير العالمية.' }}
                             @else
@@ -435,7 +447,7 @@
                             @endif
                         </p>
                         <a href="#contact"
-                            class="inline-flex items-center gap-2 px-8 py-3 border-2 border-jood-green text-jood-green rounded-full font-bold text-lg hover:bg-jood-green hover:text-white transition">
+                            class="inline-flex items-center gap-2 px-6 sm:px-8 py-2.5 sm:py-3 border-2 border-jood-green text-jood-green rounded-full font-bold text-base sm:text-lg hover:bg-jood-green hover:text-white transition">
                             {{ session('locale', 'en') === 'ar' ? 'اطلب عرض سعر' : 'Request a Quote' }}
                         </a>
                     </div>
@@ -716,32 +728,32 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-12 md:py-20 bg-white overflow-hidden">
+    <section class="py-10 md:py-20 bg-white overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 md:px-8">
-            <div class="bg-[#a1bd68] rounded-3xl relative p-6 md:p-12 lg:p-12" data-aos="fade-up">
-                <div class="grid md:grid-cols-2 gap-0 items-center">
-
+            <div class="bg-[#a1bd68] rounded-2xl md:rounded-3xl relative p-4 sm:p-6 md:p-12 " data-aos="fade-up">
+                <div class="grid md:grid-cols-2 gap-4 md:gap-0 items-center">
 
                     <!-- Content Side -->
                     <div
-                        class="p-6 md:p-12 lg:p-12 {{ session('locale', 'en') === 'ar' ? 'md:order-2 text-right' : 'md:order-1 text-left' }}">
-                        <h2 class="text-xl md:text-2xl lg:text-2xl font-bold text-jood-green-dark leading-tight mb-4">
+                        class="order-1 p-2 sm:p-4 md:p-12 {{ session('locale', 'en') === 'ar' ? 'md:order-1 text-right' : 'md:order-1 text-left' }}">
+                        <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-jood-green-dark leading-tight mb-3 md:mb-4">
                             {{ session('locale', 'en') === 'ar' ? 'جودة تُحفظ بعناية ، طعم طبيعي يدوم وثقة تبدأ من أول تجربة' : 'Quality preserved with care, natural taste that lasts, and trust starting from the first experience' }}
                         </h2>
-                        <p class="text-white text-base md:text-lg mb-6">
+                        <p class="text-white text-sm sm:text-base md:text-lg mb-4 md:mb-6">
                             {{ session('locale', 'en') === 'ar' ? 'عناية دقيقة في كل خطوة، وجودة تُلاحظ من أول تجربة.' : 'Meticulous care at every step, and quality you notice from the first experience.' }}
                         </p>
                         <a href="#contact"
-                            class="inline-block w-full  bg-jood-green text-center text-white px-8 py-3 rounded-xl font-bold text-lg hover:bg-jood-green-dark transition shadow-lg">
+                            class="inline-block w-full sm:w-auto bg-jood-green text-center text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl font-bold text-base sm:text-lg hover:bg-jood-green-dark transition shadow-lg">
                             {{ session('locale', 'en') === 'ar' ? 'تواصل معنا' : 'Contact Us' }}
                         </a>
                     </div>
-                    <!-- Truck Image Side - Extends outside the card -->
+
+                    <!-- Truck Image Side - Hidden on mobile, extends outside the card on desktop -->
                     <div
-                        class="relative  {{ session('locale', 'en') === 'ar' ? 'md:order-2' : 'md:order-1' }} p-6 md:p-0">
+                        class="hidden md:block order-2 relative {{ session('locale', 'en') === 'ar' ? 'md:order-2' : 'md:order-2' }} md:p-0">
                         <img src="{{ asset('images/cta-truck.png') }}" alt="Jood Harvest Truck"
-                            class="w-full max-w-md mx-auto md:max-w-none md:absolute md:top-1/2 md:-translate-y-1/2 {{ session('locale', 'en') === 'ar' ? 'md:left-0 md:-translate-x-1/4 lg:-translate-x-1/3' : 'md:right-0 md:translate-x-1/4 lg:translate-x-1/3' }} md:w-auto md:h-auto object-contain"
-                            style="max-height: 280px; min-width: 400px;">
+                            class="md:absolute md:top-1/2 md:-translate-y-1/2 {{ session('locale', 'en') === 'ar' ? 'md:left-0 md:-translate-x-1/4 lg:-translate-x-1/3' : 'md:right-0 md:translate-x-1/4 lg:translate-x-1/3' }} object-contain"
+                            style="max-height: 280px;">
                     </div>
 
                 </div>
