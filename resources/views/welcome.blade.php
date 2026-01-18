@@ -313,6 +313,436 @@
                 display: none;
             }
         }
+
+        /* ============================================= */
+        /* MODERN MOBILE-ONLY STYLES - Cool & Premium   */
+        /* ============================================= */
+
+        /* Mobile Menu Overlay Backdrop */
+        @media (max-width: 768px) {
+            .mobile-menu-backdrop {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.4);
+                backdrop-filter: blur(4px);
+                z-index: 55;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .mobile-menu-backdrop.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            /* Modern Slide-in Mobile Menu */
+            .mobile-menu-drawer {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 80%;
+                max-width: 320px;
+                height: 100vh;
+                background: linear-gradient(180deg, #3A522A 0%, #29391D 100%);
+                z-index: 60;
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                padding: 2rem 1.5rem;
+                overflow-y: auto;
+            }
+
+            [dir="rtl"] .mobile-menu-drawer {
+                right: auto;
+                left: 0;
+                transform: translateX(-100%);
+            }
+
+            .mobile-menu-drawer.active {
+                transform: translateX(0);
+            }
+
+            .mobile-menu-drawer .menu-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 2rem;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            }
+
+            .mobile-menu-drawer .menu-close {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                transition: all 0.3s ease;
+            }
+
+            .mobile-menu-drawer .menu-close:active {
+                background: rgba(255, 255, 255, 0.2);
+                transform: scale(0.95);
+            }
+
+            .mobile-menu-drawer nav a {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                padding: 1rem;
+                color: white;
+                font-size: 1.1rem;
+                font-weight: 600;
+                border-radius: 12px;
+                transition: all 0.3s ease;
+                margin-bottom: 0.5rem;
+            }
+
+            .mobile-menu-drawer nav a:hover,
+            .mobile-menu-drawer nav a:active {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .mobile-menu-drawer nav a .nav-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .mobile-menu-drawer .lang-switcher {
+                display: flex;
+                gap: 0.5rem;
+                margin-top: 1.5rem;
+                padding-top: 1.5rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.15);
+            }
+
+            .mobile-menu-drawer .lang-btn {
+                flex: 1;
+                padding: 0.75rem;
+                border-radius: 10px;
+                text-align: center;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+            }
+
+            .mobile-menu-drawer .lang-btn.active {
+                background: white;
+                color: #3A522A;
+            }
+
+            /* Modern Hero Section Mobile */
+            #home {
+                min-height: auto;
+                padding-top: 80px;
+                padding-bottom: 0;
+            }
+
+            #home .grid {
+                padding-top: 1rem !important;
+                padding-bottom: 0 !important;
+            }
+
+            /* Reduce Hero bottom padding and Why Us top padding */
+            .why-us-section {
+                padding-top: 1rem !important;
+                margin-top: -1rem;
+            }
+
+            /* Floating Decorative Orb */
+            .mobile-hero-orb {
+                position: absolute;
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, rgba(201, 217, 167, 0.4) 0%, rgba(58, 82, 42, 0.2) 100%);
+                filter: blur(40px);
+                animation: float-orb 6s ease-in-out infinite;
+                z-index: 0;
+            }
+
+            @keyframes float-orb {
+                0%, 100% { transform: translate(0, 0) scale(1); }
+                50% { transform: translate(-20px, -30px) scale(1.1); }
+            }
+
+            /* Glassmorphism Card Effect */
+            .glass-card {
+                background: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                box-shadow: 0 8px 32px rgba(58, 82, 42, 0.1);
+            }
+
+            /* Mobile Why Us Cards - Horizontal Scroll */
+            .why-us-cards-grid {
+                display: flex !important;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 1rem;
+                padding: 0.5rem;
+                margin: 0 -1rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .why-us-cards-grid::-webkit-scrollbar {
+                display: none;
+            }
+
+            .why-us-cards-grid .why-card {
+                flex: 0 0 280px;
+                scroll-snap-align: center;
+                transform: none !important;
+                background: linear-gradient(145deg, var(--color-accent-lime-light) 0%, rgba(217, 228, 193, 0.8) 100%);
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                box-shadow: 0 4px 20px rgba(58, 82, 42, 0.08);
+            }
+
+            /* Scroll Indicator Dots */
+            .scroll-indicator {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                margin-top: 1rem;
+            }
+
+            .scroll-indicator span {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: var(--color-accent-lime-light);
+                transition: all 0.3s ease;
+            }
+
+            .scroll-indicator span.active {
+                width: 24px;
+                border-radius: 4px;
+                background: var(--color-primary-green);
+            }
+
+            /* Mobile Section Titles with Animated Underline */
+            .section-title-mobile {
+                position: relative;
+                display: inline-block;
+            }
+
+            .section-title-mobile::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 3px;
+                background: linear-gradient(90deg, transparent, var(--color-primary-green), transparent);
+                border-radius: 2px;
+            }
+
+            /* Mobile Services Cards - Stack with Offset */
+            #services .grid {
+                gap: 1rem !important;
+            }
+
+            #services .bg-jood-light {
+                position: relative;
+                overflow: hidden;
+            }
+
+            #services .bg-jood-light::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 80px;
+                height: 80px;
+                background: linear-gradient(135deg, rgba(58, 82, 42, 0.05) 0%, transparent 70%);
+                border-radius: 0 1.5rem 0 50%;
+            }
+
+            /* Mobile Clients Grid - 2x2 with subtle animation */
+            #clients .grid {
+                gap: 1rem !important;
+            }
+
+            #clients .bg-jood-light {
+                padding: 1rem !important;
+                transition: all 0.3s ease;
+            }
+
+            #clients .bg-jood-light:active {
+                transform: scale(0.97);
+            }
+
+            /* Mobile CTA - Full width beautiful card */
+            .bg-\[\#a1bd68\] {
+                border-radius: 1.5rem !important;
+            }
+
+            /* Mobile Contact Section */
+            #contact .bg-\[\\#d4e4bc\] {
+                border-radius: 1.5rem !important;
+                padding: 1.5rem !important;
+            }
+
+            /* Floating Bottom Navigation */
+            .mobile-bottom-nav {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                border-top: 1px solid rgba(58, 82, 42, 0.1);
+                padding: 0.5rem 1rem;
+                padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0));
+                z-index: 50;
+                display: none;
+            }
+
+            .mobile-bottom-nav .nav-items {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+            }
+
+            .mobile-bottom-nav a {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.25rem;
+                padding: 0.5rem;
+                color: #666;
+                font-size: 0.65rem;
+                font-weight: 500;
+                transition: all 0.3s ease;
+                border-radius: 0.75rem;
+            }
+
+            .mobile-bottom-nav a:active {
+                background: rgba(58, 82, 42, 0.1);
+            }
+
+            .mobile-bottom-nav a.active,
+            .mobile-bottom-nav a:hover {
+                color: var(--color-primary-green);
+            }
+
+            .mobile-bottom-nav a .nav-icon-wrap {
+                width: 32px;
+                height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+            }
+
+            .mobile-bottom-nav a.active .nav-icon-wrap {
+                background: linear-gradient(135deg, var(--color-primary-green), var(--color-primary-green-dark));
+                color: white;
+            }
+
+            /* Add padding to body for bottom nav */
+            body {
+                padding-bottom: 70px;
+            }
+
+            /* Show bottom nav on mobile */
+            .mobile-bottom-nav {
+                display: block;
+            }
+
+            /* Modern Mobile Header */
+            header nav {
+                padding: 0.75rem 1rem !important;
+                background: rgba(233, 244, 211, 0.95) !important;
+                backdrop-filter: blur(10px) !important;
+            }
+
+            /* Pulse Animation for CTA Button */
+            .pulse-btn {
+                animation: pulse-glow 2s ease-in-out infinite;
+            }
+
+            @keyframes pulse-glow {
+                0%, 100% {
+                    box-shadow: 0 0 0 0 rgba(58, 82, 42, 0.4);
+                }
+                50% {
+                    box-shadow: 0 0 20px 5px rgba(58, 82, 42, 0.2);
+                }
+            }
+
+            /* Fade-in Animation for Mobile Elements */
+            .mobile-fade-in {
+                animation: mobile-fade 0.6s ease forwards;
+            }
+
+            @keyframes mobile-fade {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* Stagger delay classes */
+            .delay-1 { animation-delay: 0.1s; }
+            .delay-2 { animation-delay: 0.2s; }
+            .delay-3 { animation-delay: 0.3s; }
+            .delay-4 { animation-delay: 0.4s; }
+
+            /* Mobile Card Hover State (Touch Feedback) */
+            .touch-card {
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .touch-card:active {
+                transform: scale(0.98);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Gradient Text for Headings */
+            .gradient-text {
+                background: linear-gradient(135deg, var(--color-primary-green) 0%, var(--color-primary-green-dark) 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            /* Footer adjustment for bottom nav */
+            footer {
+                padding-bottom: 80px !important;
+            }
+        }
+
+        /* Desktop only - hide mobile elements */
+        @media (min-width: 769px) {
+            .mobile-only {
+                display: none !important;
+            }
+            .mobile-bottom-nav {
+                display: none !important;
+            }
+            body {
+                padding-bottom: 0;
+            }
+        }
     </style>
 </head>
 
@@ -373,32 +803,85 @@
             </div>
 
             <!-- Mobile Menu Toggle -->
-            <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path x-show="!mobileMenu" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 rounded-lg hover:bg-white/50 transition">
+                <svg class="w-6 h-6 text-jood-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M4 6h16M4 12h16M4 18h16" />
-                    <path x-show="mobileMenu" x-cloak stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
         </nav>
-
-        <!-- Mobile Menu -->
-        <div x-show="mobileMenu" x-cloak class="md:hidden mt-2 bg-white rounded-2xl shadow-lg p-4">
-            <a href="#home"
-                class="block py-3 font-bold">{{ session('locale', 'en') === 'ar' ? 'الرئيسية' : 'Home' }}</a>
-            <a href="#why-us" class="block py-3">{{ session('locale', 'en') === 'ar' ? 'لماذا نحن' : 'Why Us' }}</a>
-            <a href="#services" class="block py-3">{{ session('locale', 'en') === 'ar' ? 'خدماتنا' : 'Services' }}</a>
-            <a href="#clients" class="block py-3">{{ session('locale', 'en') === 'ar' ? 'عملاؤنا' : 'Clients' }}</a>
-            <a href="#contact" class="block py-3">{{ session('locale', 'en') === 'ar' ? 'تواصل معنا' : 'Contact' }}</a>
-            <div class="flex gap-2 mt-3">
-                <a href="{{ route('locale.change', 'en') }}"
-                    class="px-4 py-2 rounded-full {{ session('locale', 'en') === 'en' ? 'bg-jood-green text-white' : 'bg-gray-100' }}">EN</a>
-                <a href="{{ route('locale.change', 'ar') }}"
-                    class="px-4 py-2 rounded-full {{ session('locale', 'en') === 'ar' ? 'bg-jood-green text-white' : 'bg-gray-100' }}">AR</a>
-            </div>
-        </div>
     </header>
+
+    <!-- Modern Mobile Menu Backdrop -->
+    <div class="mobile-menu-backdrop md:hidden" 
+         :class="{ 'active': mobileMenu }" 
+         @click="mobileMenu = false"></div>
+
+    <!-- Modern Mobile Menu Drawer -->
+    <div class="mobile-menu-drawer md:hidden" :class="{ 'active': mobileMenu }">
+        <div class="menu-header">
+            <img src="{{ asset('images/logo.png') }}" class="h-10" alt="Jood Harvest">
+            <button @click="mobileMenu = false" class="menu-close">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        
+        <nav>
+            <a href="#home" @click="mobileMenu = false">
+                <span class="nav-icon">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                </span>
+                {{ session('locale', 'en') === 'ar' ? 'الرئيسية' : 'Home' }}
+            </a>
+            <a href="#why-us" @click="mobileMenu = false">
+                <span class="nav-icon">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </span>
+                {{ session('locale', 'en') === 'ar' ? 'لماذا نحن' : 'Why Us' }}
+            </a>
+            <a href="#services" @click="mobileMenu = false">
+                <span class="nav-icon">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                </span>
+                {{ session('locale', 'en') === 'ar' ? 'خدماتنا' : 'Services' }}
+            </a>
+            <a href="#clients" @click="mobileMenu = false">
+                <span class="nav-icon">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </span>
+                {{ session('locale', 'en') === 'ar' ? 'عملاؤنا' : 'Clients' }}
+            </a>
+            <a href="#contact" @click="mobileMenu = false" class="!bg-white/10">
+                <span class="nav-icon !bg-white/20">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </span>
+                {{ session('locale', 'en') === 'ar' ? 'تواصل معنا' : 'Contact Us' }}
+            </a>
+        </nav>
+
+        <div class="lang-switcher">
+            <a href="{{ route('locale.change', 'en') }}" 
+               class="lang-btn {{ session('locale', 'en') === 'en' ? 'active' : '' }}">
+                English
+            </a>
+            <a href="{{ route('locale.change', 'ar') }}" 
+               class="lang-btn {{ session('locale', 'en') === 'ar' ? 'active' : '' }}">
+                العربية
+            </a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="home" class="min-h-screen relative overflow-hidden ">
@@ -407,6 +890,10 @@
 
         <!-- Abstract decorative elements -->
         <div class="absolute inset-0 abstract-dots opacity-30"></div>
+
+        <!-- Mobile-only Floating Decorative Orbs -->
+        <div class="mobile-hero-orb md:hidden" style="top: 10%; right: -50px;"></div>
+        <div class="mobile-hero-orb md:hidden" style="bottom: 20%; left: -80px; animation-delay: -3s; width: 150px; height: 150px;"></div>
 
         <!-- Abstract Side Shape -->
         <svg class="side-abstract {{ session('locale', 'en') === 'ar' ? 'side-abstract-left' : 'side-abstract-right' }}"
@@ -542,6 +1029,14 @@
                         <h3 class="{{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">{{ session('locale', 'en') === 'ar' ? 'شريك موثوق' : 'Trusted Partner' }}</h3>
                         <p class="{{ session('locale', 'en') === 'ar' ? 'text-right' : 'text-left' }}">{{ session('locale', 'en') === 'ar' ? 'نلتزم ببناء الجودة، نظام التوريد، وبناء شراكات طويلة المدى' : 'We are committed to quality, reliable supply chains, and building long-term partnerships' }}</p>
                     </div>
+                </div>
+
+                <!-- Mobile Scroll Indicator -->
+                <div class="scroll-indicator md:hidden">
+                    <span class="active"></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
 
 
@@ -767,11 +1262,11 @@
                         </a>
                     </div>
 
-                    <!-- Truck Image Side - Hidden on mobile, extends outside the card on desktop -->
+                    <!-- Truck Image Side - Now visible on all screens -->
                     <div
-                        class="hidden md:block order-2 relative {{ session('locale', 'en') === 'ar' ? 'md:order-2' : 'md:order-2' }} md:p-0">
+                        class="order-2 relative {{ session('locale', 'en') === 'ar' ? 'md:order-2' : 'md:order-2' }} md:p-0 flex justify-center">
                         <img src="{{ asset('images/cta-truck.png') }}" alt="Jood Harvest Truck"
-                            class="md:absolute md:top-1/2 md:-translate-y-1/2 {{ session('locale', 'en') === 'ar' ? 'md:left-0 md:-translate-x-1/4 lg:-translate-x-1/3' : 'md:right-0 md:translate-x-1/4 lg:translate-x-1/3' }} object-contain"
+                            class="w-full max-w-[200px] md:max-w-none md:absolute md:top-1/2 md:-translate-y-1/2 {{ session('locale', 'en') === 'ar' ? 'md:left-0 md:-translate-x-1/4 lg:-translate-x-1/3' : 'md:right-0 md:translate-x-1/4 lg:translate-x-1/3' }} object-contain"
                             style="max-height: 280px;">
                     </div>
 
@@ -992,7 +1487,97 @@
             once: true,
             offset: 50
         });
+
+        // Mobile Bottom Navigation Active State
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const bottomNavLinks = document.querySelectorAll('.mobile-bottom-nav a');
+            
+            function updateActiveLink() {
+                const scrollPos = window.scrollY + 100;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                        bottomNavLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === '#' + sectionId) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', updateActiveLink);
+            updateActiveLink();
+
+            // Why Us Cards Scroll Indicator
+            const cardsContainer = document.querySelector('.why-us-cards-grid');
+            const scrollDots = document.querySelectorAll('.scroll-indicator span');
+            
+            if (cardsContainer && scrollDots.length > 0) {
+                cardsContainer.addEventListener('scroll', function() {
+                    const scrollLeft = cardsContainer.scrollLeft;
+                    const cardWidth = 280 + 16; // card width + gap
+                    const activeIndex = Math.round(scrollLeft / cardWidth);
+                    
+                    scrollDots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === activeIndex);
+                    });
+                });
+            }
+        });
     </script>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav md:hidden">
+        <div class="nav-items">
+            <a href="#home" class="active">
+                <span class="nav-icon-wrap">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                </span>
+                <span>{{ session('locale', 'en') === 'ar' ? 'الرئيسية' : 'Home' }}</span>
+            </a>
+            <a href="#why-us">
+                <span class="nav-icon-wrap">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </span>
+                <span>{{ session('locale', 'en') === 'ar' ? 'لماذا نحن' : 'Why Us' }}</span>
+            </a>
+            <a href="#services">
+                <span class="nav-icon-wrap">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                </span>
+                <span>{{ session('locale', 'en') === 'ar' ? 'خدماتنا' : 'Services' }}</span>
+            </a>
+            <a href="#clients">
+                <span class="nav-icon-wrap">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </span>
+                <span>{{ session('locale', 'en') === 'ar' ? 'العملاء' : 'Clients' }}</span>
+            </a>
+            <a href="#contact">
+                <span class="nav-icon-wrap">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </span>
+                <span>{{ session('locale', 'en') === 'ar' ? 'تواصل' : 'Contact' }}</span>
+            </a>
+        </div>
+    </nav>
 </body>
 
 </html>
