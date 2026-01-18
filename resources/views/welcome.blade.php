@@ -442,20 +442,30 @@
 
             /* Modern Hero Section Mobile */
             #home {
-                min-height: auto;
-                padding-top: 80px;
+                min-height: auto !important;
+                padding-top: 70px;
                 padding-bottom: 0;
             }
 
+            /* Remove min-height from inner container */
+            #home > div.relative.z-10 {
+                min-height: auto !important;
+            }
+
             #home .grid {
-                padding-top: 1rem !important;
+                padding-top: 0.5rem !important;
                 padding-bottom: 0 !important;
+            }
+
+            /* Reduce Image Side top padding */
+            #home .order-2 {
+                padding-top: 0 !important;
             }
 
             /* Reduce Hero bottom padding and Why Us top padding */
             .why-us-section {
-                padding-top: 1rem !important;
-                margin-top: -1rem;
+                padding-top: 0.5rem !important;
+                margin-top: 0;
             }
 
             /* Floating Decorative Orb */
