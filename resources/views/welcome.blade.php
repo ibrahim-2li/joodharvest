@@ -89,6 +89,13 @@
             padding: 5rem 0;
         }
 
+        /* Mobile-specific section padding reduction */
+        @media (max-width: 768px) {
+            .why-us-section {
+                padding: 2.5rem 0;
+            }
+        }
+
         .why-us-section .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -250,6 +257,7 @@
             .why-us-cards-grid {
                 grid-template-columns: 1fr;
                 padding-top: 0;
+                gap: var(--spacing-md);
             }
 
             /* Reset staggered effect on mobile */
@@ -259,10 +267,23 @@
 
             .why-card {
                 text-align: center;
+                padding: var(--spacing-lg);
             }
 
             .why-icon {
-                margin: 0 auto var(--spacing-md) auto;
+                margin: 0 auto var(--spacing-sm) auto;
+                width: 48px;
+                height: 48px;
+            }
+
+            .why-card h3 {
+                font-size: 1.1rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .why-card p {
+                font-size: 0.875rem;
+                line-height: 1.5;
             }
         }
 
@@ -409,7 +430,7 @@
                 <div class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center pt-24 lg:pt-32 pb-8 lg:pb-0">
 
                     <!-- Image Side -->
-                    <div class="order-2 lg:order-2 pt-8 lg:pt-64" data-aos="fade-up">
+                    <div class="order-2 lg:order-2 pt-2 lg:pt-64" data-aos="fade-up">
                         <div class="relative">
                             @if (isset($content['hero']) &&
                                     $content['hero']->firstWhere('key', 'image') &&
@@ -439,7 +460,7 @@
                             @endif
                         </h1>
                         <p
-                            class="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed mb-6 lg:mb-8 max-w-lg {{ session('locale', 'en') === 'ar' ? 'mr-0 ml-auto' : '' }}">
+                            class="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed mb-4 lg:mb-8 max-w-lg {{ session('locale', 'en') === 'ar' ? 'mr-0 ml-auto' : '' }}">
                             @if (session('locale', 'en') === 'ar')
                                 {{ $content['hero']->firstWhere('key', 'description')->value_ar ?? 'نختص في استيراد وتخزين وتوزيع المنتجات الغذائية المبردة والمجمدة بجودة عالية والتزام تام بالمعايير العالمية.' }}
                             @else
@@ -530,7 +551,7 @@
 
 
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-jood-green relative overflow-hidden">
+    <section id="services" class="py-10 md:py-20 bg-jood-green relative overflow-hidden">
         <!-- Decorative Corner Elements -->
         <!-- Top Right Corner -->
         <div class="absolute top-8 right-8 hidden md:block">
@@ -554,7 +575,7 @@
         <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
 
             <!-- Top Row: Import - Header - Transport -->
-            <div class="grid lg:grid-cols-3 gap-6 items-center mb-6">
+            <div class="grid lg:grid-cols-3 gap-3 md:gap-6 items-center mb-3 md:mb-6">
 
                 <!-- Card 1: Import (Right in RTL) -->
                 <!-- Mobile: Order 2, Desktop: Order 1 (or natural flow) -->
@@ -649,10 +670,10 @@
     </section>
 
     <!-- Who We Serve Section -->
-    <section id="clients" class="py-20 bg-white">
+    <section id="clients" class="py-10 md:py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 md:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl flex justify-start md:text-4xl font-bold text-jood-green mb-4">
+            <div class="text-center mb-8 md:mb-16" data-aos="fade-up">
+                <h2 class="text-2xl md:text-3xl flex justify-start lg:text-4xl font-bold text-jood-green mb-3 md:mb-4">
                     {{ session('locale', 'en') === 'ar' ? 'لمن نقدم الخدمة' : 'Who We Serve' }}
                 </h2>
                 <div class="flex gap-1 justify-start">
@@ -664,7 +685,7 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-4">
                 @php
                     $clients = [
                         [
@@ -761,7 +782,7 @@
 
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white"
+    <section id="contact" class="py-10 md:py-20 bg-white"
         dir="{{ session('locale', 'en') === 'ar' ? 'rtl' : 'ltr' }}">
         <div class="max-w-6xl mx-auto px-4 md:px-8">
             
@@ -884,7 +905,7 @@
 
 
     <!-- Footer -->
-    <footer class="py-16" style="background: linear-gradient(to right, #ebede9, #fdfdfd 50%, #ebede9);">
+    <footer class="py-8 md:py-16" style="background: linear-gradient(to right, #ebede9, #fdfdfd 50%, #ebede9);">
         <div class="max-w-6xl mx-auto px-4 md:px-8">
             <!-- Centered Logo -->
             <div class="text-center mb-8">
