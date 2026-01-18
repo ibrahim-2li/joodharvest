@@ -443,7 +443,7 @@
             /* Modern Hero Section Mobile */
             #home {
                 min-height: auto !important;
-                padding-top: 70px;
+                padding-top: 100px;
                 padding-bottom: 0;
             }
 
