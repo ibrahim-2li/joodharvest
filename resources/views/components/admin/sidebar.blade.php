@@ -56,6 +56,10 @@
         <x-admin.nav-item section="messages" icon="chat" :badge="$unreadCount">
             {{ session('locale', 'en') === 'ar' ? 'الرسائل' : 'Messages' }}
         </x-admin.nav-item>
+
+        <x-admin.nav-item section="account" icon="settings">
+            {{ session('locale', 'en') === 'ar' ? 'إعدادات الحساب' : 'Account Settings' }}
+        </x-admin.nav-item>
     </nav>
 
     {{-- Language Switcher --}}

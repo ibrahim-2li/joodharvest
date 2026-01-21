@@ -89,4 +89,33 @@ class DashboardController extends Controller
                 'active_section' => $activeSection
             ]);
     }
+    public function updateAccount(Request $request)
+    {
+        $user = auth()->user();
+        
+        $validated = $request->validate([
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'current_password' => ['nullable', 'required_with:password', 'current_password'],
+            'password' => ['nullable', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
+        ]);
+
+        $user->email = $validated['email'];
+
+        if ($request->filled('password')) {
+            $user->password = \Illuminate\Support\Facades\Hash::make($validated['password']);
+        }
+
+        $user->save();
+
+        $successMessage = session('locale', 'en') === 'ar' 
+            ? 'تم تحديث معلومات الحساب بنجاح!'
+            : 'Account information updated successfully!';
+
+        return redirect()
+            ->route('admin.dashboard')
+            ->with([
+                'success' => $successMessage,
+                'active_section' => 'account'
+            ]);
+    }
 }

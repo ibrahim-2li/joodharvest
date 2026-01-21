@@ -20,6 +20,7 @@ Route::post('/contact', [App\Http\Controllers\ContactController::class, 'store']
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/update', [DashboardController::class, 'update'])->name('update');
+    Route::post('/account/update', [DashboardController::class, 'updateAccount'])->name('account.update');
     
     // Contact messages management
     Route::post('/messages/{id}/read', [App\Http\Controllers\ContactController::class, 'markAsRead'])->name('messages.read');

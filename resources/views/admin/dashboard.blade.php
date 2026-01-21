@@ -25,6 +25,9 @@
 
             {{-- Messages Section --}}
             <x-admin.sections.messages :messages="$messages" :unreadCount="$unreadCount" />
+
+            {{-- Account Settings Section --}}
+            <x-admin.sections.account />
         </main>
     </div>
 @endsection
