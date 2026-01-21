@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -9,10 +10,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/locale/{locale}', [LocaleController::class, 'change'])->name('locale.change');
 
 // Landing page
-Route::get('/', function () {
-    $content = \App\Models\LandingContent::all()->groupBy('section');
-    return view('welcome', compact('content'));
-});
+Route::get('/', [LandingController::class, 'index'])->name('home');
+
 
 // Contact Form
 Route::post('/contact', [App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
